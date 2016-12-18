@@ -1,0 +1,28 @@
+sudo: required # necessary to use Trusty
+dist: trusty
+
+cache: apt
+
+addons:
+  apt:
+    packages:
+      - latexmk
+
+      - texlive-latex-base
+      - texlive-fonts-recommended
+      - texlive-lang-cyrillic
+
+      - texlive-latex-recommended
+      - texlive-latex-extra # comment
+      - texlive-science # physics
+
+      - latex-xcolor # xcolor
+
+      - aspell
+      - aspell-en
+      - aspell-ru
+
+script:
+  - make wipe
+  - make build
+  - make aspell-ci
