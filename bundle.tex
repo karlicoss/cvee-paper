@@ -1,4 +1,4 @@
-\subsection{Модель исследования}
+\subsection{The model}
 % TODO http://tex.stackexchange.com/a/155317/5966 ?
 \begin{figure}
 \centering
@@ -8,50 +8,49 @@
 \caption{Квантовый граф $\Gamma$, состоящий из полубесконечных ребер $\Omega_L, \Omega_R$ и рассеивателя $\Omega$, представляющего из себя $W$ идентичных ребер длины 1. В вершинах $V_a$, $V_b$ находятся $\delta$-образные потенциальные ямы глубины $a$ и $b$ соответственно.}\label{fig:res_bundle}
 \end{figure}
 
-Рассмотрим систему на \autoref{fig:res_bundle}. Оператор Шредингера действует как $-\dv[2]{\psi}{x}$ на ребрах, а в вершинах $V_a$ и $V_b$ находятся $\delta$-образные потенциальные ямы, порождающие граничные условия:
+Let's invastigate the model on \autoref{fig:res_bundle}. Schrodinger's operator is defined on edges of the graph as  $-\dv[2]{\psi}{x}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
 
 \begin{equation}\label{eq:bundle_system}
 \begin{aligned}
    \forall i: \psi_i(0) &= \psi_L(0)
 \\ \forall i: \psi_i(1) &= \psi_R(0)
-\\ \psi'_L(0) - \sum\limits_{i = 1}^W \psi'_i(0) &= a \psi_L(0)
-\\ -\psi'_R(0) + \sum\limits_{i = 1}^W \psi'_i(1) &= b \psi_R(0)
+\\ \psi'_L(0) - \sum\limits_{i = 1}^W \psi'_i(0) &= 0
+\\ -\psi'_R(0) + \sum\limits_{i = 1}^W \psi'_i(1) &= 0
 \end{aligned}
 \end{equation}
 
-\subsection{Вычисление $S$-матрицы}
-После решения системы уравнений \ref{eq:bundle_system} в сочетании с \ref{eq:wlwl}, мы получаем:
+\subsection{Calculation of $S$ matrix}
+After solving \ref{eq:bundle_system} в сочетании с \ref{eq:wlwl}, we get:
 \begin{equation*}
-\resizebox{0.85\hsize}{!}{$
-\det S(k) = \frac{W {\left(a + b\right)} k \cos\left(k\right) + 2 i \, W k^{2} \cos\left(k\right) + {\left(i \, a + i \, b\right)} k \sin\left(k\right) - {\left({\left(W^{2} + 1\right)} k^{2} - a b\right)} \sin\left(k\right)}{W {\left(a + b\right)} k \cos\left(k\right) - 2 i \, W k^{2} \cos\left(k\right) - {\left(i \, a + i \, b\right)} k \sin\left(k\right) - {\left({\left(W^{2} + 1\right)} k^{2} - a b\right)} \sin\left(k\right)}
-$}
+\det S(k) = \frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}
 \end{equation*}
 
-\subsection{Доказательство полноты резонансных состояний при $a = b = 0$}
-Для простоты, рассмотрим случай $a = 0, b = 0$. После подстановки, получим
+
 \begin{equation}\label{eq:bundle_s}
 s(k) = \abs{\det S(k)} = \abs{\frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}}
 \end{equation}
 
 \mtodo{график S-матрицы?}
 
-Зафиксируем $r$, и далее, для улучшения читаемости, определим $C = C(r)$, $R = R(r)$. Для каждого такого $r$, оценим интеграл и покажем, что последовательность оценок стремится к нулю.
+TODO: define contour
 
-Воспользуемся неравенством Коши-Буняковского:
+Let's fix $r$, and further, for the sake of readability, let's define $C = C(r)$ and $R = R(r)$. For each $r$, we estimate the integral and show that the sequence of estimates converges to zero.
+
+Let's use Cauchy–Schwarz's inequality:
 \[
 \big| \langle u,v \rangle \big| \leq \left\|u\right\| \left\|v\right\|
 \]
-, а если точнее, его специализацией на $\mcL^2[a, b]$:
+, to be precise, it's $\mcL^2[a, b]$ version:
 \[
 \abs{
 \int\limits_{t=a}^{b} f(t) g^*(t) dt
-}^2
+}
 \le
-\int\limits_{t=a}^b \abs{f(t)}^2 dt 
-\int\limits_{t=a}^b \abs{g(t)}^2 dt 
+\sqrt{\int\limits_{t=a}^b \abs{f(t)}^2 dt }
+\sqrt{\int\limits_{t=a}^b \abs{g(t)}^2 dt }
 \]
 % 
-Чтобы воспользоваться неравенством, разделим подынтегральное выражение в (\ref{eq:critp}) на $f(t) g^*(t)$ следующим образом:
+To use inequality, we are going to represent the integrand in (\ref{eq:critp}) as $f(t) g^*(t)$ as follows:
 \begin{equation}\label{eq:split}
 \begin{aligned}
 a      &= 0 \\
@@ -60,10 +59,11 @@ f(t)   &= \ln s(R \eexp{\iu t} + \iu C) \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C +
 g^*(t) &= \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i}
 \end{aligned}
 \end{equation}
-Далее будет показано, что $\int \abs{g(t)}^2$ ограничено сверху константой, не зависящей от $r$, а $\int \abs{f(t)}^2$ стремится к нулю, из чего будет немедленно следовать сходимость интеграла (\ref{eq:critp}).
+Next, we will show that $\norm{g}$ (that is, $\sqrt{\int \abs{g(t)}^2}$) is bounded by a constant which does not depend on $r$, and $\norm{f}$ goes to $0$ as $r$ goes to $1$, hence (\ref{eq:critp}) converges.
 
-\subsubsection{Оценка $\int \abs{g(t)}^2$}
+\subsubsection{Estimate of $\norm{g}$}
 
+First, we evaluate the integrand:
 \begin{align*}
 \abs{g(t)}^2 = \abs{g^*(t)}^2
 &=   \frac{\sqrt{R}^2}{\abs{R \cos t + \iu R \sin t + \iu C + i}^2} \\
@@ -72,33 +72,34 @@ g^*(t) &= \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i}
 &=   \frac{1}{R + \frac{(C + 1)^2}{R} + 2 (C + 1) \sin t} \\ 
 \end{align*}
 
-Заметим, что:
+We have to integrate this function on interval $[0, 2 \pi]$. Integral of such type is well-known: (TODO REFERENCE)
+\[
+\int\limits_{0}^{2 \pi} \frac{dx}{a + b \sin x} = \frac{2 \pi}{\sqrt{a^2 - b^2}}
+\]
+, when $a > b$. In our case, $a = R + \frac{(C + 1)^2}{R}$, $b = 2 (C + 1)$).
+
+First, we check that $a > b$:
 \begin{align*}
    R + \frac{(C + 1)^2}{R} - 2 (C + 1)
    &= \frac{R^2 + C^2 + 2C + 1 - 2 RC - 2 R}{R}
-\\ &= \frac{(R - C)^2 + 2(C - R) + 1}{R}
-\\ &> 0 && \text{,так как $C > R$} 
+\\ &= \frac{(C - R)^2 + 2(C - R) + 1}{R}
+\\ &= \frac{(C - R + 1)^2 }{R}
+\\ &> 0 && \text{,strictly greater since $C > R$} 
 \end{align*}
 
-Интеграл такого типа хорошо известен, и его первообразная при $a > b$ (где $a = R + \frac{(C + 1)^2}{R}$, $b = 2 (C + 1)$):
-\[
-\int \frac{dx}{a + b \sin x} = \frac{2}{\sqrt{a^2 - b^2}} \atan \frac{a \tan \frac{x}{2} + b}{\sqrt{a^2 - b^2}}
-\]
-
-Далее, рассмотрим:
+Next, we compute en estimate for $\sqrt{a^2 - b^2}$:
 \begin{align*}
 a^2 - b^2
 & =  (R + \frac{(C + 1)^2}{R})^2 - (2 (C + 1))^2\\
 & =  R^2 + \frac{(C+1)^4}{R^2} + 2 (C+1)^2 - 4 (C + 1)^2 \\
-& =  (R - \frac{(C + 1)^2}{R})^2 && \text{,так как $C > R$} \\
-&\ge (R - \frac{(R + 1)^2}{R})^2 \\
-&\ge (2 + \frac{1}{R})^2 \\
+& =  \left( \frac{(C + 1)^2}{R} - R \right)^2 \\
+& =  \left( \frac{(C + 1)^2 - R^2}{R}\right)^2 \\
+& =  \left( \frac{(C + 1 - R) (C + 1 + R)}{R}\right)^2 && \text{,since $C > R > 0$} \\
+&\ge \left( \frac{(1) (R + R)}{R}\right)^2  \\
 &\ge 4
 \end{align*}
 
-Чтобы избежать разрыва первообразной в точке $\pi$ (из-за неопределенности $\tan \pi$), изменим интервал интегрирования на $(-\pi, \pi)$, на котором первообразная непрерывна. Таким образом, можно применить формулу Ньютона-Лейбница, в частности, тот факт, что $\abs{\int\limits_{x_1}^{x_2} f(x) dx} \le \abs{F(x_2) - F(x_1)} \le \abs{F(x_1)} + \abs{F(x_2)}$.
-
-Итого, так как $\frac{2}{\sqrt{a^2 - b^2}} \le \frac{2}{2} = 1$, а $\abs{\atan x}$ ограничен сверху как $\frac{\pi}{2}$, непосредственно применяя вышеупомянутый факт, получаем что весь интеграл ограничен сверху константой $\pi$.
+Finally, since $\frac{2 \pi}{\sqrt{a^2 - b^2}} \le \frac{2 \pi}{2} = \pi$, and we just proved that $\norm{g}$ is bounded by a constant. 
 
 
 \subsubsection{Оценка $\int \abs{f(t)}^2$}
