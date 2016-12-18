@@ -1,0 +1,31 @@
+\newcommand{\Wglen}{6.0}; % waveguide length
+\newcommand{\Warrlen}{2.0}; % wave arrow length
+\newcommand{\Reslen}{0.0}; % resonator length
+
+\coordinate (LLL) at (-\Wglen - 1, 0);
+\coordinate (RRR) at ( \Wglen + 1, 0);
+\coordinate (LL)  at (-\Wglen, 0);
+\coordinate (RR)  at ( \Wglen, 0);
+\coordinate (L)   at (-\Reslen, 0);
+\coordinate (R)   at ( \Reslen, 0);
+%
+
+\coordinate (U) at (0, 3); % upper point of resonator
+
+% waveguide
+\draw[ultra thick, dotted] (LLL) -- (LL);
+\draw[ultra thick] (LL)--(L);
+\draw[ultra thick] (R)--(RR);
+\draw[ultra thick, dotted] (RR) -- (RRR);
+%
+
+\draw[<-, thick] (-\Wglen, 1.5) -- (-\Wglen + \Warrlen, 1.5) node [midway, above] {\large $R e^{-\iu k x}$};
+\draw[->, thick] (-\Wglen, 0.8) -- (-\Wglen + \Warrlen, 0.8) node [midway, above] {\large $e^{\iu k x}$};
+\draw[->, thick] (\Wglen - \Warrlen, 0.5) -- (\Wglen, 0.5)   node [midway, above] {\large $T e^{\iu k x}$};
+
+\draw (LL) node [below] {\large $\Omega_L$};
+\draw (RR) node [below] {\large $\Omega_R$};
+
+\draw[ultra thick] (0, 2) node [above] {\Large $\Omega$};
+
+\draw[ultra thick] node [below] {\large $V$} (0, 2) circle[radius=2];

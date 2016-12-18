@@ -1,0 +1,352 @@
+\subsection{Модель исследования}
+% TODO http://tex.stackexchange.com/a/155317/5966 ?
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=1.1] % TODO SCALE!!!
+\input{pic/resonator_bundle.tex}
+\end{tikzpicture}
+\caption{Квантовый граф $\Gamma$, состоящий из полубесконечных ребер $\Omega_L, \Omega_R$ и рассеивателя $\Omega$, представляющего из себя $W$ идентичных ребер длины 1. В вершинах $V_a$, $V_b$ находятся $\delta$-образные потенциальные ямы глубины $a$ и $b$ соответственно.}\label{fig:res_bundle}
+\end{figure}
+
+Рассмотрим систему на \autoref{fig:res_bundle}. Оператор Шредингера действует как $-\dv[2]{\psi}{x}$ на ребрах, а в вершинах $V_a$ и $V_b$ находятся $\delta$-образные потенциальные ямы, порождающие граничные условия:
+
+\begin{equation}\label{eq:bundle_system}
+\begin{aligned}
+   \forall i: \psi_i(0) &= \psi_L(0)
+\\ \forall i: \psi_i(1) &= \psi_R(0)
+\\ \psi'_L(0) - \sum\limits_{i = 1}^W \psi'_i(0) &= a \psi_L(0)
+\\ -\psi'_R(0) + \sum\limits_{i = 1}^W \psi'_i(1) &= b \psi_R(0)
+\end{aligned}
+\end{equation}
+
+\subsection{Вычисление $S$-матрицы}
+После решения системы уравнений \ref{eq:bundle_system} в сочетании с \ref{eq:wlwl}, мы получаем:
+\begin{equation*}
+\resizebox{0.85\hsize}{!}{$
+\det S(k) = \frac{W {\left(a + b\right)} k \cos\left(k\right) + 2 i \, W k^{2} \cos\left(k\right) + {\left(i \, a + i \, b\right)} k \sin\left(k\right) - {\left({\left(W^{2} + 1\right)} k^{2} - a b\right)} \sin\left(k\right)}{W {\left(a + b\right)} k \cos\left(k\right) - 2 i \, W k^{2} \cos\left(k\right) - {\left(i \, a + i \, b\right)} k \sin\left(k\right) - {\left({\left(W^{2} + 1\right)} k^{2} - a b\right)} \sin\left(k\right)}
+$}
+\end{equation*}
+
+\subsection{Доказательство полноты резонансных состояний при $a = b = 0$}
+Для простоты, рассмотрим случай $a = 0, b = 0$. После подстановки, получим
+\begin{equation}\label{eq:bundle_s}
+s(k) = \abs{\det S(k)} = \abs{\frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}}
+\end{equation}
+
+\mtodo{график S-матрицы?}
+
+Зафиксируем $r$, и далее, для улучшения читаемости, определим $C = C(r)$, $R = R(r)$. Для каждого такого $r$, оценим интеграл и покажем, что последовательность оценок стремится к нулю.
+
+Воспользуемся неравенством Коши-Буняковского:
+\[
+\big| \langle u,v \rangle \big| \leq \left\|u\right\| \left\|v\right\|
+\]
+, а если точнее, его специализацией на $\mcL^2[a, b]$:
+\[
+\abs{
+\int\limits_{t=a}^{b} f(t) g^*(t) dt
+}^2
+\le
+\int\limits_{t=a}^b \abs{f(t)}^2 dt 
+\int\limits_{t=a}^b \abs{g(t)}^2 dt 
+\]
+% 
+Чтобы воспользоваться неравенством, разделим подынтегральное выражение в (\ref{eq:critp}) на $f(t) g^*(t)$ следующим образом:
+\begin{equation}\label{eq:split}
+\begin{aligned}
+a      &= 0 \\
+b      &= 2 \pi \\
+f(t)   &= \ln s(R \eexp{\iu t} + \iu C) \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i} \\
+g^*(t) &= \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i}
+\end{aligned}
+\end{equation}
+Далее будет показано, что $\int \abs{g(t)}^2$ ограничено сверху константой, не зависящей от $r$, а $\int \abs{f(t)}^2$ стремится к нулю, из чего будет немедленно следовать сходимость интеграла (\ref{eq:critp}).
+
+\subsubsection{Оценка $\int \abs{g(t)}^2$}
+
+\begin{align*}
+\abs{g(t)}^2 = \abs{g^*(t)}^2
+&=   \frac{\sqrt{R}^2}{\abs{R \cos t + \iu R \sin t + \iu C + i}^2} \\
+&=   \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} \\
+&= \frac{R}{R^2 \cos^2 t + R^2 \sin^2 t + (C + 1)^2  + 2 R (C + 1) \sin t} \\
+&=   \frac{1}{R + \frac{(C + 1)^2}{R} + 2 (C + 1) \sin t} \\ 
+\end{align*}
+
+Заметим, что:
+\begin{align*}
+   R + \frac{(C + 1)^2}{R} - 2 (C + 1)
+   &= \frac{R^2 + C^2 + 2C + 1 - 2 RC - 2 R}{R}
+\\ &= \frac{(R - C)^2 + 2(C - R) + 1}{R}
+\\ &> 0 && \text{,так как $C > R$} 
+\end{align*}
+
+Интеграл такого типа хорошо известен, и его первообразная при $a > b$ (где $a = R + \frac{(C + 1)^2}{R}$, $b = 2 (C + 1)$):
+\[
+\int \frac{dx}{a + b \sin x} = \frac{2}{\sqrt{a^2 - b^2}} \atan \frac{a \tan \frac{x}{2} + b}{\sqrt{a^2 - b^2}}
+\]
+
+Далее, рассмотрим:
+\begin{align*}
+a^2 - b^2
+& =  (R + \frac{(C + 1)^2}{R})^2 - (2 (C + 1))^2\\
+& =  R^2 + \frac{(C+1)^4}{R^2} + 2 (C+1)^2 - 4 (C + 1)^2 \\
+& =  (R - \frac{(C + 1)^2}{R})^2 && \text{,так как $C > R$} \\
+&\ge (R - \frac{(R + 1)^2}{R})^2 \\
+&\ge (2 + \frac{1}{R})^2 \\
+&\ge 4
+\end{align*}
+
+Чтобы избежать разрыва первообразной в точке $\pi$ (из-за неопределенности $\tan \pi$), изменим интервал интегрирования на $(-\pi, \pi)$, на котором первообразная непрерывна. Таким образом, можно применить формулу Ньютона-Лейбница, в частности, тот факт, что $\abs{\int\limits_{x_1}^{x_2} f(x) dx} \le \abs{F(x_2) - F(x_1)} \le \abs{F(x_1)} + \abs{F(x_2)}$.
+
+Итого, так как $\frac{2}{\sqrt{a^2 - b^2}} \le \frac{2}{2} = 1$, а $\abs{\atan x}$ ограничен сверху как $\frac{\pi}{2}$, непосредственно применяя вышеупомянутый факт, получаем что весь интеграл ограничен сверху константой $\pi$.
+
+
+\subsubsection{Оценка $\int \abs{f(t)}^2$}
+Функция $s(k)$ (\ref{eq:bundle_s}) слишком сложна для прямого аналитического доказательства сходимости. Однако, так как $s(k)$ — модуль определителя $S$-матрицы, в верхней комплексной полуплоскости $0 \le s(k) \le 1$. Это означает, что $s(k)$ может быть заменена на некую оценку снизу $l(k)$, такую что $0 \le l(k) \le s(k)$. После этого, если будет доказана сходимость к нулю для этой нижней оценки, то так как $s(k) \le 1$, $\ln l(k) \le \ln s(k) \le 0$, мы будем иметь $\ln^2 s(k) \le \ln^2 l(k)$, и, следовательно, так как подынтегральное выражение неотрицательно, сходимость искомого интеграла. Мы часто будем опираться на этот факт и проводить подобные замены под знаком логарифма, заменяя сложные функции на кусочно-линейные, и используя известные оценки для логарифма чтобы оценить исходный интеграл.
+
+\subsubsection{Упрощение функции $s(k)$}
+Сначала мы дадим простую оценку для $s(k)$ по всей верней комплексной полуплоскости и сделаем ее независимой от вещественной части аргумента.
+
+Легко видеть, что $s(k)$ периодична относительно вещественной части аргумента при неизменной комплексной части.
+% Since $\sin k$ and $\cos k$ are periodic w.r.t the real axis, with the period of $2 \pi$, 
+\mtodo{is this step really necessary?}
+
+У функции $s(k)$ есть счетное число нулей, и для всех $\Im k = \atanh \frac{2 W}{W^2 + 1}$. Для краткости, дадим обозначения:
+
+\begin{equation*}
+\begin{aligned}
+   V &= \frac{2 W}{W^2 + 1}
+\\ Z &= \atanh V
+\end{aligned}
+\end{equation*}
+
+Далее, заметим что для любого $x$, $s(x + \iu y) \le s(\iu y)$. \mtodo{How to prove? We could probably take a look at numerator and denominator in separate?} После всех вышеупомянутых замечаний, для $s(x + \iu y)$ можно дать довольно простую нижнюю оценку:
+\begin{align*}
+l(x + \iu y)
+   &= \abs{\frac{(W^2 + 1) \sinh y - 2 W \cosh y}{(W^2 + 1) \sinh y + 2 W \cosh y}}
+\\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(так как $\cosh y \ge 1$)}
+\end{align*}
+
+Легко понять, что у функции $l(k)$ будут нули вдоль линии $\Im k = Z$, что значит, что вдоль этой линии у функции $\ln l(k)$ будет несчетное множество особенностей. Интуитивно, это не должно испортить сходимость, так как контур интегрирования все равно мог пересечь сингулярность функции $\ln s(k)$. Действительно, далее мы покажем, что даже такое загрубление функции позволяет доказать сходимость. Далее, для краткости записи, будем опускать вещественную часть аргумента и обозначим $l(y) = l(x + \iu y)$, где $x$ может быть любым, так как $l$ от него все равно не зависит.
+\mtodo{Plot?}
+
+% Так как $\tanh y$ неотрицательна и растет при $y \ge 0$, мы можем избавиться от знака модуля:
+
+% \todo{make the formula bigger}
+% \todo{get rid of it??}
+% \[
+% l(x + \iu y)
+%  = \begin{cases}
+%  \frac{V - \tanh y}{\tanh y + V}, & 0 \le y \le Z \\
+%  \frac{\tanh y - V}{\tanh y + V}, & y > Z 
+%  \end{cases}
+% \]
+
+После построения нижней оценки можно упростить интеграл, который мы исследуем:
+\begin{align*}
+       \int\limits_{t=0}^{2 \pi} \abs{f(t)}^2 dt
+   = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \eexp{\iu t} + \iu C) \frac{R}{\norm{R \eexp{\iu t} + \iu C + i}^2} dt
+\\ = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \sin t + C) \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} dt
+\end{align*}
+% TODO f зависит только от Im k
+
+Во-первых, заметим, что:
+
+\begin{equation*}
+\begin{aligned}
+   \sin(-\pi/2 + t)   &= \sin(-\pi/2 - t) = - \cos t
+\\ \cos^2(-\pi/2 + t) &= \cos^2(-\pi/2 = t) = \sin^2 t
+\end{aligned}
+\end{equation*}
+, то есть подынтегральное выражение симметрично относительно оси $y$, и, следовательно, достаточно доказать сходимость интеграла на отрезке $-\pi/2 \le t \le \pi/2$.
+
+Далее, заменим переменную интегрирования:
+\begin{equation*}
+\begin{aligned}
+   y         &= R \sin t + C
+\\ t         &= \asin \frac{y - C}{R}
+\\ dt        &= \frac{1}{\sqrt{R^2 - (C - y)^2}} dy
+\\ \cos t    &= \frac{\sqrt{R^2 - (C - y)^2}}{R}
+\\ y(-\pi/2) &= C - R 
+\\ y(\pi/2)  &= C + R 
+\end{aligned}
+\end{equation*}
+, что после подстановки дает:
+\begin{equation}\label{eq:int_f}
+\resizebox{0.9\hsize}{!}{$
+\begin{aligned}
+    & \int\limits_{y = C - R}^{C + R} \ln^2 f(y) \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} dy \\
+=   & \int\limits_{y = C - R}^{C + R} \ln^2 f(y) \frac{R}{R^2 - (C - y)^2 + (y + 1)^2} \frac{1}{\sqrt{R^2 - (C - y)^2}} dy\\
+=   & \int\limits_{y = C - R}^{C + R} \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}  dy\\
+\end{aligned}
+$}
+\end{equation}
+
+На пути интегрирования присутствуют особенности при $y = C - R$, $y = Z$, $y = C + R$, и подынтегральное выражение все еще достаточно сложно для непосредственной оценки. Разделим интеграл на несколько сегментов и оценим каждый.
+
+\subsubsection{Случай 1: $C - R \le y \le Z$}
+Очень важным свойством $s(k)$ является ее стремление к 1 при $\Im k$ стремящемся к нулю. Благодаря этому $\ln s(k)$ стремится к нулю, что в свою очередь необходимо чтобы компенсировать сингулярность функции $\frac{1}{R - C + y}$ при $y = C - R$. Интуитивно, контур интегрирования становится все ближе и ближе к $\bbR$ при увеличении радиуса и если бы $\ln s(k)$ не занулялась, сходимость бы пропала. Таким образом, разумная нижняя оценка на $s(k)$ также должна удовлетворять свойству сходимости к $1$ при $\Im k$ стремящемся к $0$.
+
+Так как $l$ выпукла при $0 \le y \le Z$, она может быть оценена снизу с помощью первой производной в $0$. Однако, этого недостаточно, так как это нарушит неотрицательность выражения под знаком логарифма, следовательно, надо быть аккуратнее и оценить снизу функцию в точке $Z$ в том числа, после чего склеить эти две оценки в некой точке $Z_0$:
+\begin{align*}
+f(y)
+& = 
+\begin{cases}
+l'(0) y + 1   &, 0 \le y < Z_0  \\
+l'(Z) (y - Z) &, Z_0 \le y < Z \\
+\end{cases}
+\\
+& =
+\begin{cases}
+\frac{-2}{V} y + 1   &, 0 \le y < Z_0  \\
+\frac{1}{2 V}(V^2 - 1) (y - Z) &, Z_0 \le y < Z \\
+\end{cases}
+\end{align*}
+
+Заметим, что в качестве $Z_0$ можно взять любое число в полуинтервале $[C-R, Z)$ (оценка снизу не обязана быть непрерывной функцией), главное чтобы $f(y)$ была неотрицательно определенной. Для простоты вычислений нам подойдет $Z_0 = \frac{V}{4}$. \mtodo{plot?}
+
+Далее, отдельно рассматриваем интегралы на участках $[C - R, \frac{V}{4})$ и $[\frac{V}{4}, Z)$.
+
+\subsubsection{$C - R \le y < \frac{V}{4}$}
+
+Посчитаем верхнюю оценку на подынтегральное выражение (\ref{eq:int_f}). Заметим, что при $C - R \le y \le \frac{V}{4}$:
+\begin{align*}
+       & \ln^2 l(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+% \\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\end{align*}
+,воспользуемся неравенством $\frac{x}{1 + x} \le \ln (1 + x)$ для $x > -1$, где $x = -\frac{2}{V} y$. Так как выражение под логарифмом меньше единицы, получим что $\ln^2 (1 + x) \le \frac{x^2}{(1 + x)^2}$:
+\begin{align*}
+       & \dots 
+\\ \le & \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V}y)^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V} \frac{V}{4})^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\end{align*}
+
+Заметим, что подынтегральное выражение теперь имеет вид $\frac{y^2}{a + b y}$, где $a = R^2 - C^2 + 1, b = 2 (C + 1)$, и при достаточно больших $R$ и $C$, $a > 0$ и $b > 0$. Заметим, что при этом $\frac{y^2}{a + b y}$ неотрицательно при $y > 0$, и строго возрастает:
+\[
+  \left(\frac{y^2}{a + b y}\right)'
+= \frac{2y}{a + by} + y^2 \frac{-b}{(a + by)^2}
+= \frac{2y (a + by) - b y^2}{(a + by)^2}
+= \frac{y (2a + by)}{(a + by)^2}
+\ge 0
+\]
+
+Следовательно, функцию можно оценить сверху ее значением на правом конце интервала в точке $\frac{V}{4}$, и легко видеть, что:
+\[
+\frac{y^2}{a + b y} = \mcO\left(\frac{1}{R}\right)
+\]
+
+Оставшаяся часть интеграла имеет вид:
+\[
+\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - C + R} = \mcO(1)
+\]
+, и в итоге весь интеграл на участке $[C - R, \frac{V}{4})$ имеет порядок $\mcO\left(\frac{1}{R}\right)$.
+
+\subsubsection{$\frac{V}{4} \le y < Z$}
+
+Оценим сверху подынтегральное выражение (\ref{eq:int_f}). Заметим, что для $\frac{V}{4} \le y < Z$:
+\begin{align*}
+    & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}} 
+\\ \le & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}}
+\\ \le & \ln^2 \left( \frac{1}{2 V}(V^2 - 1) (y - Z) \right) \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}}
+\end{align*}
+
+Функция $\ln^2(x)$ интегрируема в окрестности $x = 0$, и известно что: %  REFTODO
+
+\[
+\int\limits_{x=x_0}^b \ln^2(a (x - b)) dx = (b - x_0) (\ln^2(a (x_0 - b)) - 2 \ln(a (x_0 - b)) + 2)
+\]
+
+В нашем случае: $x_0 = \frac{V}{4}$, $b = Z$, следовательно, $x_0 - b \ne 0$ и определенный интеграл ограничен постоянной, не зависящей от $R$ и $C$. Таким образом, поведение интеграла зависит только от поведения множителя:
+
+\[
+\frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R - C + \frac{V}{4}}} \frac{1}{\sqrt{R + C - Z}}
+\]
+
+Очевидно, что при $r \to \infty$, $R \to \infty$, $C \to \infty$, $R - C \to 0$, и можно легко видеть, что выражение выше принадлежит классу $\mcO(\frac{1}{\sqrt{R}})$, и, следовательно, в пределе будет зануляться.
+
+\subsubsection{Случай 2: $y > Z$}
+При $y > Z$, 
+\[
+l(x + \iu y) 
+ = \frac{\tanh y - V}{\tanh y + V}
+ = 1 - 2 \frac{V}{\tanh y + V}
+\]
+
+% https://proofwiki.org/wiki/Inverse_of_Strictly_Increasing_Strictly_Concave_Real_Function_is_Strictly_Convex
+\mtodo{proof? just take a look at second derivative?}
+Так как $l$ вогнута, строго возрастает, и для фиксированного $r$, нас интересуют только $y \le C + R$, мы можем оценить функцию линейной: \mtodo{plot?}
+\[
+f(y) = \frac{l(C + R)}{C + R - Z} (y - Z)
+\]
+\mtodo{actually, even C + R is okay but whatever}
+Заметим, что в точке $C + R$, для начиная с достаточно большого $r$, функция $l(y)$ с зажата константами, не зависящими от $C$ и $R$. Это легко понять так как $\tanh y$ на бесконечности уходит к $1$, соответственно, $l(y)$ в пределе будет равно $1 - \frac{2 V}{V + 1}$. Это является довольно важным свойством данного квантового графа, если бы $l$ на бесконечности устремлялась к нулю, эта часть доказательства не могла бы быть проведена (см. \autoref{sec:ring}).
+
+В начале заметим, что на всем участке $Z \le y \le R + C$ у функции $\frac{1}{\sqrt{R - C + y}}$ нет сингулярности, и подынтегральное выражение (\ref{eq:int_f}) можно оценить как:
+\begin{equation}\label{eq:int_f_up}
+\begin{aligned}
+       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\end{aligned}
+\end{equation}
+
+Чтобы оценить это выражение, разделим интеграл на интервалы $[Z, Z + \frac{1}{R})$, $[Z + \frac{1}{R}, C)$, $[C, C + R]$.
+
+\subsubsection{$Z \le y < Z + \frac{1}{R}$}
+
+Оценим сверху выражение (\ref{eq:int_f_up}):
+\begin{align*}
+       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
+% \\  = & \ln^2 f(y) \mcO()
+\end{align*}
+
+\mtodo{reference?}
+$\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$ легко вычислить явно, используя:
+\[
+    \int\limits_b^{b + c} \ln^2 (a (x - b)) dx = c (\ln^2(a c) - 2 \ln (a c) + 2)
+\]
+
+Таким образом, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) - 2 \ln (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) + 2)$. Так как $l(C + R)$ ограничена константами, не зависящими от $r$, раскрывая логарифмы, легко можно понять что выражение принадлежит классу $\mcO(\frac{\ln^2 R}{R})$. Учитывая что коэффициент перед интегралом:
+\[
+\frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
+\]
+, очевидно, имеет порядок $\mcO\left(\frac{1}{\sqrt{R}}\right)$, очевидно что интеграл на данном интервале стремится к нулю при $R, C \to \infty$.
+
+\subsubsection{$Z + \frac{1}{R} \le y < C$}
+Оценим сверху выражение (\ref{eq:int_f_up}):
+\begin{align*}
+       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \ln^2 f(Z + \frac{1}{R}) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}}
+\end{align*}
+
+Первообразная для функции подобного вида широко известна:
+\[
+\int \frac{1}{a x + b} = \frac{\ln (a x + b)}{a}
+\]
+, где в нашем случае $a = 2 (C + 1)$, $b = R^2 - C^2 + 1$. Применяя формулу Ньютона-Лейбница для интервала $(Z + \frac{1}{R}, C)$, получим:
+\[
+\frac{\ln \frac{2 (C + 1) C + R^2 - C^2 + 1}{2 (C + 1) (Z + \frac{1}{R}) + R^2 - C^2 + 1}}{2 (C + 1)} = \mcO\left( \frac{\ln R}{R} \right)
+\]
+
+При стремлении $R$ к бесконечности, $\ln^2 f(Z + \frac{1}{R})$ будет также стремиться к бесконечности, поэтому необходимо оценить порядок особенности. Так как $\ln f(Z + \frac{1}{R}) = \ln \left( \frac{l(C + R)}{C + R - Z} \frac{1}{R} \right) = \ln l(C + R) - \ln (C + R - Z) - \ln R$, легко видеть что $\ln^2 f(Z + \frac{1}{R}) = \mcO (\ln^2 R)$.
+
+В результате, комбинируя все оценки, получаем: $\mcO (\ln^2 R) \mcO\left( \frac{\ln R}{R} \right) \frac{R}{\sqrt{R}} \frac{1}{\sqrt{R - C + Z}} = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)$, что означает что интеграл на этом участке стремится к $0$ с увеличением $r$.
+
+\subsubsection{$C \le y \le C + R$}
+
+Оценим сверху выражение (\ref{eq:int_f_up}):
+\begin{align*}
+       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+% \\  = & \ln^2 f(y) \mcO()
+\end{align*}
+
+Интеграл $\frac{1}{\sqrt{R + C - y}}$ от $C$ до $C + R$ тривиален и равен $2 \sqrt{R}$. Функция $f$ в точке $C$ ограничена константами не зависящими от $R$ и $C$, следовательно, и квадрат ее логарифма. Очевидно, что в результате получим выражение $\mcO \left( \frac{1}{R} \right) \sqrt R = \mcO \left( \frac{1}{\sqrt{R}} \right)$.
+
+\subsubsection{Оценка $\int \abs{f(t)}^2$: итог}
+Итого, мы разбили интегрирование на пять различных участков, и в итоге имеем порядок интеграла:
+\[
+\mcO \left( \frac{1}{R} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)
+\]
+, что означает, что весь интеграл уходит в 0 при стремлении $r$ к 1 (соответственно, $R$ к бесконечности), что и требовалось доказать.
