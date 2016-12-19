@@ -271,28 +271,28 @@ And finally, after combining all these estimages, we get $\mcO(1) \mcO(\sqrt{R})
 
 \subsubsection{$\frac{V}{4} \le y < Z$}
 
-Оценим сверху подынтегральное выражение (\ref{eq:int_f}). Заметим, что для $\frac{V}{4} \le y < Z$:
+Let's estimate the integral (\ref{eq:int_f}) from above. Note that for $\frac{V}{4} \le y < Z$:
 \begin{align*}
-    & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}} 
-\\ \le & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}}
-\\ \le & \ln^2 \left( \frac{1}{2 V}(V^2 - 1) (y - Z) \right) \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}} 
+\\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}}
+\\ \le &  \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}} \int \ln^2 \left( \frac{1}{2 V}(V^2 - 1) (y - Z) \right)
 \end{align*}
 
-Функция $\ln^2(x)$ интегрируема в окрестности $x = 0$, и известно что: %  REFTODO
+$\ln^2(x)$ is integrable in the neighborhood of $x = 0$, and it is known that: %  REFTODO
 
 \[
 \int\limits_{x=x_0}^b \ln^2(a (x - b)) dx = (b - x_0) (\ln^2(a (x_0 - b)) - 2 \ln(a (x_0 - b)) + 2)
 \]
 
-В нашем случае: $x_0 = \frac{V}{4}$, $b = Z$, следовательно, $x_0 - b \ne 0$ и определенный интеграл ограничен постоянной, не зависящей от $R$ и $C$. Таким образом, поведение интеграла зависит только от поведения множителя:
+In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we can see that the integral is bounded by a constant independent of $R$ and $C$. Таким образом, поведение интеграла зависит только от поведения множителя:
 
 \[
-\frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R - C + \frac{V}{4}}} \frac{1}{\sqrt{R + C - Z}}
+\frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}} 
 \]
 
-Очевидно, что при $r \to \infty$, $R \to \infty$, $C \to \infty$, $R - C \to 0$, и можно легко видеть, что выражение выше принадлежит классу $\mcO(\frac{1}{\sqrt{R}})$, и, следовательно, в пределе будет зануляться.
+Clearly, as $r \to \infty$, we get $R \to \infty$, $C \to \infty$, $R - C \to 0$, and we can see that the expression grows as $\mcO(\frac{1}{\sqrt{R}})$ TODO ELABORATE
 
-\subsubsection{Случай 2: $y > Z$}
+\subsubsection{Case 2: $y > Z$}
 При $y > Z$, 
 \[
 l(x + \iu y) 
