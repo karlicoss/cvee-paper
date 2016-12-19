@@ -293,7 +293,7 @@ In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we c
 Clearly, as $r \to \infty$, we get $R \to \infty$, $C \to \infty$, $R - C \to 0$, and we can see that the expression grows as $\mcO(\frac{1}{\sqrt{R}})$ TODO ELABORATE
 
 \subsubsection{Case 2: $y > Z$}
-При $y > Z$, 
+When $y > Z$, 
 \[
 l(x + \iu y) 
  = \frac{\tanh y - V}{\tanh y + V}
@@ -302,43 +302,44 @@ l(x + \iu y)
 
 % https://proofwiki.org/wiki/Inverse_of_Strictly_Increasing_Strictly_Concave_Real_Function_is_Strictly_Convex
 \mtodo{proof? just take a look at second derivative?}
-Так как $l$ вогнута, строго возрастает, и для фиксированного $r$, нас интересуют только $y \le C + R$, мы можем оценить функцию линейной: \mtodo{plot?}
+Since $l$ is concave, strictly increasing and for a fixed $r$, we are only interested at $y \le C + R$, we can estimate the function by a linear one: \mtodo{plot?}
 \[
 f(y) = \frac{l(C + R)}{C + R - Z} (y - Z)
 \]
 \mtodo{actually, even C + R is okay but whatever}
-Заметим, что в точке $C + R$, для начиная с достаточно большого $r$, функция $l(y)$ с зажата константами, не зависящими от $C$ и $R$. Это легко понять так как $\tanh y$ на бесконечности уходит к $1$, соответственно, $l(y)$ в пределе будет равно $1 - \frac{2 V}{V + 1}$. Это является довольно важным свойством данного квантового графа, если бы $l$ на бесконечности устремлялась к нулю, эта часть доказательства не могла бы быть проведена (см. \autoref{sec:ring}).
 
-В начале заметим, что на всем участке $Z \le y \le R + C$ у функции $\frac{1}{\sqrt{R - C + y}}$ нет сингулярности, и подынтегральное выражение (\ref{eq:int_f}) можно оценить как:
+Notice that when $y = C + R$, for a sufficiently big $r$, $l(y)$ is bounded from both sides by constants, independent from $C$ and $R$. This is because $\tanh y$ goes to $1$ as $y$ goes to infinity, therefore, $l(y)$ in the limit will be equal to $1 - \frac{2 V}{V + 1}$. This is an important property of this specific model, since if $l$ went to zero on infinity, this part of proof couldn't have been done (see \autoref{sec:ring}).
+
+First, not that on $Z \le y \le R + C$ the function $\frac{1}{\sqrt{R - C + y}}$ has no singularities and we can estimate integral (\ref{eq:int_f}) as:
 \begin{equation}\label{eq:int_f_up}
 \begin{aligned}
-       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
-\\ \le & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}} 
 \end{aligned}
 \end{equation}
 
-Чтобы оценить это выражение, разделим интеграл на интервалы $[Z, Z + \frac{1}{R})$, $[Z + \frac{1}{R}, C)$, $[C, C + R]$.
+To estimate this expression, let's split the integration interval in two: $[Z, Z + \frac{1}{R})$, $[Z + \frac{1}{R}, C)$, $[C, C + R]$.
 
 \subsubsection{$Z \le y < Z + \frac{1}{R}$}
 
-Оценим сверху выражение (\ref{eq:int_f_up}):
+Let's estimate (\ref{eq:int_f_up}), replacing functions in integrands by their extreme value at interval's ends:
 \begin{align*}
-       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
-\\ \le & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
-% \\  = & \ln^2 f(y) \mcO()
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
+\\ =   & \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}} \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \int \ln^2 f(y) 
 \end{align*}
 
 \mtodo{reference?}
-$\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$ легко вычислить явно, используя:
+$\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$ can be computed explicitly, using:
 \[
     \int\limits_b^{b + c} \ln^2 (a (x - b)) dx = c (\ln^2(a c) - 2 \ln (a c) + 2)
 \]
 
-Таким образом, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) - 2 \ln (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) + 2)$. Так как $l(C + R)$ ограничена константами, не зависящими от $r$, раскрывая логарифмы, легко можно понять что выражение принадлежит классу $\mcO(\frac{\ln^2 R}{R})$. Учитывая что коэффициент перед интегралом:
+Hence, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) - 2 \ln (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) + 2)$. As we noted above, $l(C + R)$ is bounded by constants independent on $r$, and we can clearly see that the expression grows as $\mcO(\frac{\ln^2 R}{R})$. Since the coefficient before the integral:
 \[
 \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
 \]
-, очевидно, имеет порядок $\mcO\left(\frac{1}{\sqrt{R}}\right)$, очевидно что интеграл на данном интервале стремится к нулю при $R, C \to \infty$.
+, has order of growth $\mcO\left(\frac{1}{\sqrt{R}}\right)$, it is clear that the integral on this interval goes to zero as $R, C \to \infty$.
 
 \subsubsection{$Z + \frac{1}{R} \le y < C$}
 Оценим сверху выражение (\ref{eq:int_f_up}):
