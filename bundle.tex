@@ -318,7 +318,7 @@ First, not that on $Z \le y \le R + C$ the function $\frac{1}{\sqrt{R - C + y}}$
 \end{aligned}
 \end{equation}
 
-To estimate this expression, let's split the integration interval in two: $[Z, Z + \frac{1}{R})$, $[Z + \frac{1}{R}, C)$, $[C, C + R]$.
+To estimate this expression, let's split the integration interval in three: $[Z, Z + \frac{1}{R})$, $[Z + \frac{1}{R}, C)$, $[C, C + R]$.
 
 \subsubsection{$Z \le y < Z + \frac{1}{R}$}
 
@@ -342,24 +342,27 @@ Hence, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\
 , has order of growth $\mcO\left(\frac{1}{\sqrt{R}}\right)$, it is clear that the integral on this interval goes to zero as $R, C \to \infty$.
 
 \subsubsection{$Z + \frac{1}{R} \le y < C$}
-Оценим сверху выражение (\ref{eq:int_f_up}):
+Let's estimate (\ref{eq:int_f_up}) from above TODO again by picking extreme values blah blah:
 \begin{align*}
-       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
-\\ \le & \ln^2 f(Z + \frac{1}{R}) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \int \ln^2 f(Z + \frac{1}{R}) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}}
+\\  =  & \ln^2 f(Z + \frac{1}{R})  \frac{R}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{R^2 - C^2 + 2 (C + 1) y + 1}
 \end{align*}
 
-Первообразная для функции подобного вида широко известна:
+TODO REPLACE R BY C(R) EVERYWHERE?
+
+Antiderivative for such a function is well known:
 \[
 \int \frac{1}{a x + b} = \frac{\ln (a x + b)}{a}
 \]
-, где в нашем случае $a = 2 (C + 1)$, $b = R^2 - C^2 + 1$. Применяя формулу Ньютона-Лейбница для интервала $(Z + \frac{1}{R}, C)$, получим:
+, in our case $a = 2 (C + 1)$, $b = R^2 - C^2 + 1$. Substituting the ends of the interval $(Z + \frac{1}{R}, C)$, we get the definite integral:
 \[
 \frac{\ln \frac{2 (C + 1) C + R^2 - C^2 + 1}{2 (C + 1) (Z + \frac{1}{R}) + R^2 - C^2 + 1}}{2 (C + 1)} = \mcO\left( \frac{\ln R}{R} \right)
 \]
 
-При стремлении $R$ к бесконечности, $\ln^2 f(Z + \frac{1}{R})$ будет также стремиться к бесконечности, поэтому необходимо оценить порядок особенности. Так как $\ln f(Z + \frac{1}{R}) = \ln \left( \frac{l(C + R)}{C + R - Z} \frac{1}{R} \right) = \ln l(C + R) - \ln (C + R - Z) - \ln R$, легко видеть что $\ln^2 f(Z + \frac{1}{R}) = \mcO (\ln^2 R)$.
+As $R$ goes to infinity, $\ln^2 f(Z + \frac{1}{R})$ goes to infinity as well, so we have to compute the order of singularity. Since $\ln f(Z + \frac{1}{R}) = \ln \left( \frac{l(C + R)}{C + R - Z} \frac{1}{R} \right) = \ln l(C + R) - \ln (C + R - Z) - \ln R$, we can see that $\ln^2 f(Z + \frac{1}{R}) = \mcO (\ln^2 R)$.
 
-В результате, комбинируя все оценки, получаем: $\mcO (\ln^2 R) \mcO\left( \frac{\ln R}{R} \right) \frac{R}{\sqrt{R}} \frac{1}{\sqrt{R - C + Z}} = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)$, что означает что интеграл на этом участке стремится к $0$ с увеличением $r$.
+Finally, after combining all estimates, we get: $\mcO (\ln^2 R) \mcO\left( \frac{\ln R}{R} \right) \frac{R}{\sqrt{R}} \frac{1}{\sqrt{R - C + Z}} = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)$, which means that integral goes to $0$ on this interval as $r$ goes to $1$.
 
 \subsubsection{$C \le y \le C + R$}
 
