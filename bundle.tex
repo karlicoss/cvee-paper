@@ -201,10 +201,12 @@ $}
 
 On the integration path we cross singularities at $y = C - R$, $y = Z$, $y = C + R$, and the integrand is still too complex for direct estimation. Let's split the integration path in multiple segments and estimate them independently.
 
-\subsubsection{Случай 1: $C - R \le y \le Z$}
-Очень важным свойством $s(k)$ является ее стремление к 1 при $\Im k$ стремящемся к нулю. Благодаря этому $\ln s(k)$ стремится к нулю, что в свою очередь необходимо чтобы компенсировать сингулярность функции $\frac{1}{R - C + y}$ при $y = C - R$. Интуитивно, контур интегрирования становится все ближе и ближе к $\bbR$ при увеличении радиуса и если бы $\ln s(k)$ не занулялась, сходимость бы пропала. Таким образом, разумная нижняя оценка на $s(k)$ также должна удовлетворять свойству сходимости к $1$ при $\Im k$ стремящемся к $0$.
+\subsubsection{Case 1: $C - R \le y \le Z$}
+A crucial property of $s(k)$ is its convergence to 1 as $\Im k$ converges to TODO ZERO??, since then $\ln s(k)$ goes to zero, which is necessary to compensate the singularity of $\frac{1}{R - C + y}$ at $y = C - R$. 
+% TODO: Интуитивно, контур интегрирования становится все ближе и ближе к $\bbR$ при увеличении радиуса и если бы $\ln s(k)$ не занулялась, сходимость бы пропала.
+This implies that lower bound for $s(k)$ should also converge to $1$ as $\Im k$ goes to $0$.
 
-Так как $l$ выпукла при $0 \le y \le Z$, она может быть оценена снизу с помощью первой производной в $0$. Однако, этого недостаточно, так как это нарушит неотрицательность выражения под знаком логарифма, следовательно, надо быть аккуратнее и оценить снизу функцию в точке $Z$ в том числа, после чего склеить эти две оценки в некой точке $Z_0$:
+Since $l$ is convex when $0 \le y \le Z$, we can estimate it from below using its first derivative at $0$. However, this is not enough, since it will this will violate the property of the estimate being positive (it is under the logarithm sign) TODO PLOT IT, so we have to be more careful and approximate the function at $Z$ with its first derivative as well, and then glue them together at some point $Z_0$:
 \begin{align*}
 f(y)
 & = 
@@ -220,9 +222,9 @@ l'(Z) (y - Z) &, Z_0 \le y < Z \\
 \end{cases}
 \end{align*}
 
-Заметим, что в качестве $Z_0$ можно взять любое число в полуинтервале $[C-R, Z)$ (оценка снизу не обязана быть непрерывной функцией), главное чтобы $f(y)$ была неотрицательно определенной. Для простоты вычислений нам подойдет $Z_0 = \frac{V}{4}$. \mtodo{plot?}
+Note that lower bound does not have to be a continuous function, so we can pick any number in $[C - R, Z)$ as $Z_0$. For the ease of calculations, let's take $Z_0 = \frac{V}{4}$. \mtodo{plot?}
 
-Далее, отдельно рассматриваем интегралы на участках $[C - R, \frac{V}{4})$ и $[\frac{V}{4}, Z)$.
+Next we investigate integrals on $[C - R, \frac{V}{4})$ and $[\frac{V}{4}, Z)$ separately.
 
 \subsubsection{$C - R \le y < \frac{V}{4}$}
 
