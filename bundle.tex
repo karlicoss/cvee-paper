@@ -8,7 +8,7 @@
 \caption{Квантовый граф $\Gamma$, состоящий из полубесконечных ребер $\Omega_L, \Omega_R$ и рассеивателя $\Omega$, представляющего из себя $W$ идентичных ребер длины 1. В вершинах $V_a$, $V_b$ находятся $\delta$-образные потенциальные ямы глубины $a$ и $b$ соответственно.}\label{fig:res_bundle}
 \end{figure}
 
-Let's invastigate the model on \autoref{fig:res_bundle}. Schrodinger's operator is defined on edges of the graph as  $-\dv[2]{\psi}{x}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
+Let's investigate the model on \autoref{fig:res_bundle}. Schrodinger's operator is defined on edges of the graph as  $-\dv[2]{\psi}{x}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
 
 \begin{equation}\label{eq:bundle_system}
 \begin{aligned}
@@ -102,33 +102,49 @@ a^2 - b^2
 Finally, since $\frac{2 \pi}{\sqrt{a^2 - b^2}} \le \frac{2 \pi}{2} = \pi$, and we just proved that $\norm{g}$ is bounded by a constant. 
 
 
-\subsubsection{Оценка $\int \abs{f(t)}^2$}
-Функция $s(k)$ (\ref{eq:bundle_s}) слишком сложна для прямого аналитического доказательства сходимости. Однако, так как $s(k)$ — модуль определителя $S$-матрицы, в верхней комплексной полуплоскости $0 \le s(k) \le 1$. Это означает, что $s(k)$ может быть заменена на некую оценку снизу $l(k)$, такую что $0 \le l(k) \le s(k)$. После этого, если будет доказана сходимость к нулю для этой нижней оценки, то так как $s(k) \le 1$, $\ln l(k) \le \ln s(k) \le 0$, мы будем иметь $\ln^2 s(k) \le \ln^2 l(k)$, и, следовательно, так как подынтегральное выражение неотрицательно, сходимость искомого интеграла. Мы часто будем опираться на этот факт и проводить подобные замены под знаком логарифма, заменяя сложные функции на кусочно-линейные, и используя известные оценки для логарифма чтобы оценить исходный интеграл.
+\subsubsection{Estimating $\int \abs{f(t)}^2$}
+Function $s(k)$ (\ref{eq:bundle_s}) is too complex for direct proof of the convergence.
 
-\subsubsection{Упрощение функции $s(k)$}
-Сначала мы дадим простую оценку для $s(k)$ по всей верней комплексной полуплоскости и сделаем ее независимой от вещественной части аргумента.
+We proceed as follows:
 
-Легко видеть, что $s(k)$ периодична относительно вещественной части аргумента при неизменной комплексной части.
+\begin{itemize}
+\item Since $s(k)$ is an absolute value of the determinant of the $S$ matrix, in the upper complex plane $0 \le s(k) \le 1$ holds. From here, we immediately know that the integral is bounded from above since TODO blah blah
+\item We replace $s(k)$ with a lower bound $l(k)$ such that: $0 \le l(k) \le s(k) \le 1$.
+\item By appling logarithm to the expression above, we get $\ln l(k) \le \ln s(k) \le 0$, and therefore, $\ln^2 s(k) \le \ln^2 l(k)$.
+\item Now, if we prove convergence for $l(k)$, this immediately proves the convergence of the original integral.
+\end{itemize}
+
+We are going to use this fact in our proof and do such function changes under the integral sign, replacing complicated function with simpler (in particular, piecewise linear) lower bounds, and then using well known facts to estimate the integral.
+
+\subsubsection{Simplifying $s(k)$}
+We build a simple estimate for $s(k)$ over the upper complex plane. This function will be independent of the complex part of its argument which will make the analysis way easier.
+
+\begin{enumerate}
+\item
+  It is easy to spot that if we fix the complex part of the argument, $s(k)$ is periodic with respect to the real part of its argument.
 % Since $\sin k$ and $\cos k$ are periodic w.r.t the real axis, with the period of $2 \pi$, 
 \mtodo{is this step really necessary?}
+\item 
+  Function $s(k)$ has countably infinite set of zeros, and each of them has $\Im k = \atanh \frac{2 W}{W^2 + 1}$. For brewity, we define:
 
-У функции $s(k)$ есть счетное число нулей, и для всех $\Im k = \atanh \frac{2 W}{W^2 + 1}$. Для краткости, дадим обозначения:
+  \begin{equation*}
+  \begin{aligned}
+     V &= \frac{2 W}{W^2 + 1}
+  \\ Z &= \atanh V
+  \end{aligned}
+  \end{equation*}
+\item
+  Notice that for each $x$, $s(x + \iu y) \le s(\iu y)$. \mtodo{How to prove? We could probably take a look at numerator and denominator in separate?} 
+\end{enumerate}
 
-\begin{equation*}
-\begin{aligned}
-   V &= \frac{2 W}{W^2 + 1}
-\\ Z &= \atanh V
-\end{aligned}
-\end{equation*}
-
-Далее, заметим что для любого $x$, $s(x + \iu y) \le s(\iu y)$. \mtodo{How to prove? We could probably take a look at numerator and denominator in separate?} После всех вышеупомянутых замечаний, для $s(x + \iu y)$ можно дать довольно простую нижнюю оценку:
+Given these fact, we can build a simple lower bound for $s(x + \iu y)$:
 \begin{align*}
 l(x + \iu y)
    &= \abs{\frac{(W^2 + 1) \sinh y - 2 W \cosh y}{(W^2 + 1) \sinh y + 2 W \cosh y}}
-\\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(так как $\cosh y \ge 1$)}
+\\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(since $\cosh y > 0$)}
 \end{align*}
 
-Легко понять, что у функции $l(k)$ будут нули вдоль линии $\Im k = Z$, что значит, что вдоль этой линии у функции $\ln l(k)$ будет несчетное множество особенностей. Интуитивно, это не должно испортить сходимость, так как контур интегрирования все равно мог пересечь сингулярность функции $\ln s(k)$. Действительно, далее мы покажем, что даже такое загрубление функции позволяет доказать сходимость. Далее, для краткости записи, будем опускать вещественную часть аргумента и обозначим $l(y) = l(x + \iu y)$, где $x$ может быть любым, так как $l$ от него все равно не зависит.
+It's pretty clear that $l(k)$ has a continuum of zeros over the line $\Im k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration cound intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brewity, we will omit it and defince $l(y) = l(\iu y)$.
 \mtodo{Plot?}
 
 % Так как $\tanh y$ неотрицательна и растет при $y \ge 0$, мы можем избавиться от знака модуля:
@@ -143,7 +159,7 @@ l(x + \iu y)
 %  \end{cases}
 % \]
 
-После построения нижней оценки можно упростить интеграл, который мы исследуем:
+Now, we will simplify the integral (TODO REF) using the bound we just built:
 \begin{align*}
        \int\limits_{t=0}^{2 \pi} \abs{f(t)}^2 dt
    = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \eexp{\iu t} + \iu C) \frac{R}{\norm{R \eexp{\iu t} + \iu C + i}^2} dt
@@ -151,7 +167,7 @@ l(x + \iu y)
 \end{align*}
 % TODO f зависит только от Im k
 
-Во-первых, заметим, что:
+First, notice that:
 
 \begin{equation*}
 \begin{aligned}
@@ -159,9 +175,9 @@ l(x + \iu y)
 \\ \cos^2(-\pi/2 + t) &= \cos^2(-\pi/2 = t) = \sin^2 t
 \end{aligned}
 \end{equation*}
-, то есть подынтегральное выражение симметрично относительно оси $y$, и, следовательно, достаточно доказать сходимость интеграла на отрезке $-\pi/2 \le t \le \pi/2$.
+, that is, the integrand is symmetric with respect to $y$ and for proving convergence it is enough to prove convergence on the (half circle) contour defined by $-\pi/2 \le t \le \pi/2$.
 
-Далее, заменим переменную интегрирования:
+Next, we do a variable change:
 \begin{equation*}
 \begin{aligned}
    y         &= R \sin t + C
@@ -172,7 +188,7 @@ l(x + \iu y)
 \\ y(\pi/2)  &= C + R 
 \end{aligned}
 \end{equation*}
-, что после подстановки дает:
+, and after substitution:
 \begin{equation}\label{eq:int_f}
 \resizebox{0.9\hsize}{!}{$
 \begin{aligned}
@@ -183,7 +199,7 @@ l(x + \iu y)
 $}
 \end{equation}
 
-На пути интегрирования присутствуют особенности при $y = C - R$, $y = Z$, $y = C + R$, и подынтегральное выражение все еще достаточно сложно для непосредственной оценки. Разделим интеграл на несколько сегментов и оценим каждый.
+On the integration path we cross singularities at $y = C - R$, $y = Z$, $y = C + R$, and the integrand is still too complex for direct estimation. Let's split the integration path in multiple segments and estimate them independently.
 
 \subsubsection{Случай 1: $C - R \le y \le Z$}
 Очень важным свойством $s(k)$ является ее стремление к 1 при $\Im k$ стремящемся к нулю. Благодаря этому $\ln s(k)$ стремится к нулю, что в свою очередь необходимо чтобы компенсировать сингулярность функции $\frac{1}{R - C + y}$ при $y = C - R$. Интуитивно, контур интегрирования становится все ближе и ближе к $\bbR$ при увеличении радиуса и если бы $\ln s(k)$ не занулялась, сходимость бы пропала. Таким образом, разумная нижняя оценка на $s(k)$ также должна удовлетворять свойству сходимости к $1$ при $\Im k$ стремящемся к $0$.
