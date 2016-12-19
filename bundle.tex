@@ -228,20 +228,26 @@ Next we investigate integrals on $[C - R, \frac{V}{4})$ and $[\frac{V}{4}, Z)$ s
 
 \subsubsection{$C - R \le y < \frac{V}{4}$}
 
-Посчитаем верхнюю оценку на подынтегральное выражение (\ref{eq:int_f}). Заметим, что при $C - R \le y \le \frac{V}{4}$:
+Let's compute an upper bound for the integrand (\ref{eq:int_f}). Note that for $C - R \le y \le \frac{V}{4}$:
 \begin{align*}
        & \ln^2 l(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
 \\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
 % \\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \end{align*}
-,воспользуемся неравенством $\frac{x}{1 + x} \le \ln (1 + x)$ для $x > -1$, где $x = -\frac{2}{V} y$. Так как выражение под логарифмом меньше единицы, получим что $\ln^2 (1 + x) \le \frac{x^2}{(1 + x)^2}$:
+
+Now, we use a well known inequality which holds for $x > -1$: TODO REFERENCE
+\[
+\frac{x}{1 + x} \le \ln (1 + x)
+\]
+, where in our case $x = -\frac{2}{V} y$. Since the expression under logarithm is less than 1, we get $\ln^2 (1 + x) \le \frac{x^2}{(1 + x)^2}$:
 \begin{align*}
        & \dots 
 \\ \le & \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V}y)^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
 \\ \le & \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V} \frac{V}{4})^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\\ = & \frac{\frac{4}{V^2}}{(1 - \frac{2}{V} \frac{V}{4})^2} \frac{R}{\sqrt{R + C - Z}} \frac{y^2}{R^2 - C^2 + 2 (C + 1) y + 1}  \frac{1}{\sqrt{R - C + y}}
 \end{align*}
 
-Заметим, что подынтегральное выражение теперь имеет вид $\frac{y^2}{a + b y}$, где $a = R^2 - C^2 + 1, b = 2 (C + 1)$, и при достаточно больших $R$ и $C$, $a > 0$ и $b > 0$. Заметим, что при этом $\frac{y^2}{a + b y}$ неотрицательно при $y > 0$, и строго возрастает:
+Note that we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$. Now the integrand (TODO ACTUALLY ONLY ONE PART OF IT) has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ (TODO WHY) и $b > 0$. That means $\frac{y^2}{a + b y}$ will be nonnegative when $y > 0$, and strictly increasing, since:
 \[
   \left(\frac{y^2}{a + b y}\right)'
 = \frac{2y}{a + by} + y^2 \frac{-b}{(a + by)^2}
@@ -250,16 +256,18 @@ Next we investigate integrals on $[C - R, \frac{V}{4})$ and $[\frac{V}{4}, Z)$ s
 \ge 0
 \]
 
-Следовательно, функцию можно оценить сверху ее значением на правом конце интервала в точке $\frac{V}{4}$, и легко видеть, что:
+This implies that we can estimate the function from above by using its value on the rightmost point of the interval at $\frac{V}{4}$.
 \[
 \frac{y^2}{a + b y} = \mcO\left(\frac{1}{R}\right)
 \]
+TODO ELABORATE ON THAT!
 
-Оставшаяся часть интеграла имеет вид:
+The remaning part of integral is:
 \[
 \int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - C + R} = \mcO(1)
 \]
-, и в итоге весь интеграл на участке $[C - R, \frac{V}{4})$ имеет порядок $\mcO\left(\frac{1}{R}\right)$.
+
+And finally, after combining all these estimages, we get $\mcO(1) \mcO(\sqrt{R}) \mcO\left(\frac{1}{R}\right) \mcO(1)  = \mcO\left(\frac{1}{\sqrt{R}}\right)$ TODO EXPAND IN TERMS OF small r!
 
 \subsubsection{$\frac{V}{4} \le y < Z$}
 
