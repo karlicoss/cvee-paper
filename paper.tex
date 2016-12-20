@@ -21,6 +21,9 @@
     {inline,backgroundcolor=red}{}
 \newcommand{\mtodo}[1]{\todo[linecolor=green!70!white, backgroundcolor=blue!20!white, bordercolor=red]{#1}}
 
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}
+
 
 \newcommand{\hilb}[1]{\mathcal{H}_{#1}}
 \newcommand{\cconj}[1]{\overline{#1}}
@@ -41,6 +44,7 @@
 \newcommand{\bbR}{\mathbb{R}}
 \newcommand{\bbT}{\mathbb{T}} % complex unit circle
 \newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbH}{\mathbb{H}}
 
 % imaginary unit
 \newcommand{\iu}{{i\mkern1mu}}
@@ -57,5 +61,6 @@
 
 \begin{document}
 
+\input{chapter_1_background.tex}
 \input{bundle.tex}
 \end{document}
