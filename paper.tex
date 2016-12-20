@@ -32,6 +32,8 @@
 
 \newcommand{\eexp}[1]{e^{#1}}
 
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 \DeclareMathOperator\asin{asin}
@@ -84,16 +86,24 @@ w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
 
 One notable property of the Cayley transform is that it injectively maps $\bbR$ into unit circle $\bbT$.
 
-Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $C(r)$ and radius $R(r)$, where:
+Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\iu C(r)$ and radius $R(r)$, where:
 
 \begin{equation}\label{eq:c_and_r}
 \begin{aligned}
-   C(r) &= \Im \frac{w(r) + w(-r)}{2}
-\\ R(r) &= \Im \frac{w(r) - w(-r)}{2}
+   C(r) &= \Im \frac{w(r) + w(-r)}{2} = \frac{1 + r^2}{1 - r^2}
+\\ R(r) &= \Im \frac{w(r) - w(-r)}{2} = \frac{2 r}{1 - r^2}
 \end{aligned}
 \end{equation}
 
-From these formulas it's easy to see that if we limit $r$ to $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$, which intuinively makes sense since a complex unit circle maps to a real axis. TODO ???
+From these formulas it's easy to see that if we limit $r$ to $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$, which intuinively makes sense since a complex unit circle maps to a real axis.
+
+Also, we'll note two useful facts:
+\begin{itemize}
+\item $C(r) - R(r) > 0$
+\item $C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r}$, which means that $C - R$ is $\mcO(\frac{1}{R})$
+\end{itemize}
+
+% TODO: $C(r) + R(r) = \Im w(r) = \frac{1 + r}{1 - r}$, $C(r) - R(r) = \Im w(-r) = \frac{1 - r}{1 + r}$
 
 \section{Convergence criterion}
 There is a connection between the S-matrix and the completeness of the resonant states for a scattering problem:
@@ -131,7 +141,6 @@ s(k) = \abs{\det S(k)}
 \begin{equation}\label{eq:critp}
 \lim\limits_{r \to 1} \int\limits_{0}^{2 \pi} \ln s(R(r) \eexp{\iu t} + \iu C(r)) \frac{R}{(R(r) \eexp{\iu t} + \iu C(r) + i)^2} dt = 0
 \end{equation}
-TODO: $C + R = \Im w(r) = \frac{1 + r}{1 - r}$, $C - R = \Im w(-r) = \frac{1 - r}{1 + r}$
 
 
 \section{The model}
@@ -350,8 +359,8 @@ Next we investigate integrals on $[C - R, \frac{V}{4})$ and $[\frac{V}{4}, Z)$ s
 
 Let's compute an upper bound for the integrand (\ref{eq:int_f}). Note that for $C - R \le y \le \frac{V}{4}$:
 \begin{align*}
-       & \ln^2 l(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
-\\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+       & \int \ln^2 l(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
 \end{align*}
 
 Now, we use a well known inequality which holds for $x > -1$: TODO REFERENCE
@@ -361,12 +370,14 @@ Now, we use a well known inequality which holds for $x > -1$: TODO REFERENCE
 , where in our case $x = -\frac{2}{V} y$. Since the expression under logarithm is less than 1, we get $\ln^2 (1 + x) \le \frac{x^2}{(1 + x)^2}$:
 \begin{align*}
        & \dots 
-\\ \le & \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V}y)^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
-\\ \le & \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V} \frac{V}{4})^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
-\\ = & \frac{\frac{4}{V^2}}{(1 - \frac{2}{V} \frac{V}{4})^2} \frac{R}{\sqrt{R + C - Z}} \frac{y^2}{R^2 - C^2 + 2 (C + 1) y + 1}  \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V}y)^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V} \frac{V}{4})^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\\ =   & \frac{\frac{4}{V^2}}{(1 - \frac{2}{V} \frac{V}{4})^2} \frac{R}{\sqrt{R + C - Z}}  \int \frac{y^2}{R^2 - C^2 + 2 (C + 1) y + 1}  \frac{1}{\sqrt{R - C + y}}
 \end{align*}
 
-Note that we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$. Now the integrand (TODO ACTUALLY ONLY ONE PART OF IT) has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ (TODO WHY) и $b > 0$. That means $\frac{y^2}{a + b y}$ will be nonnegative when $y > 0$, and strictly increasing, since:
+It's clear that the multiplier before the integral has order $\mcO(\sqrt{R})$ (we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$).
+
+The first part of the integrand has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ and $b > 0$. That means $\frac{y^2}{a + b y}$ will be nonnegative when $y > 0$, and non decreasing, since:
 \[
   \left(\frac{y^2}{a + b y}\right)'
 = \frac{2y}{a + by} + y^2 \frac{-b}{(a + by)^2}
@@ -377,16 +388,15 @@ Note that we can ignore the terms dependent on $V$ only since $V$ is a constant 
 
 This implies that we can estimate the function from above by using its value on the rightmost point of the interval at $\frac{V}{4}$.
 \[
-\frac{y^2}{a + b y} = \mcO\left(\frac{1}{R}\right)
+\frac{y^2}{a + b y} \le \frac{\frac{V^2}{16}}{R^2 - C^2 + 1 + 2 (C + 1) \frac{V}{4}} = \mcO\left(\frac{1}{R}\right)
 \]
-TODO ELABORATE ON THAT!
 
-The remaning part of integral is:
+Interal of the second part of the integrand is:
 \[
-\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - C + R} = \mcO(1)
+\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - (C - R)} < 2 \sqrt{\frac{V}{4}} = \mcO(1)
 \]
 
-And finally, after combining all these estimages, we get $\mcO(1) \mcO(\sqrt{R}) \mcO\left(\frac{1}{R}\right) \mcO(1)  = \mcO\left(\frac{1}{\sqrt{R}}\right)$ TODO EXPAND IN TERMS OF small r!
+And finally, after combining we get $\mcO(\sqrt{R}) \mcO\left(\frac{1}{R}\right) \mcO(1)  = \mcO\left(\frac{1}{\sqrt{R}}\right)$.
 
 \subsubsection{$\frac{V}{4} \le y < Z$}
 
