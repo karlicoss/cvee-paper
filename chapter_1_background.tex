@@ -1,29 +1,19 @@
-\section{Различные обозначения}
+\section{Definitions}
 \begin{itemize}
-\item $\bbC$ — комплексная плоскость, $\bbC = \{ x + \iu y \mid x, y \in \bbR \}$ 
-\item $\bbH$ — верхняя комплексная полуплоскость (англ. upper half-plane), $\bbH = \{ x + \iu y \mid y > 0, x, y \in \bbR \}$
-\item $\bbD$ — комплексный единичный круг (англ. unit disk), $\bbD = \{ z \mid \abs{z} < 1 \}$
-\item $\bbT$ — комплексная единичная окружность (англ. unit circle), $\bbT = \partial \bbD =  \{z \mid \abs{z} = 1 \}$
-\item $z$ используется в качестве переменной, обозначающей точку в верхней комплексной полуплоскости $\bbH$
-\item $\zeta$ используется в качестве переменной, обозначающей точку на комплексном единичном диске $\bbD$
+\item $\bbC$ — complex plane, $\bbC = \{ x + \iu y \mid x, y \in \bbR \}$ 
+\item $\bbH$ — upper complex half-plane, $\bbH = \{ x + \iu y \mid y > 0, x, y \in \bbR \}$
+\item $\bbD$ — unit disk, $\bbD = \{ z \mid \abs{z} < 1 \}$
+\item $\bbT$ — unit circle, $\bbT = \partial \bbD =  \{z \mid \abs{z} = 1 \}$
+\item $z$ denotes a complex argument on upper complex half-plane $\bbH$
+\item $\zeta$ denotes a complex argument on unit disk $\bbD$
 \end{itemize}
 
-\section{Уравнение Шредингера}
+\section{Schrodinger's equation}
+In this paper we are only interested in the mathematical scattering problem and not actual energies, so we define Plank's constant as $1$ and use stationary Schrodinger's equation: $H \Psi = E \Psi$. We are going to be interested in scattering state solutions for this equation.
 
-Уравнение Шредингера описывает временную эволюцию чистых состояний квантовых систем во времени, и выглядит как:
-\[
-\iu \hbar \pdv{t} \Psi(t) = H \Psi(t)
-\]
-, $\hbar$ — приведенная постоянная Планка, $H$ — гамильтониан, оператор полной энергии системы. Спектром гамильтониана является множество возможных значений энергии квантовой системы, которые можно получить при ее измерении.
-
-Так как в этой работе нам интересна математическая задача рассеяния, и качественное поведение системы, а не конкретные значения энергий, далее мы будем игнорировать постоянную Планка и примем ее равной $1$; а так система статична, и гамильтониан не зависит от времени, можно перейти к стационарному уравнению Шредингера:
-\[
-H \Psi = E \Psi
-\]
-При этом решения уравнения разделяются на два класса: связанные состояния (англ. bound states) — те, которые соответствуют дискретной части спектра и чью собственные функции являются квадратично интегрируемыми, и состояния рассеяния (англ. scattering states), которые являются лишь формальными решениями, и соответствуют непрерывной части спектра. Такие решения не лежат не являются квадратично интегрируемыми, и в них мы будем заинтересованы в данной работе.
-
-\section{S-матрица}\label{sec:smatrix}
+\section{S-matrix}\label{sec:smatrix}
 % \mtodo{картиночку с полюсами и нулями??}
+Consider a localized one dimensional potential barrier or resonator. From the left and right we TODO BLAH BLAH
 Рассмотрим локализованный одномерный потенциальный барьер или резонатор. Пусть на барьер слева и справа направлены частицы с волновым вектором $k$ (который будет скаляром в одномерном случае). Слева и справа от резонатора частицы ведут себя как свободные, соответственно, в общем виде их волновые функции имеют следующий вид:
 
 \begin{equation}\label{eq:wlwl}
@@ -33,33 +23,33 @@ H \Psi = E \Psi
 \end{aligned}
 \end{equation}
 
-S-матрица, или  матрица рассеяния (англ. scattering matrix) выражает зависимость исходящего состояния от входящего:
+S-matrix, or scattering matrix relates the final and initial states of the system:
 \begin{equation}\label{eq:smatrix}
 \begin{pmatrix} B \\ C \end{pmatrix} = S \begin{pmatrix} A \\ D \end{pmatrix}
 \end{equation}
-, и полностью характеризует рассеивающие свойства потенциального барьера.
+, and defines scattering properties of a potential barriers.
 
-$S$-матрица обладает рядом интересных свойств \cite[стр. 75]{perelomov1998quantum}, позволяющих анализировать рассеяние в квантовой системе: к примеру, $S$-матрица как функция комплексного аргумента, аналитична в верхней комплексной полуплоскости, а ее полюса соответствуют связным состояниям или резонансам.
+% $S$-матрица обладает рядом интересных свойств \cite[стр. 75]{perelomov1998quantum}, позволяющих анализировать рассеяние в квантовой системе: к примеру, $S$-матрица как функция комплексного аргумента, аналитична в верхней комплексной полуплоскости, а ее полюса соответствуют связным состояниям или резонансам.
 
-\section{Квантовые графы}
-Квантовый граф (англ. quantum graph) — широко используемая модель наносистемы \cite{kuchment2002graph, lobanov2013genetic, brown2010analysis}. Квантовый граф представляет из себя набор вершин и линейных, одномерных ребер, их соединяющих, или уходящих на бесконечность (можно обратиться к \autoref{fig:res_segment} в качестве простейшего примера). При этом на ребрах графа действует дифференциальный оператор, к примеру, оператор Шредингера свободной частицы: $-\dv[2]{\psi}{x}$, а в вершинах графа установлено граничное условие, связывающее волновые функции на смежных ребрах.
+% \section{Квантовые графы}
+% Квантовый граф (англ. quantum graph) — широко используемая модель наносистемы \cite{kuchment2002graph, lobanov2013genetic, brown2010analysis}. Квантовый граф представляет из себя набор вершин и линейных, одномерных ребер, их соединяющих, или уходящих на бесконечность (можно обратиться к \autoref{fig:res_segment} в качестве простейшего примера). При этом на ребрах графа действует дифференциальный оператор, к примеру, оператор Шредингера свободной частицы: $-\dv[2]{\psi}{x}$, а в вершинах графа установлено граничное условие, связывающее волновые функции на смежных ребрах.
 
 % Заметим, что если граф $\Gamma$ состоит только из конечного числа ребер конечной длины, его гамильтониан имеет чисто дискретный спектр, и его собственные функции образуют полную систему в $\mcL_2(\Gamma)$. Если же граф $\Gamma$ представляет из себя резонатор $\Omega$ с полубесконечными ребрами, в спектре будет присутствовать непрерывная часть и резонансы, индуцированные собственными числами гамильтониана резонатора $\mcH_\Omega$. Резонансные состояния оператора Шредингера не принадлежат пространству $\mcL_2(\Gamma)$, однако, при сужении их на конечный домен $\Omega$, становятся квадратично интегрируемыми и лежат в пространстве $\mcL_2(\Omega)$. Для многих приложений интересно знать, формируют ли полную систему резонансные состояния графа $\Gamma$ в пространстве $\mcL_2(\Omega)$ резонатора.
 
-\section{Преобразование Кэли}
+\section{Cayley transform}
 
-Прямое преобразование Кэли (англ. Cayley transform) конформно отображает $\bbH$ в $\bbD$:
+Cayley transform maps $\bbH$ to $\bbD$:
 \begin{equation}\label{eq:cayley}
 W(z) = \frac{z - \iu}{z + \iu}
 \end{equation}
-, обратное преобразование Кэли аналогично отображает $\bbD$ в $\bbH$:
+, inverse Cayley transform maps $\bbD$ to $\bbH$:
 \begin{equation}\label{eq:cayley_inverse}
 w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
 \end{equation}
 
-Важным свойством преобразование Кэли является инъективное отображение $\bbR$ в единичную окружность $\bbT$.
+One notable property of the Cayley transform is that it injectively maps $\bbR$ into unit circle $\bbT$.
 
-Так как преобразование Кэли является трансформацией Мебиуса, оно сохраняет окружности. В частности, окружность с радиусом $r$ в нуле, под действием обратного преобразование Кэли перейдет в окружность с центром в $C(r)$ и радиусом $R(r)$, где:
+Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $C(r)$ and radius $R(r)$, where:
 
 \begin{equation}\label{eq:c_and_r}
 \begin{aligned}
@@ -68,7 +58,7 @@ w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
 \end{aligned}
 \end{equation}
 
-Легко заметить, что при стремлении $r$ к $1$, $R(r)$ стремится к бесконечности, а $C(r)$ стремится к $R(r)$, что естественно так как в пределе комплексная единичная окружность отображается в вещественную ось.
+From these formulas it's easy to see that if we limit $r$ to $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$, which intuinively makes sense since a complex unit circle maps to a real axis. TODO ???
 
 \section{Теория Лакса-Филипса}
 Мы рассматриваем рассеяние в подходе Лакса-Филипса, кратко опишем его (подробно с ним можно ознакомиться в работах \cite{lax1990scattering,lax1976scattering}).
