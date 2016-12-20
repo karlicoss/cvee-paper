@@ -366,18 +366,19 @@ Finally, after combining all estimates, we get: $\mcO (\ln^2 R) \mcO\left( \frac
 
 \subsubsection{$C \le y \le C + R$}
 
-Оценим сверху выражение (\ref{eq:int_f_up}):
+Let's estimate (\ref{eq:int_f_up}) from above:
 \begin{align*}
-       & \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
-\\ \le & \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \int \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ =   & \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{\sqrt{R + C - y}}
 % \\  = & \ln^2 f(y) \mcO()
 \end{align*}
 
-Интеграл $\frac{1}{\sqrt{R + C - y}}$ от $C$ до $C + R$ тривиален и равен $2 \sqrt{R}$. Функция $f$ в точке $C$ ограничена константами не зависящими от $R$ и $C$, следовательно, и квадрат ее логарифма. Очевидно, что в результате получим выражение $\mcO \left( \frac{1}{R} \right) \sqrt R = \mcO \left( \frac{1}{\sqrt{R}} \right)$.
+Integral $\frac{1}{\sqrt{R + C - y}}$ from $C$ to $C + R$ is elementary and equals $2 \sqrt{R}$. Function $f$ at $C$ is bounded by constants not dependent on $r$, therefore, the square of its logarithm as well. Finally, we get an expression of order $\mcO \left( \frac{1}{R} \right) \mcO( \sqrt R ) = \mcO \left( \frac{1}{\sqrt{R}} \right)$.
 
-\subsubsection{Оценка $\int \abs{f(t)}^2$: итог}
-Итого, мы разбили интегрирование на пять различных участков, и в итоге имеем порядок интеграла:
+\subsubsection{Final estimate of $\int \abs{f(t)}^2$}
+We split our integration path in five intervals, and the integral has order:
 \[
-\mcO \left( \frac{1}{R} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)
+\mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)
 \]
-, что означает, что весь интеграл уходит в 0 при стремлении $r$ к 1 (соответственно, $R$ к бесконечности), что и требовалось доказать.
+, which means that integral converges to $0$ as $r$ goes to $1$.
