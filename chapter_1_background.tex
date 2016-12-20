@@ -1,9 +1,9 @@
 \section{Definitions}
 \begin{itemize}
-\item $\bbC$ — complex plane, $\bbC = \{ x + \iu y \mid x, y \in \bbR \}$ 
-\item $\bbH$ — upper complex half-plane, $\bbH = \{ x + \iu y \mid y > 0, x, y \in \bbR \}$
-\item $\bbD$ — unit disk, $\bbD = \{ z \mid \abs{z} < 1 \}$
-\item $\bbT$ — unit circle, $\bbT = \partial \bbD =  \{z \mid \abs{z} = 1 \}$
+\item $\bbC$: complex plane, $\bbC = \{ x + \iu y \mid x, y \in \bbR \}$ 
+\item $\bbH$: upper complex half-plane, $\bbH = \{ x + \iu y \mid y > 0, x, y \in \bbR \}$
+\item $\bbD$: unit disk, $\bbD = \{ z \mid \abs{z} < 1 \}$
+\item $\bbT$: unit circle, $\bbT = \partial \bbD =  \{z \mid \abs{z} = 1 \}$
 \item $z$ denotes a complex argument on upper complex half-plane $\bbH$
 \item $\zeta$ denotes a complex argument on unit disk $\bbD$
 \end{itemize}
@@ -12,7 +12,6 @@
 In this paper we are only interested in the mathematical scattering problem and not actual energies, so we define Plank's constant as $1$ and use stationary Schrodinger's equation: $H \Psi = E \Psi$. We are going to be interested in scattering state solutions for this equation.
 
 \section{S-matrix}\label{sec:smatrix}
-% \mtodo{картиночку с полюсами и нулями??}
 Consider a localized one dimensional potential barrier or resonator. From the left and right we TODO BLAH BLAH
 Рассмотрим локализованный одномерный потенциальный барьер или резонатор. Пусть на барьер слева и справа направлены частицы с волновым вектором $k$ (который будет скаляром в одномерном случае). Слева и справа от резонатора частицы ведут себя как свободные, соответственно, в общем виде их волновые функции имеют следующий вид:
 
@@ -28,13 +27,6 @@ S-matrix, or scattering matrix relates the final and initial states of the syste
 \begin{pmatrix} B \\ C \end{pmatrix} = S \begin{pmatrix} A \\ D \end{pmatrix}
 \end{equation}
 , and defines scattering properties of a potential barriers.
-
-% $S$-матрица обладает рядом интересных свойств \cite[стр. 75]{perelomov1998quantum}, позволяющих анализировать рассеяние в квантовой системе: к примеру, $S$-матрица как функция комплексного аргумента, аналитична в верхней комплексной полуплоскости, а ее полюса соответствуют связным состояниям или резонансам.
-
-% \section{Квантовые графы}
-% Квантовый граф (англ. quantum graph) — широко используемая модель наносистемы \cite{kuchment2002graph, lobanov2013genetic, brown2010analysis}. Квантовый граф представляет из себя набор вершин и линейных, одномерных ребер, их соединяющих, или уходящих на бесконечность (можно обратиться к \autoref{fig:res_segment} в качестве простейшего примера). При этом на ребрах графа действует дифференциальный оператор, к примеру, оператор Шредингера свободной частицы: $-\dv[2]{\psi}{x}$, а в вершинах графа установлено граничное условие, связывающее волновые функции на смежных ребрах.
-
-% Заметим, что если граф $\Gamma$ состоит только из конечного числа ребер конечной длины, его гамильтониан имеет чисто дискретный спектр, и его собственные функции образуют полную систему в $\mcL_2(\Gamma)$. Если же граф $\Gamma$ представляет из себя резонатор $\Omega$ с полубесконечными ребрами, в спектре будет присутствовать непрерывная часть и резонансы, индуцированные собственными числами гамильтониана резонатора $\mcH_\Omega$. Резонансные состояния оператора Шредингера не принадлежат пространству $\mcL_2(\Gamma)$, однако, при сужении их на конечный домен $\Omega$, становятся квадратично интегрируемыми и лежат в пространстве $\mcL_2(\Omega)$. Для многих приложений интересно знать, формируют ли полную систему резонансные состояния графа $\Gamma$ в пространстве $\mcL_2(\Omega)$ резонатора.
 
 \section{Cayley transform}
 
@@ -60,64 +52,40 @@ Another important property we are going to use is that Cayley transform preserve
 
 From these formulas it's easy to see that if we limit $r$ to $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$, which intuinively makes sense since a complex unit circle maps to a real axis. TODO ???
 
-\section{Теория Лакса-Филипса}
-Мы рассматриваем рассеяние в подходе Лакса-Филипса, кратко опишем его (подробно с ним можно ознакомиться в работах \cite{lax1990scattering,lax1976scattering}).
+\section{???}
+There is a connection between the S-matrix and the completeness of the resonant states for a scattering problem:
 
-Рассмотрим задачу Коши для волнового уравнения в области $\Gamma$:
-\begin{equation}
-\begin{aligned}
-   u''_{tt}   &= H u
-\\ u(x, 0)    &= u_0(x)
-\\ u'_t(x, 0) &= u_1(x).
-\end{aligned}
-\end{equation}
+TODO something about dissipating operator
 
-Пусть $\mathcal{E}$ — гильбертово пространство двухкомпонентных функций с конечной энергией $(u_0, u_1)$ на графе $\Gamma$:
-\[
-\norm{(u_0, u_1)}^2_{\mathcal{E}} = \frac{1}{2} \int\limits_\Gamma (\abs{u'_0}^2 + \abs{u_1}^2) dx
-\]
-, где пара $(u_0, u_1)$ называется данными Коши (англ. Cauchy data), а оператор $U(t)$, дающий решение этой задаче: $U(t)(u_0, u_1) = (u(x, t), u'_t(x, t))$, порождает унитарную группу $\{ U(t) \mid t \in \bbR \}$. Данная группа содержит два ортогональных подпространства: $D_-$ — входящее подпространство, и $D_+$ — исходящее.
-
-В теории рассеяния установлено, что существуют отображения $T_\pm: \mathcal{R} \to \mcL^2(\bbR, \bbC^2)$, такие что $T_\pm U(t) = \eexp{\iu k t T_\pm}$, которые называются исходящим (соответственно, входящим) спектральным представлением унитарной группы $U(t)$. Обозначим $K = \mathcal{E} \ominus (D_+ \oplus D_-)$, и рассмотрим полугруппу $Z(t) = \mcP_K U(t)|_K, t > 0$, где $\mcP_K$ — оператор проецирования на $K$. Пусть $B$ — генератор $Z(t)$, то есть $Z(t) = \eexp{\iu B t}$, тогда собственные вектора этого оператора и будут резонансными состояниями, а $T_- T_+^{-1}$ называется оператором рассеяния. Оператор рассеяния действует как умножения на матрично-значную функцию $S(k)$, и являющейся матрицей рассеяния (см. \autoref{sec:smatrix}).
-
-\begin{theorem}[{\cite[стр. 95]{nikol2012treatise}}]
-Пусть $S$ — внутренняя функция, тогда следущие утверждения эквивалентны:
+\begin{theorem}[{\cite[p. 95]{nikol2012treatise}}, {\cite[p. 99]{nikol2012treatise}}]
+The following statements are equivalent:
 \begin{itemize}
-\item Оператор $Z$ полный.
-\item $S$ — произведение Бляшке-Потапова.
-\end{itemize}
-\end{theorem}
-
-\begin{theorem}[{\cite[стр. 99]{nikol2012treatise}}]
-Пусть вспомогательное пространство конечномерно. Тогда, следующие утверждения эквивалентны:
-\begin{itemize}
-\item $S$ — произведение Бляшке-Потапова.
+\item the dissipating operator $Z$ is complete
 \item
 \begin{equation}\label{eq:blaschke}
 \lim\limits_{r = 1} \int\limits_{\bbT} \log \abs{\det S(r \zeta)} d m(\zeta) = 0
 \end{equation}
 \end{itemize}
 \end{theorem}
-Непосредственно применяя эти теоремы, и пользуясь тем, что нашим вспомогательным пространством является $\bbC^2$, получаем, что мы можем воспользоваться данным упрощенным критерием для доказательства полноты резонансных состояний в квантовом графе.
 
-\section{Критерий сходимости}
+\section{Convergence criterion}
 
-Так как $\det S$ является скалярной внутренней функцией \cite{nikol2012treatise}, мы можем воспользоваться критерием \ref{eq:blaschke} для исследования полноты системы резонансных состояний. В пространстве единичного диска он будем выглядеть как:
+Next, we will use the criterion \ref{eq:blaschke} to analyse the completeness of the system of resonant states. In the space of the unit disk it looks like:
 \begin{equation}\label{eq:crit_cayley}
 \lim\limits_{r = 1} \int\limits_{\abs{\zeta} = r} \log \abs{\det S(\zeta)} d \zeta = 0
 \end{equation}
 
-Так как $S$-матрица естественным образом определена на комплексной плоскости, иногда бывает удобнее работать с этим признаком в верхней полуплоскости $\bbH$, а не на единичном диске. Заменим в (\ref{eq:crit_cayley}) переменную, применив к интегралу преобразование Кэли (\ref{eq:cayley}) к дифференциалу и области интегрирования, получив:
+Since S-matrix is naturally defined on the complex plance, it makes sense to use the upper complex plane for the analysis of completeness. We change the variable in (\ref{eq:crit_cayley}), applying Cayley transform to the integral, which results in:
 
 \begin{equation}\label{eq:crit}
 \lim\limits_{r \to 1} \int\limits_{C_r} \ln \abs{\det S(k)} \frac{2 \iu}{(k + i)^2} dk = 0
 \end{equation}
-, где $C_r$ — образ $\abs{\zeta} = r$ относительно обратного преобразования Кэли. Для удобства вычислений параметризуем $C_r$ как $C_r = \{R(r) \eexp{\iu t} + \iu C(r) \mid t \in [0, 2 \pi)\}$ (см. \ref{eq:c_and_r}). Для краткости, обозначим:
+, where $C_r$ is an image of $\abs{\zeta} = r$ under the inverse Cayley transform. It can be parameterised as $C_r = \{R(r) \eexp{\iu t} + \iu C(r) \mid t \in [0, 2 \pi)\}$ (see \ref{eq:c_and_r}). For brewity, define:
 
 \[
 s(k) = \abs{\det S(k)}
 \]
-, и, откинув константы, не влияющие на сходимость/расходимость интеграла, получаем финальную форму критерия, которой и будем пользоваться в дальнейшем:
+, and after throwing away constants which are irrelevant for convergence, we get the final form of the criterion, which we are going to use afterwards:
 
 \begin{equation}\label{eq:critp}
 \lim\limits_{r \to 1} \int\limits_{0}^{2 \pi} \ln s(R(r) \eexp{\iu t} + \iu C(r)) \frac{R}{(R(r) \eexp{\iu t} + \iu C(r) + i)^2} dt = 0
