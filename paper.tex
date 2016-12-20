@@ -3,13 +3,14 @@
 \usepackage[english]{babel}
 
 \usepackage{cite}
-\usepackage{hyperref} % \url{url} \href{url}{displayed text}
+\usepackage{hyperref} % \autoref
 
 \usepackage[pdftex]{graphicx}
 \graphicspath{{pic/}}
 \usepackage{tikz}
+
 \usepackage{amsmath,amsfonts,amssymb,amsthm,amscd,amsxtra}
-\usepackage{physics}
+\usepackage{mathtools}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -39,10 +40,12 @@
 
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
-\renewcommand{\phi}{\varphi} % TODO is there a prettier way to do that
 
 \newcommand{\eexp}[1]{e^{#1}}
 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+\DeclareMathOperator\asin{asin}
 \DeclareMathOperator\atanh{atanh}
 
 \begin{document}
@@ -149,11 +152,11 @@ TODO: $C + R = \Im w(r) = \frac{1 + r}{1 - r}$, $C - R = \Im w(-r) = \frac{1 - r
 \begin{tikzpicture}[scale=1.1] % TODO SCALE!!!
 \input{pic/resonator_bundle.tex}
 \end{tikzpicture}
-\caption{Quantum graph $\Gamma$, consisting of semi infinite edges  $\Omega_L, \Omega_R$ and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
+\caption{Quantum graph $\Gamma$, consisting of semi infinite edges $\Omega_L, \Omega_R$ and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
 \label{fig:res_bundle}
 \end{figure}
 
-Let's investigate the model on \autoref{fig:res_bundle}. Schrodinger's operator is defined on edges of the graph as  $-\dv[2]{\psi}{x}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
+Let's investigate the model on \autoref{fig:res_bundle}. Schrodinger's operator is defined on edges of the graph as  $-\frac{d^2 \psi}{dx^2}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
 
 \begin{equation}\label{eq:bundle_system}
 \begin{aligned}
@@ -179,7 +182,7 @@ TODO: define contour
 
 Let's fix $r$, and further, for the sake of readability, let's define $C = C(r)$ and $R = R(r)$. For each $r$, we estimate the integral and show that the sequence of estimates converges to zero.
 
-Let's use Cauchy–Schwarz's inequality:
+Let's use Cauchy-Schwarz's inequality:
 \[
 \big| \langle u,v \rangle \big| \leq \left\|u\right\| \left\|v\right\|
 \]
