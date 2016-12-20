@@ -4,41 +4,24 @@
 
 \usepackage{cite}
 \usepackage{hyperref} % \autoref
-
-\usepackage[pdftex]{graphicx}
-\graphicspath{{pic/}}
 \usepackage{tikz}
-
 \usepackage{amsmath,amsfonts,amssymb,amsthm,amscd,amsxtra}
 \usepackage{mathtools}
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
 
-
-\newcommand{\mcL}{\mathcal{L}} % L2 space
 \newcommand{\mcO}{\mathcal{O}} % Big O
-\newcommand{\bbC}{\mathbb{C}} % complex plane
-\newcommand{\bbD}{\mathbb{D}} % complex unit disk
-\newcommand{\bbR}{\mathbb{R}}
-\newcommand{\bbT}{\mathbb{T}} % complex unit circle
-\newcommand{\bbH}{\mathbb{H}} % complex upper half plane
+\newcommand{\iu}{{i\mkern1mu}} % imaginary unit
+\newcommand{\eexp}[1]{e^{#1}}  % convenient exponent
 
-% imaginary unit
-\newcommand{\iu}{{i\mkern1mu}}
-
-% \renewcommand{\Re}{\operatorname{Re}}
-% \renewcommand{\Im}{\operatorname{Im}}
-
-\newcommand{\eexp}[1]{e^{#1}}
-
-\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Re}{\operatorname{Re}} % default Re/Im is weird
 \renewcommand{\Im}{\operatorname{Im}}
+
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 
 \DeclareMathOperator\asin{asin}
 \DeclareMathOperator\atanh{atanh}
+
 
 \begin{document}
 
@@ -47,12 +30,12 @@ TODO ?????
 
 \section{Definitions}
 \begin{itemize}
-\item $\bbC$: complex plane, $\bbC = \{ x + \iu y \mid x, y \in \bbR \}$ 
-\item $\bbH$: upper complex half-plane, $\bbH = \{ x + \iu y \mid y > 0, x, y \in \bbR \}$
-\item $\bbD$: unit disk, $\bbD = \{ z \mid \abs{z} < 1 \}$
-\item $\bbT$: unit circle, $\bbT = \partial \bbD =  \{z \mid \abs{z} = 1 \}$
-\item $z$ denotes a complex argument on upper complex half-plane $\bbH$
-\item $\zeta$ denotes a complex argument on unit disk $\bbD$
+\item $\mathbb{C}$: complex plane, $\mathbb{C} = \{ x + \iu y \mid x, y \in \mathbb{R} \}$ 
+\item $\mathbb{H}$: upper complex half-plane, $\mathbb{H} = \{ x + \iu y \mid y > 0, x, y \in \mathbb{R} \}$
+\item $\mathbb{D}$: unit disk, $\mathbb{D} = \{ z \mid \abs{z} < 1 \}$
+\item $\mathbb{T}$: unit circle, $\mathbb{T} = \partial \mathbb{D} =  \{z \mid \abs{z} = 1 \}$
+\item $z$ denotes a complex argument on upper complex half-plane $\mathbb{H}$
+\item $\zeta$ denotes a complex argument on unit disk $\mathbb{D}$
 \end{itemize}
 
 \section{Schrodinger's equation}
@@ -76,16 +59,16 @@ S-matrix, or scattering matrix relates the final and initial states of the syste
 
 \section{Cayley transform}
 
-Cayley transform maps $\bbH$ to $\bbD$:
+Cayley transform maps $\mathbb{H}$ to $\mathbb{D}$:
 \begin{equation}\label{eq:cayley}
 W(z) = \frac{z - \iu}{z + \iu}
 \end{equation}
-, inverse Cayley transform maps $\bbD$ to $\bbH$:
+, inverse Cayley transform maps $\mathbb{D}$ to $\mathbb{H}$:
 \begin{equation}\label{eq:cayley_inverse}
 w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
 \end{equation}
 
-One notable property of the Cayley transform is that it injectively maps $\bbR$ into unit circle $\bbT$.
+One notable property of the Cayley transform is that it injectively maps $\mathbb{R}$ into unit circle $\mathbb{T}$.
 
 Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\iu C(r)$ and radius $R(r)$, where:
 
@@ -111,16 +94,16 @@ There is a connection between the S-matrix and the completeness of the resonant 
 
 TODO something about dissipating operator
 
-\begin{theorem}[{\cite[p. 95]{nikol2012treatise}}, {\cite[p. 99]{nikol2012treatise}}]
+Theorem ({\cite[p. 95]{nikol2012treatise}}, {\cite[p. 99]{nikol2012treatise}}): 
+
 The following statements are equivalent:
 \begin{itemize}
 \item the dissipating operator $Z$ is complete
 \item
 \begin{equation}\label{eq:blaschke}
-\lim\limits_{r = 1} \int\limits_{\bbT} \log \abs{\det S(r \zeta)} d m(\zeta) = 0
+\lim\limits_{r = 1} \int\limits_{\mathbb{T}} \log \abs{\det S(r \zeta)} d m(\zeta) = 0
 \end{equation}
 \end{itemize}
-\end{theorem}
 
 Next, we will use the criterion \ref{eq:blaschke} to analyse the completeness of the system of resonant states. In the space of the unit disk it looks like:
 \begin{equation}\label{eq:crit_cayley}
@@ -149,7 +132,7 @@ s(k) = \abs{\det S(k)}
 \begin{figure}
 \centering
 \begin{tikzpicture}[scale=1.1] % TODO SCALE!!!
-\input{pic/resonator_bundle.tex}
+\input{resonator_bundle.tex}
 \end{tikzpicture}
 \caption{Quantum graph $\Gamma$, consisting of semi infinite edges $\Omega_L, \Omega_R$ and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
 \label{fig:res_bundle}
@@ -185,7 +168,7 @@ Let's use Cauchy-Schwarz's inequality:
 \[
 \big| \langle u,v \rangle \big| \leq \left\|u\right\| \left\|v\right\|
 \]
-, to be precise, it's $\mcL^2[a, b]$ version:
+, to be precise, it's $\mathcal{L}^2[a, b]$ version:
 \[
 \abs{
 \int\limits_{t=a}^{b} f(t) g^*(t) dt
