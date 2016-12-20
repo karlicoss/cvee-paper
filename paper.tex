@@ -1,4 +1,39 @@
-\input{preamble.tex}
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian, english]{babel}
+
+\usepackage{comment}
+
+\usepackage{enumerate}
+\usepackage{cite}
+\usepackage{mathrsfs}
+\usepackage{fullpage}
+\usepackage{hyperref} % \url{url} \href{url}{displayed text}
+\usepackage{tabularx}
+\usepackage{indentfirst}
+\usepackage{bm}
+\usepackage{braket}
+
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{pic/}}
+\usepackage{tikz}
+\usepackage{xcolor} % \textcolor
+\usepackage{mathtools} % xmapsto, \Vector
+\usepackage{comment}
+\usepackage{soul} % text striking
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amscd,amsxtra}
+\usepackage{physics}
+\usepackage[sharp]{easylist}
+\usepackage[colorinlistoftodos,prependcaption,disable]{todonotes} % TODO: move to preamble!!
+\presetkeys%
+    {todonotes}%
+    {inline,backgroundcolor=red}{}
+\newcommand{\mtodo}[1]{\todo[linecolor=green!70!white, backgroundcolor=blue!20!white, bordercolor=red]{#1}}
+
 \input{macros/macros.tex}
 
 \begin{document}

@@ -5,7 +5,8 @@
 \begin{tikzpicture}[scale=1.1] % TODO SCALE!!!
 \input{pic/resonator_bundle.tex}
 \end{tikzpicture}
-\caption{Квантовый граф $\Gamma$, состоящий из полубесконечных ребер $\Omega_L, \Omega_R$ и рассеивателя $\Omega$, представляющего из себя $W$ идентичных ребер длины 1. В вершинах $V_a$, $V_b$ находятся $\delta$-образные потенциальные ямы глубины $a$ и $b$ соответственно.}\label{fig:res_bundle}
+\caption{Quantum graph $\Gamma$, consisting of semi infinite edges  $\Omega_L, \Omega_R$ and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
+\label{fig:res_bundle}
 \end{figure}
 
 Let's investigate the model on \autoref{fig:res_bundle}. Schrodinger's operator is defined on edges of the graph as  $-\dv[2]{\psi}{x}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
@@ -284,7 +285,7 @@ $\ln^2(x)$ is integrable in the neighborhood of $x = 0$, and it is known that: %
 \int\limits_{x=x_0}^b \ln^2(a (x - b)) dx = (b - x_0) (\ln^2(a (x_0 - b)) - 2 \ln(a (x_0 - b)) + 2)
 \]
 
-In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we can see that the integral is bounded by a constant independent of $R$ and $C$. Таким образом, поведение интеграла зависит только от поведения множителя:
+In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we can see that the integral is bounded by a constant independent of $R$ and $C$. Hence, the behaviour of the integral only dependends on the behaviour of the multiplier:
 
 \[
 \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}} 
