@@ -1,33 +1,19 @@
 \documentclass[12pt, a4paper]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T2A]{fontenc}
-\usepackage[russian, english]{babel}
+\usepackage[english]{babel}
 
-% \usepackage{fullpage}
 \usepackage{cite}
 \usepackage{hyperref} % \url{url} \href{url}{displayed text}
 
 \usepackage[pdftex]{graphicx}
 \graphicspath{{pic/}}
 \usepackage{tikz}
-\usepackage{xcolor} % \textcolor
-\usepackage{mathtools} % xmapsto, \Vector
 \usepackage{amsmath,amsfonts,amssymb,amsthm,amscd,amsxtra}
 \usepackage{physics}
-\usepackage[colorinlistoftodos,prependcaption,disable]{todonotes} % TODO: move to preamble!!
-\presetkeys%
-    {todonotes}%
-    {inline,backgroundcolor=red}{}
-\newcommand{\mtodo}[1]{\todo[linecolor=green!70!white, backgroundcolor=blue!20!white, bordercolor=red]{#1}}
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Теорема}
+\newtheorem{theorem}{Theorem}
 
-
-\newcommand{\hilb}[1]{\mathcal{H}_{#1}}
-\newcommand{\cconj}[1]{\overline{#1}}
-\newcommand{\hank}[1]{H_{#1}^{(1)}}
 
 \newcommand{\mcF}{\mathcal{F}}
 \newcommand{\mcH}{\mathcal{H}} % ???
@@ -153,7 +139,7 @@ s(k) = \abs{\det S(k)}
 \begin{equation}\label{eq:critp}
 \lim\limits_{r \to 1} \int\limits_{0}^{2 \pi} \ln s(R(r) \eexp{\iu t} + \iu C(r)) \frac{R}{(R(r) \eexp{\iu t} + \iu C(r) + i)^2} dt = 0
 \end{equation}
-\mtodo{$C + R = \Im w(r) = \frac{1 + r}{1 - r}$, $C - R = \Im w(-r) = \frac{1 - r}{1 + r}$}
+TODO: $C + R = \Im w(r) = \frac{1 + r}{1 - r}$, $C - R = \Im w(-r) = \frac{1 - r}{1 + r}$
 
 
 \section{The model}
@@ -179,7 +165,7 @@ Let's investigate the model on \autoref{fig:res_bundle}. Schrodinger's operator 
 \end{equation}
 
 \subsection{Calculation of $S$ matrix}
-After solving \ref{eq:bundle_system} в сочетании с \ref{eq:wlwl}, we get:
+After solving \ref{eq:bundle_system} in conjunction with \ref{eq:wlwl}, we get:
 \begin{equation*}
 \det S(k) = \frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}
 \end{equation*}
@@ -188,8 +174,6 @@ After solving \ref{eq:bundle_system} в сочетании с \ref{eq:wlwl}, we 
 \begin{equation}\label{eq:bundle_s}
 s(k) = \abs{\det S(k)} = \abs{\frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}}
 \end{equation}
-
-\mtodo{график S-матрицы?}
 
 TODO: define contour
 
@@ -220,7 +204,7 @@ g^*(t) &= \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i}
 \end{equation}
 Next, we will show that $\norm{g}$ (that is, $\sqrt{\int \abs{g(t)}^2}$) is bounded by a constant which does not depend on $r$, and $\norm{f}$ goes to $0$ as $r$ goes to $1$, hence (\ref{eq:critp}) converges.
 
-\subsubsection{Estimate of $\norm{g}$}
+\subsection{Estimating $\norm{g}$}
 
 First, we evaluate the integrand:
 \begin{align*}
@@ -261,7 +245,7 @@ a^2 - b^2
 Finally, since $\frac{2 \pi}{\sqrt{a^2 - b^2}} \le \frac{2 \pi}{2} = \pi$, and we just proved that $\norm{g}$ is bounded by a constant. 
 
 
-\subsubsection{Estimating $\int \abs{f(t)}^2$}
+\subsection{Estimating $\norm{f}$}
 Function $s(k)$ (\ref{eq:bundle_s}) is too complex for direct proof of the convergence.
 
 We proceed as follows:
@@ -281,8 +265,6 @@ We build a simple estimate for $s(k)$ over the upper complex plane. This functio
 \begin{enumerate}
 \item
   It is easy to spot that if we fix the complex part of the argument, $s(k)$ is periodic with respect to the real part of its argument.
-% Since $\sin k$ and $\cos k$ are periodic w.r.t the real axis, with the period of $2 \pi$, 
-\mtodo{is this step really necessary?}
 \item 
   Function $s(k)$ has countably infinite set of zeros, and each of them has $\Im k = \atanh \frac{2 W}{W^2 + 1}$. For brewity, we define:
 
@@ -293,7 +275,8 @@ We build a simple estimate for $s(k)$ over the upper complex plane. This functio
   \end{aligned}
   \end{equation*}
 \item
-  Notice that for each $x$, $s(x + \iu y) \le s(\iu y)$. \mtodo{How to prove? We could probably take a look at numerator and denominator in separate?} 
+  Notice that for each $x$, $s(x + \iu y) \le s(\iu y)$.
+  % \mtodo{How to prove? We could probably take a look at numerator and denominator in separate?} 
 \end{enumerate}
 
 Given these fact, we can build a simple lower bound for $s(x + \iu y)$:
@@ -304,19 +287,7 @@ l(x + \iu y)
 \end{align*}
 
 It's pretty clear that $l(k)$ has a continuum of zeros over the line $\Im k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration cound intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brewity, we will omit it and defince $l(y) = l(\iu y)$.
-\mtodo{Plot?}
-
-% Так как $\tanh y$ неотрицательна и растет при $y \ge 0$, мы можем избавиться от знака модуля:
-
-% \todo{make the formula bigger}
-% \todo{get rid of it??}
-% \[
-% l(x + \iu y)
-%  = \begin{cases}
-%  \frac{V - \tanh y}{\tanh y + V}, & 0 \le y \le Z \\
-%  \frac{\tanh y - V}{\tanh y + V}, & y > Z 
-%  \end{cases}
-% \]
+% \mtodo{Plot?}
 
 Now, we will simplify the integral (TODO REF) using the bound we just built:
 \begin{align*}
@@ -324,7 +295,6 @@ Now, we will simplify the integral (TODO REF) using the bound we just built:
    = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \eexp{\iu t} + \iu C) \frac{R}{\norm{R \eexp{\iu t} + \iu C + i}^2} dt
 \\ = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \sin t + C) \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} dt
 \end{align*}
-% TODO f зависит только от Im k
 
 First, notice that:
 
@@ -362,7 +332,6 @@ On the integration path we cross singularities at $y = C - R$, $y = Z$, $y = C +
 
 \subsubsection{Case 1: $C - R \le y \le Z$}
 A crucial property of $s(k)$ is its convergence to 1 as $\Im k$ converges to TODO ZERO??, since then $\ln s(k)$ goes to zero, which is necessary to compensate the singularity of $\frac{1}{R - C + y}$ at $y = C - R$. 
-% TODO: Интуитивно, контур интегрирования становится все ближе и ближе к $\bbR$ при увеличении радиуса и если бы $\ln s(k)$ не занулялась, сходимость бы пропала.
 This implies that lower bound for $s(k)$ should also converge to $1$ as $\Im k$ goes to $0$.
 
 Since $l$ is convex when $0 \le y \le Z$, we can estimate it from below using its first derivative at $0$. However, this is not enough, since it will this will violate the property of the estimate being positive (it is under the logarithm sign) TODO PLOT IT, so we have to be more careful and approximate the function at $Z$ with its first derivative as well, and then glue them together at some point $Z_0$:
@@ -381,7 +350,7 @@ l'(Z) (y - Z) &, Z_0 \le y < Z \\
 \end{cases}
 \end{align*}
 
-Note that lower bound does not have to be a continuous function, so we can pick any number in $[C - R, Z)$ as $Z_0$. For the ease of calculations, let's take $Z_0 = \frac{V}{4}$. \mtodo{plot?}
+Note that lower bound does not have to be a continuous function, so we can pick any number in $[C - R, Z)$ as $Z_0$. For the ease of calculations, let's take $Z_0 = \frac{V}{4}$.  % \mtodo{plot?}
 
 Next we investigate integrals on $[C - R, \frac{V}{4})$ and $[\frac{V}{4}, Z)$ separately.
 
@@ -391,7 +360,6 @@ Let's compute an upper bound for the integrand (\ref{eq:int_f}). Note that for $
 \begin{align*}
        & \ln^2 l(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
 \\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
-% \\ \le & \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \end{align*}
 
 Now, we use a well known inequality which holds for $x > -1$: TODO REFERENCE
@@ -459,13 +427,11 @@ l(x + \iu y)
  = 1 - 2 \frac{V}{\tanh y + V}
 \]
 
-% https://proofwiki.org/wiki/Inverse_of_Strictly_Increasing_Strictly_Concave_Real_Function_is_Strictly_Convex
-\mtodo{proof? just take a look at second derivative?}
-Since $l$ is concave, strictly increasing and for a fixed $r$, we are only interested at $y \le C + R$, we can estimate the function by a linear one: \mtodo{plot?}
+
+Since $l$ is concave, strictly increasing and for a fixed $r$, we are only interested at $y \le C + R$, we can estimate the function by a linear one: % \mtodo{plot?}
 \[
 f(y) = \frac{l(C + R)}{C + R - Z} (y - Z)
 \]
-\mtodo{actually, even C + R is okay but whatever}
 
 Notice that when $y = C + R$, for a sufficiently big $r$, $l(y)$ is bounded from both sides by constants, independent from $C$ and $R$. This is because $\tanh y$ goes to $1$ as $y$ goes to infinity, therefore, $l(y)$ in the limit will be equal to $1 - \frac{2 V}{V + 1}$. This is an important property of this specific model, since if $l$ went to zero on infinity, this part of proof couldn't have been done (see \autoref{sec:ring}).
 
@@ -488,7 +454,7 @@ Let's estimate (\ref{eq:int_f_up}), replacing functions in integrands by their e
 \\ =   & \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}} \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \int \ln^2 f(y) 
 \end{align*}
 
-\mtodo{reference?}
+% \mtodo{reference?}
 $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$ can be computed explicitly, using:
 \[
     \int\limits_b^{b + c} \ln^2 (a (x - b)) dx = c (\ln^2(a c) - 2 \ln (a c) + 2)
