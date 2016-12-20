@@ -1,4 +1,4 @@
-NAME        := paper.tex
+NAME        := paper_gerasimovd.tex
 OUTPUT_NAME := paper_gerasimovd
 
 BUILD_DIR := build
