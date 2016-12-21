@@ -19,6 +19,19 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
+\newcommand{\mcO}{\mathcal{O}} % Big O
+\newcommand{\iu}{{i\mkern1mu}} % imaginary unit
+\newcommand{\eexp}[1]{e^{#1}}  % convenient exponent
+
+\renewcommand{\Re}{\operatorname{Re}} % default Re/Im is weird
+\renewcommand{\Im}{\operatorname{Im}}
+
+% \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+% \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\newcommand\abs[1]{\left|#1\right|}
+\DeclareMathOperator\asin{asin}
+\DeclareMathOperator\atanh{atanh}
 \begin{document}
 
 %\jvol{00} \jnum{00} \jyear{2015} \jmonth{February}
@@ -106,38 +119,122 @@ submission instructions; source file coding; environments; references citation; 
 
 \section{Introduction}
 
-In order to assist authors in the process of preparing a manuscript for \textit{Complex Variables and Elliptic Equations} (\textit{gCOV}), the journal's layout style has been implemented as a \LaTeXe\ class file based on the \texttt{article} document class. A \textsc{Bib}\TeX\ style file is also provided to assist with the formatting of your references in a style appropriate to that of the journal.
+????? 
 
-Commands that differ from or are provided in addition to the standard \LaTeXe\ interface are explained in this guide. The guide alone is not intended as a substitute for an appropriate \LaTeXe\ manual.
+% In order to assist authors in the process of preparing a manuscript for \textit{Complex Variables and Elliptic Equations} (\textit{gCOV}), the journal's layout style has been implemented as a \LaTeXe\ class file based on the \texttt{article} document class. A \textsc{Bib}\TeX\ style file is also provided to assist with the formatting of your references in a style appropriate to that of the journal.
 
-The \texttt{gCOVguide.tex} file can also be used as a template for composing an article for submission by cutting, pasting, inserting and
-deleting text as appropriate, using the \LaTeX\ environments provided (e.g. \verb"\begin{equation}", \verb"\begin{enumerate}").
+% Commands that differ from or are provided in addition to the standard \LaTeXe\ interface are explained in this guide. The guide alone is not intended as a substitute for an appropriate \LaTeXe\ manual.
 
-\textbf{Please note that the index following the abstract in this guide is provided for information only. An index is not required in submitted papers.}
+% The \texttt{gCOVguide.tex} file can also be used as a template for composing an article for submission by cutting, pasting, inserting and
+% deleting text as appropriate, using the \LaTeX\ environments provided (e.g. \verb"\begin{equation}", \verb"\begin{enumerate}").
+
+% \textbf{Please note that the index following the abstract in this guide is provided for information only. An index is not required in submitted papers.}
+
+\section{Definitions and notation}
+
+\subsection{Notation}
+
+\begin{itemize}
+\item $\mathbb{C}$: complex plane, $\mathbb{C} = \{ x + \iu y \mid x, y \in \mathbb{R} \}$ 
+\item $\mathbb{H}$: upper complex half-plane, $\mathbb{H} = \{ x + \iu y \mid y > 0, x, y \in \mathbb{R} \}$
+\item $\mathbb{D}$: unit disk, $\mathbb{D} = \{ z \mid \abs{z} < 1 \}$
+\item $\mathbb{T}$: unit circle, $\mathbb{T} = \partial \mathbb{D} =  \{z \mid \abs{z} = 1 \}$
+\item $z$ denotes a complex argument on complex plane $\mathbb{C}$
+\item $\zeta$ denotes a complex argument on unit disk $\mathbb{D}$
+\end{itemize}
+
+\subsection{Cayley transform}
+
+Cayley transform maps $\mathbb{H}$ to $\mathbb{D}$:
+\begin{equation}\label{eq:cayley}
+W(z) = \frac{z - \iu}{z + \iu}
+\end{equation}
+, whereas inverse Cayley transform maps $\mathbb{D}$ to $\mathbb{H}$:
+\begin{equation}\label{eq:cayley_inverse}
+w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
+\end{equation}
+
+One notable property of the Cayley transform is that it injectively maps $\mathbb{R}$ into unit circle $\mathbb{T}$.
+
+Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\iu C(r)$ and radius $R(r)$, where:
+
+\begin{equation}\label{eq:c_and_r}
+\begin{aligned}
+   C(r) &= \Im \frac{w(r) + w(-r)}{2} = \frac{1 + r^2}{1 - r^2}
+\\ R(r) &= \Im \frac{w(r) - w(-r)}{2} = \frac{2 r}{1 - r^2}
+\end{aligned}
+\end{equation}
+
+From these formulas it's easy to see that if we limit $r$ to $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$.
+
+Also, we'll note two useful facts:
+\begin{itemize}
+\item $C(r) - R(r) > 0$
+\item $C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r}$, which means that $C - R$ is $\mcO(\frac{1}{R})$
+\end{itemize}
+
+\subsection{S-matrix}\label{sec:smatrix}
+Consider a localized one dimensional potential barrier or resonator. We assume that the system evolves under the stationary Schrodinger's equation. Since we are only interested in the mathematical scattering problem and scattering state solutions, we set Plank's constant to $1$.
+
+From the left and right we subject in to beams of quantum particles with the wavevector $k$, which will be a scalar in 1D case. Outside the potential barrier the particles behave as plane waves:
+
+\begin{equation}\label{eq:wlwl}
+\begin{aligned}
+   \psi_L(x) &= A \eexp{\iu k x} + B \eexp{-\iu k x}
+\\ \psi_R(x) &= C \eexp{\iu k x} + D \eexp{-\iu k x}
+\end{aligned}
+\end{equation}
+
+S-matrix, or scattering matrix relates the final and initial states of the system:
+\begin{equation}\label{eq:smatrix}
+\begin{pmatrix} B \\ C \end{pmatrix} = S \begin{pmatrix} A \\ D \end{pmatrix}
+\end{equation}
+, and defines scattering properties of a potential barrier.
+
+\section{Convergence criterion}
+There is a connection between the S-matrix and the completeness of the resonant states for a scattering problem:
+
+TODO something about dissipating operator
+
+\begin{theorem}[{\cite[p. 95]{nikol2012treatise}}, {\cite[p. 99]{nikol2012treatise}}]
+The following statements are equivalent:
+\begin{itemize}
+\item the dissipating operator $Z$ is complete
+\item
+\begin{equation}\label{eq:blaschke}
+\lim\limits_{r = 1} \int\limits_{\mathbb{T}} \log \abs{\det S(r \zeta)} d m(\zeta) = 0
+\end{equation}
+\end{itemize}
+\end{theorem}
+
+We will use the criterion (\ref{eq:blaschke}) to analyse the completeness of the system of resonant states. In the space of the unit disk it looks like:
+\begin{equation}\label{eq:crit_cayley}
+\lim\limits_{r = 1} \int\limits_{\abs{\zeta} = r} \log \abs{\det S(\zeta)} d \zeta = 0
+\end{equation}
+
+Since S-matrix is naturally defined on the complex plance, it makes sense to use the upper complex plane for the analysis of completeness. We change the variable in (\ref{eq:crit_cayley}), applying Cayley transform to the integral, which results in:
+
+\begin{equation}\label{eq:crit}
+\lim\limits_{r \to 1} \int\limits_{C_r} \ln \abs{\det S(k)} \frac{2 \iu}{(k + i)^2} dk = 0
+\end{equation}
+, where $C_r$ is an image of $\abs{\zeta} = r$ under the inverse Cayley transform. It can be parameterised as $C_r = \{R(r) \eexp{\iu t} + \iu C(r) \mid t \in [0, 2 \pi)\}$ (see \ref{eq:c_and_r}). For brevity, define:
+
+\[
+s(k) = \abs{\det S(k)}
+\]
+, and after throwing away constants which are irrelevant for convergence, we get the final form of the criterion, which is convenient for us and will be used afterwards:
+
+\begin{equation}\label{eq:critp}
+\lim\limits_{r \to 1} \int\limits_{0}^{2 \pi} \ln s(R(r) \eexp{\iu t} + \iu C(r)) \frac{R}{(R(r) \eexp{\iu t} + \iu C(r) + i)^2} dt = 0
+\end{equation}
 
 
-\subsection{The \textit{gCOV} document class}\label{class}
-
-The \textit{gCOV} class file preserves the standard \LaTeXe\ interface such that any document that can
-be produced using \texttt{article.cls} can also be produced with minimal alteration using the \textit{gCOV} document class.
-However, the measure (the width of the text on a page) differs from the default for \texttt{article.cls}, therefore line breaks
-will change and some long equations may need to be reformatted accordingly.
-
-If your article is accepted for publication in the journal, it will be typeset in Monotype Times. As most authors do not own this font, it is possible that the page make-up may alter slightly with the change of font. Please therefore ignore details such as slightly long lines of text, or figures and tables not appearing in exact synchronization with their citations in the text: these details will be dealt with by the typesetter during preparation of the proofs. Similarly, it is unnecessary to spend time addressing warnings in the log file -- if your .tex file compiles to produce a PDF document that correctly reflects how you wish your paper to appear, such warnings will not prevent your source files being imported into the typesetter's program.
+\section{Description of model}
 
 
-\subsection{Submission of \LaTeX\ articles to the journal}\label{submission}
 
-Manuscripts for possible publication in the journal should be submitted to the Editors for review as directed in the journal's Instructions for Authors, which may be found at \texttt{http://www.tandf.co.uk/journals/authors/gcovauth.asp}.
 
-Manuscripts created using \LaTeX\ should be converted to PDF format prior to submission. The \LaTeX\ source files and any graphics files will be required in addition to the final PDF version when final, revised versions of accepted manuscripts are submitted.
-
-`Open-source' \LaTeXe\ should be used in preference to proprietary systems such as TCILaTeX or Scientific WorkPlace; similarly, class files such as REVTeX that produce a document in the style of a different publisher or journal should not be used for preference.
-
-Please ensure that any author-defined macros are gathered together in the preamble of your .tex file, before the
-\verb"\begin{document}" command. Note that if serious problems are encountered with the coding of a paper (missing author-defined macros,
-for example), it may prove necessary to divert it to conventional typesetting, i.e. it will be re-keyed.
-
+\section{Proof of completeness of resonant states}
 
 \section{Using the \textit{gCOV} class file}
 
