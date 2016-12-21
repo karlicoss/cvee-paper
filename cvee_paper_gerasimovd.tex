@@ -19,17 +19,14 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
+
 \newcommand{\mcO}{\mathcal{O}} % Big O
 \newcommand{\iu}{{i\mkern1mu}} % imaginary unit
 \newcommand{\eexp}[1]{e^{#1}}  % convenient exponent
-
 \renewcommand{\Re}{\operatorname{Re}} % default Re/Im is weird
 \renewcommand{\Im}{\operatorname{Im}}
-
-% \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
-% \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
-
 \newcommand\abs[1]{\left|#1\right|}
+\newcommand\norm[1]{\left\|#1\right\|}
 \DeclareMathOperator\asin{asin}
 \DeclareMathOperator\atanh{atanh}
 \begin{document}
@@ -121,15 +118,6 @@ submission instructions; source file coding; environments; references citation; 
 
 ????? 
 
-% In order to assist authors in the process of preparing a manuscript for \textit{Complex Variables and Elliptic Equations} (\textit{gCOV}), the journal's layout style has been implemented as a \LaTeXe\ class file based on the \texttt{article} document class. A \textsc{Bib}\TeX\ style file is also provided to assist with the formatting of your references in a style appropriate to that of the journal.
-
-% Commands that differ from or are provided in addition to the standard \LaTeXe\ interface are explained in this guide. The guide alone is not intended as a substitute for an appropriate \LaTeXe\ manual.
-
-% The \texttt{gCOVguide.tex} file can also be used as a template for composing an article for submission by cutting, pasting, inserting and
-% deleting text as appropriate, using the \LaTeX\ environments provided (e.g. \verb"\begin{equation}", \verb"\begin{enumerate}").
-
-% \textbf{Please note that the index following the abstract in this guide is provided for information only. An index is not required in submitted papers.}
-
 \section{Definitions and notation}
 
 \subsection{Notation}
@@ -196,7 +184,7 @@ There is a connection between the S-matrix and the completeness of the resonant 
 
 TODO something about dissipating operator
 
-\begin{theorem}[{\cite[p. 95]{nikol2012treatise}}, {\cite[p. 99]{nikol2012treatise}}]
+\begin{theorem}[{\cite[p. 95, 99]{nikol2012treatise}}]
 The following statements are equivalent:
 \begin{itemize}
 \item the dissipating operator $Z$ is complete
@@ -231,855 +219,375 @@ s(k) = \abs{\det S(k)}
 
 \section{Description of model}
 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[trim=0 670 155 0,clip,width=\textwidth]{resonator_bundle.eps}
+\caption{Quantum graph $\Gamma$, consisting of semi infinite edges $\Omega_L, \Omega_R$ 
+and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
+\label{fig:res_bundle}
+\end{center}
+\end{figure}
 
 
+Let's investigate the model on Figure~\ref{fig:res_bundle}. Schrodinger's operator is defined on the edges of the graph as  $-\frac{d^2 \psi}{dx^2}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
+
+\begin{equation}\label{eq:bundle_system}
+\begin{aligned}
+   \forall i: \psi_i(0) &= \psi_L(0)
+\\ \forall i: \psi_i(1) &= \psi_R(0)
+\\ \psi'_L(0) - \sum\limits_{i = 1}^W \psi'_i(0) &= 0
+\\ -\psi'_R(0) + \sum\limits_{i = 1}^W \psi'_i(1) &= 0
+\end{aligned}
+\end{equation}
+
+After solving (\ref{eq:bundle_system}) in conjunction with (\ref{eq:wlwl}), we get:
+\begin{equation*}
+\det S(k) = \frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}
+\end{equation*}
 
 \section{Proof of completeness of resonant states}
+Using the S-matrix obtained above, we get:
 
-\section{Using the \textit{gCOV} class file}
+\begin{equation}\label{eq:bundle_s}
+s(k) = \abs{\det S(k)} = \abs{\frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}}
+\end{equation}
 
-If the file \texttt{gCOV2e.cls} is not already in the appropriate system directory for \LaTeXe\ files, either
-arrange for it to be put there, or simply copy it to your working folder. In order to use the \textit{gCOV} document class, replace the command
-\verb"\documentclass{article}" at the beginning of your document with the command \verb"\documentclass{gCOV2e}".
+To prove completeness, we have to show that the criterion (\ref{eq:critp}) holds for this function. We will treat the integral as a function of $R$ and give it an upper bound such that it vanishes as $r \to 1$ and $R \to \infty$, which means that the integral vanishes as well, hence the completeness of resonant states.
 
-The following document-class options should \emph{not} be used with the \textit{gCOV} class file:
-\begin{itemize}
-  \item \texttt{10pt}, \texttt{11pt}, \texttt{12pt} -- unavailable;
-  \item \texttt{oneside}, \texttt{twoside} -- not necessary, oneside is the default;
-  \item \texttt{leqno}, \texttt{titlepage} -- should not be used;
-  \item \texttt{onecolumn} -- not necessary as it is the default style.
-\end{itemize}
-The \texttt{geometry} package and commands associated with it should also not be used to adjust the page dimensions.
+Now, let's fix $r$, and further, for the sake of readability, we define $C = C(r)$ and $R = R(r)$.
 
-
-\section{Additional features}
-
-\subsection{Title, authors' names, abstract and keywords}
-
-The title should be generated at the beginning of your article using the \verb"\maketitle" command.
-In the final version, the author name(s) and affiliation(s) must be followed immediately by \verb"\maketitle" as shown below in order for them to be displayed in your PDF document.
-To prepare an anonymous version for peer review, you can put the \verb"\maketitle" between the \verb"\title" and the \verb"\author" in order to conceal the authors' identities from the reviewers.
-Next you should include an abstract, which should be enclosed within an \texttt{abstract} environment.
-For example, the titles for this guide begin as follows:
-\begin{verbatim}
-\title{\textit{Complex Variables and Elliptic Equations} \LaTeX\
-guide for authors (Style 2 + NLM reference style)}
-
-\author{
-\name{A.N. Author\textsuperscript{a}$^{\ast}$\thanks{$^\ast$Corresponding
-author. Email: latex.helpdesk@tandf.co.uk}
-and I.T. Consultant\textsuperscript{b}}
-\affil{\textsuperscript{a}Taylor \& Francis, 4 Park Square, Milton
-Park, Abingdon, UK; \textsuperscript{b}Institut f\"{u}r Informatik,
-Albert-Ludwigs-Universit\"{a}t, Freiburg, Germany}
-\received{v4.0 released February 2015} }
-
-\maketitle
-
-\begin{abstract}
-This guide is for authors who are preparing papers for \textit{Complex
-Variables and Elliptic Equations} (\textit{gCOV}) using the \LaTeX\
-document preparation system and the class file \texttt{gCOV2e.cls},
-which is available via the journal's home page on the Taylor \&
-Francis website.
-\end{abstract}
-\end{verbatim}
-A list of keywords should follow the abstract, enclosed within a \texttt{keywords} environment, followed by subject classification codes enclosed within a \texttt{classcode} environment.
-
-
-\subsection{Additional footnotes to the title or authors' names}
-
-The \verb"\thanks" command may be used to produce additional footnotes to the title or authors' names if required.
-Footnote symbols for this purpose should be used in the order:
-$\dagger$ (coded as \verb"\dagger"), $\ddagger$ (\verb"\ddagger"), $\S$ (\verb"\S"), $\P$ (\verb"\P"), $\|$ (\verb"\|"),\break
-$\dagger\dagger$ (\verb"\dagger\dagger"), $\ddagger\ddagger$ (\verb"\ddagger\ddagger"), $\S\S$ (\verb"\S\S"),
-$\P\P$ (\verb"\P\P"), $\|\|$ (\verb"\|\|").
-
-Note that any \verb"footnote"s to the main text will automatically be assigned the superscript
- symbols 1, 2, 3, etc. by the class file.\footnote{If preferred, the \texttt{endnotes} package
- may be used to set the notes at the end of your text, before the bibliography.
- The symbols will be changed to match the style of the journal if necessary by the typesetter.}
-
-
-\subsection{Lists}
-
-The \textit{gCOV} class file provides numbered and unnumbered lists using the \texttt{enumerate} environment and bulleted
-lists using the \texttt{itemize} environment.
-
-The enumerated list will number each list item with arabic numerals by default. For example,
-\begin{enumerate}
-  \item first item
-  \item second item
-  \item third item
-\end{enumerate}
-was produced by
-\begin{verbatim}
-\begin{enumerate}
-  \item first item
-  \item second item
-  \item third item
-\end{enumerate}
-\end{verbatim}
-Alternative numbering styles can be achieved by inserting an optional argument in square brackets to each \verb"item", e.g. \verb"\item[(i)] first item"\, to create a list numbered with roman numerals.
-
-Unnumbered lists can also be produced using the \texttt{enumerate} environment, e.g.
-\begin{enumerate}
-  \item[] First unnumbered item
-  \item[] Second unnumbered item
-  \item[] Third unnumbered item
-\end{enumerate}
-was produced by
-\begin{verbatim}
-\begin{enumerate}
-  \item[] First unnumbered item
-  \item[] Second unnumbered item
-  \item[] Third unnumbered item
-\end{enumerate}
-\end{verbatim}
-
-Bulleted lists are provided using the \texttt{itemize} environment. For example,
-\begin{itemize}
-  \item First bulleted item
-  \item Second bulleted item
-  \item Third bulleted item
-\end{itemize}
-was produced by
-\begin{verbatim}
-\begin{itemize}
-  \item First bulleted item
-  \item Second bulleted item
-  \item Third bulleted item
-\end{itemize}
-\end{verbatim}
-
-
-\section{Some guidelines for using standard features}
-
-The following notes are intended to help you achieve the best effects with the \texttt{gCOV2e} class file.
-
-
-\subsection{Sections}
-
-\LaTeXe\ provides five levels of section heading, all of which are defined in the \texttt{gCOV2e} class file:
-\begin{enumerate}
-  \item[(A)] \verb"\section"
-  \item[(B)] \verb"\subsection"
-  \item[(C)] \verb"\subsubsection"
-  \item[(D)] \verb"\paragraph"
-  \item[(E)] \verb"\subparagraph"
-\end{enumerate}
-Section, subsection, subsubsection and paragraph headings are numbered automatically.
-If you need additional text styles in the headings, see the examples given in Section~\ref{headings}.
-
-
-\subsection{Illustrations (figures)}
-
-See `Instructions for Authors' in the journal's home page on the Taylor \& Francis website for how to submit artwork (note that requests to supply figures and tables separately from text are for the benefit of authors using Microsoft Word; authors using \LaTeX\ may incorporate these at the appropriate locations). The source files of any illustrations will be required when the final, revised version is submitted. Authors should ensure that their figures are suitable (in terms of lettering size, etc.) for the reductions they intend.
-
-The \textit{gCOV} class file will cope with most positioning of your illustrations and you should not normally need to use the optional placement specifiers of the \texttt{figure} environment.
-Figure captions should appear below the figure itself, therefore the \verb"\caption" command should appear after the figure.
-For example, Figure~\ref{sample-figure} with caption and sub-captions is produced using the following commands:
-\begin{verbatim}
-\begin{figure}
-\begin{center}
-\subfigure[An example of an individual figure sub-caption.]{
-\resizebox*{5cm}{!}{\includegraphics{senu_gr1.eps}}}\hspace{5pt}
-\subfigure[A slightly shorter sub-caption.]{
-\resizebox*{5cm}{!}{\includegraphics{senu_gr2.eps}}}
-\caption{Example of a two-part figure with individual sub-captions
- showing that captions are flush left and justified if greater
- than one line of text, otherwise centred below the figure.}
-\label{sample-figure}
-\end{center}
-\end{figure}
-\end{verbatim}
-
-\begin{figure}
-\begin{center}
-\subfigure[An example of an individual figure sub-caption.]{
-\resizebox*{5cm}{!}{\includegraphics{senu_gr1.eps}}}\hspace{5pt}
-\subfigure[A slightly shorter sub-caption.]{
-\resizebox*{5cm}{!}{\includegraphics{senu_gr2.eps}}}
-\caption{Example of a two-part figure with individual sub-captions
- showing that captions are flush left and justified if greater
- than one line of text, otherwise centred below the figure.}
-\label{sample-figure}
-\end{center}
-\end{figure}
-
-The \verb"\subfigure{}" and \verb"\includegraphics{}" commands require subfigure.sty and graphicx.sty.
-The former is called in the preamble of the \texttt{gCOVguide.tex} file (in order to allow your choice of an alternative package if preferred)
-and the latter by the \texttt{gCOV2e} class file; both are included with the \LaTeX\ style guide package for this journal for convenience.
-Please supply any additional figure macros you use with your article in the preamble of your .tex file before \verb"\begin{document}".
-
-To ensure that figures are correctly numbered automatically, the \verb"\label{}" command should be inserted just
-after the \verb"\caption{}" command, or in its argument.
-
-The \texttt{epstopdf} package can be used to incorporate Encapsulated PostScript (.eps) illustrations when using PDF\LaTeX, etc.
-Please provide the original .eps source files rather than the generated PDF images of those illustrations for production purposes.
-
-
-\subsection{Tables}
-
-The \textit{gCOV} class file will cope with most positioning of your tables and you should not normally need to use the optional
-placement specifiers of the \texttt{table} environment.
-
-The \texttt{tabular} environment can be used as illustrated here to produce tables with appropriately spaced single thick and thin
-horizontal rules, which are allowed, if desired. Thick rules should be used at the head and foot only, and thin rules elsewhere as appropriate.
-Commands to redefine quantities such as \verb"\arraystretch" should be omitted.
-
-The table caption appears above the body of the table in \textit{gCOV} style, therefore the \verb"\tbl" command should be used before the body of the table.
-For example, Table~\ref{sample-table} is produced using the following commands. Note that \verb"\rm" will produce a roman character in math mode.
-There are also \verb"\bf" and \verb"\it", which produce bold face and text italic in math mode.
-
-\begin{table}
-\tbl{Example of a table showing that its caption is as wide as the
- table itself and justified.}
-{\begin{tabular}[l]{@{}lcccccc}\toprule
-  Class$^{\rm a}$ & $\gamma _1$ & $\gamma _2$$^{\rm b}$
-         & $\langle \gamma \rangle$
-         & $G$ & $|{\bm f}|$ & $\theta _{c}$ \\
-\colrule
-  BL Lacs & 5 & 36 & 7 & $-4.0$ & $1.0\times 10^{-2}$ & 10$^\circ$ \\
-  FSRQs & 5 & 40 & 11 & $-2.3$ & $0.5\times 10^{-2}$ & 14$^\circ$ \\
-\botrule
-\end{tabular}}
-\tabnote{$^{\rm a}$This footnote shows what footnote symbols to use.}
-\tabnote{$^{\rm b}$This footnote shows the text turning over when a long footnote is added.}
-\label{sample-table}
-\end{table}
-
-\begin{verbatim}
-\begin{table}
-\tbl{Example of a table showing that its caption is as wide as the
- table itself and justified.}
-{\begin{tabular}[l]{@{}lcccccc}\toprule
-  Class$^{\rm a}$ & $\gamma _1$ & $\gamma _2$$^{\rm b}$
-         & $\langle \gamma \rangle$
-         & $G$ & $|{\bm f}|$ & $\theta _{c}$ \\
-\colrule
-  BL Lacs & 5 & 36 & 7 & $-4.0$ & $1.0\times 10^{-2}$ & 10$^\circ$ \\
-  FSRQs & 5 & 40 & 11 & $-2.3$ & $0.5\times 10^{-2}$ & 14$^\circ$ \\
-\botrule
-\end{tabular}}
-\tabnote{$^{\rm a}$This footnote shows what footnote symbols to use.}
-\tabnote{$^{\rm b}$This footnote shows the text turning over when a
- long footnote is added.}
-\label{sample-table}
-\end{table}
-\end{verbatim}
-
-To ensure that tables are correctly numbered automatically, the \verb"\label{}" command should be inserted just before \verb"\end{table}".
-
-Tables produced using the \texttt{booktabs} package of macros for typesetting tables are also compatible with the \textit{gCOV} class file.
-
-
-\subsection{Landscape pages}\label{landscape}
-
-If a table or illustration is too wide to fit the measure it will need to be turned, along with its caption, through 90$^{\circ}$ anticlockwise.
-Landscape illustrations and/or tables can be produced using the \verb"rotating" package, which is called by the \textit{gCOV} class file.
-The following commands (for example) can be used to produce such pages.
-\begin{verbatim}
-\setcounter{figure}{0}
-\begin{sidewaysfigure}
-\centerline{\epsfbox{figname.eps}}
-\caption{Example landscape figure caption.}
-\label{landfig}
-\end{sidewaysfigure}
-\end{verbatim}
-
-\begin{verbatim}
-\setcounter{table}{0}
-\begin{sidewaystable}
- \tbl{Example landscape table caption.}
-  {\begin{tabular}{@{}llllcll}
-    .
-    .
-    .
-  \end{tabular}}\label{landtab}
-\end{sidewaystable}
-\end{verbatim}
-Before any such float environment, use the \verb"\setcounter" command as above to fix the numbering of the caption.
-Subsequent captions will then be automatically renumbered accordingly.
-The \verb"\epsfbox{}" command requires epsfig.sty, which is called by the \texttt{gCOV2e} class file and included with the \LaTeX\ style guide package for this journal for convenience.
-
-
-\subsection{Theorem-like environments}
-
-A predefined \verb"proof" environment is provided by the \texttt{amsthm} package (which is called by the \textit{gCOV} class file), as follows:
-
-\begin{proof}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{proof}
-\noindent This was produced by simply typing:
-\begin{verbatim}
-\begin{proof}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{proof}
-\end{verbatim}
-Other theorem-like environments (theorem, lemma, corollary, etc.) need to be defined as required, e.g. using \verb"\newtheorem{theorem}{Theorem}[section]"
-in the preamble of your .tex file before \verb"\begin{document}". Theorem-like structures in \textit{gCOV} are generally numbered as per the following examples:
-
-\begin{theorem}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{theorem}
-\begin{lemma}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{lemma}
-\begin{corollary}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{corollary}
-\begin{proposition}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{proposition}
-\begin{definition}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{definition}
-\begin{remark}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{remark}
-
-\noindent These were defined as shown in detail in the preamble of the \texttt{gCOVguide.tex} file, and produced by typing, for example:
-\begin{verbatim}
-\begin{theorem}
-More recent algorithms for solving the semidefinite programming
-relaxation are particularly efficient, because they explore the
-structure of the MAX-CUT problem.
-\end{theorem}
-\end{verbatim}
-The format of the text in these environments may be changed if necessary to match the style of the journal by the typesetter during preparation of your proofs.
-
-
-\subsection{Typesetting mathematics}\label{maths}
-
-\subsubsection{Displayed mathematics}
-
-The \textit{gCOV} class file will set displayed mathematics centred on the measure without equation numbers if the \LaTeX\ standard commands open (\verb"\[") and close (\verb"\]") square brackets are used as
-delimiters. The equation
+To estimate, we need the Cauchy-Schwarz's inequality:
 \[
-  \sum_{i=1}^p \lambda_i = {\rm trace}({\textrm{\bf S}})\qquad
-  i\in {\mathbb R}
+\big| \langle u,v \rangle \big| \leq \left\|u\right\| \left\|v\right\|
 \]
-\normalfont was typeset using the commands
-\begin{verbatim}
+, or to be precise, it's $\mathcal{L}^2[a, b]$ version:
 \[
-  \sum_{i=1}^p \lambda_i = {\rm trace}({\textrm{\bf S}})\qquad
-  i\in {\mathbb R}
+\abs{
+\int\limits_{t=a}^{b} f(t) g^*(t) dt
+}
+\le
+\sqrt{\int\limits_{t=a}^b \abs{f(t)}^2 dt }
+\sqrt{\int\limits_{t=a}^b \abs{g(t)}^2 dt }
 \]
-\end{verbatim}
-
-For those of your equations that you wish to be automatically numbered sequentially throughout the text,
-use the \texttt{equation} environment, e.g.
-\begin{equation}
-  \sum_{i=1}^p \lambda_i = {\rm trace}({\textrm{\bf S}})\qquad
-  i\in {\mathbb R}
+% 
+To use inequality, we are going to represent the integrand in (\ref{eq:critp}) as $f(t) g^*(t)$ as follows:
+\begin{equation}\label{eq:split}
+\begin{aligned}
+a      &= 0 \\
+b      &= 2 \pi \\
+f(t)   &= \ln s(R \eexp{\iu t} + \iu C) \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i} \\
+g^*(t) &= \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i}
+\end{aligned}
 \end{equation}
-was typeset using the commands
-\begin{verbatim}
-\begin{equation}
-  \sum_{i=1}^p \lambda_i = {\rm trace}({\textrm{\bf S}})quad
-  i\in {\mathbb R}
+Next, we will show that $\norm{g}$ (that is, $\sqrt{\int \abs{g(t)}^2}$) is bounded by a constant which does not depend on $r$, and $\norm{f}$ goes to $0$ as $r$ goes to $1$, hence (\ref{eq:critp}) converges.
+
+\subsection{Estimating $\norm{g}$}
+
+First, we evaluate the integrand:
+\begin{align*}
+\abs{g(t)}^2 = \abs{g^*(t)}^2
+&=   \frac{\sqrt{R}^2}{\abs{R \cos t + \iu R \sin t + \iu C + i}^2} \\
+&=   \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} \\
+&= \frac{R}{R^2 \cos^2 t + R^2 \sin^2 t + (C + 1)^2  + 2 R (C + 1) \sin t} \\
+&=   \frac{1}{R + \frac{(C + 1)^2}{R} + 2 (C + 1) \sin t} \\ 
+\end{align*}
+
+We have to integrate this function on interval $[0, 2 \pi]$. Integral of such type is well-known: % REFTODO
+\[
+\int\limits_{0}^{2 \pi} \frac{dx}{a + b \sin x} = \frac{2 \pi}{\sqrt{a^2 - b^2}}
+\]
+, when $a > b$. In our case, $a = R + \frac{(C + 1)^2}{R}$, $b = 2 (C + 1)$).
+
+First, we check that $a > b$:
+\begin{align*}
+   R + \frac{(C + 1)^2}{R} - 2 (C + 1)
+   &= \frac{R^2 + C^2 + 2C + 1 - 2 RC - 2 R}{R}
+\\ &= \frac{(C - R)^2 + 2(C - R) + 1}{R}
+\\ &= \frac{(C - R + 1)^2 }{R}
+\\ &> 0 && \text{,strictly greater since $C > R$} 
+\end{align*}
+
+Next, we compute en estimate for $\sqrt{a^2 - b^2}$:
+\begin{align*}
+a^2 - b^2
+& =  (R + \frac{(C + 1)^2}{R})^2 - (2 (C + 1))^2\\
+& =  R^2 + \frac{(C+1)^4}{R^2} + 2 (C+1)^2 - 4 (C + 1)^2 \\
+& =  \left( \frac{(C + 1)^2}{R} - R \right)^2 \\
+& =  \left( \frac{(C + 1)^2 - R^2}{R}\right)^2 \\
+& =  \left( \frac{(C + 1 - R) (C + 1 + R)}{R}\right)^2 && \text{,since $C > R > 0$} \\
+&\ge \left( \frac{(1) (R + R)}{R}\right)^2  \\
+&\ge 4
+\end{align*}
+
+Finally, since $\frac{2 \pi}{\sqrt{a^2 - b^2}} \le \frac{2 \pi}{2} = \pi$, and we just proved that $\norm{g}$ is bounded by a constant. 
+
+
+\subsection{Estimating $\norm{f}$}
+Function $s(k)$ (\ref{eq:bundle_s}) is too complex for direct proof of the convergence.
+
+We proceed as follows:
+
+\begin{itemize}
+\item Since $s(k)$ is an absolute value of the determinant of the $S$ matrix, in the upper complex plane $0 \le s(k) \le 1$ holds. From here, we immediately know that the integral is bounded from above since $ln^2 1 = 0$.
+\item We replace $s(k)$ with a lower bound $l(k)$ such that: $0 \le l(k) \le s(k) \le 1$.
+\item By appling logarithm to the expression above, we get $\ln l(k) \le \ln s(k) \le 0$, and therefore, $\ln^2 s(k) \le \ln^2 l(k)$.
+\item Now, if we prove convergence for $l(k)$, this immediately proves the convergence of the original integral.
+\end{itemize}
+
+We are going to use this fact in our proof and do such function changes under the integral sign, replacing complicated function with simpler (in particular, piecewise linear) lower bounds, and then using well known facts to estimate the integral.
+
+\subsubsection{Simplifying $s(k)$}
+We build a simple estimate for $s(k)$ over the upper complex plane. This function will be independent of the complex part of its argument which will make the analysis way easier.
+
+\begin{enumerate}
+\item
+  It is easy to spot that if we fix the complex part of the argument, $s(k)$ is periodic with respect to the real part of its argument.
+\item 
+  Function $s(k)$ has countably infinite set of zeros, and each of them has $\Im k = \atanh \frac{2 W}{W^2 + 1}$. For brewity, we define:
+
+  \begin{equation*}
+  \begin{aligned}
+     V &= \frac{2 W}{W^2 + 1}
+  \\ Z &= \atanh V
+  \end{aligned}
+  \end{equation*}
+\item
+  Notice that for each $x$, $s(x + \iu y) \le s(\iu y)$.
+\end{enumerate}
+
+Given these facts, we can build a simple lower bound for $s(x + \iu y)$:
+\begin{align*}
+l(x + \iu y)
+   &= \abs{\frac{(W^2 + 1) \sinh y - 2 W \cosh y}{(W^2 + 1) \sinh y + 2 W \cosh y}}
+\\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(since $\cosh y > 0$)}
+\end{align*}
+
+It's pretty clear that $l(k)$ has a continuum of zeros over the line $\Im k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration cound intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brewity, we will omit it and defince $l(y) = l(\iu y)$.
+
+Now, we will simplify the integral using the bound we just constructed:
+\begin{align*}
+       \int\limits_{t=0}^{2 \pi} \abs{f(t)}^2 dt
+   = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \eexp{\iu t} + \iu C) \frac{R}{\norm{R \eexp{\iu t} + \iu C + i}^2} dt
+\\ = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \sin t + C) \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} dt
+\end{align*}
+
+First, notice that:
+
+\begin{equation*}
+\begin{aligned}
+   \sin(-\pi/2 + t)   &= \sin(-\pi/2 - t) = - \cos t
+\\ \cos^2(-\pi/2 + t) &= \cos^2(-\pi/2 = t) = \sin^2 t
+\end{aligned}
+\end{equation*}
+, that is, the integrand is symmetric with respect to $y$ and for proving convergence it is enough to prove convergence on the (half circle) contour defined by $-\pi/2 \le t \le \pi/2$.
+
+Next, we do a variable change:
+\begin{equation*}
+\begin{aligned}
+   y         &= R \sin t + C
+\\ t         &= \asin \frac{y - C}{R}
+\\ dt        &= \frac{1}{\sqrt{R^2 - (C - y)^2}} dy
+\\ \cos t    &= \frac{\sqrt{R^2 - (C - y)^2}}{R}
+\\ y(-\pi/2) &= C - R 
+\\ y(\pi/2)  &= C + R 
+\end{aligned}
+\end{equation*}
+, and after substitution:
+\begin{equation}\label{eq:int_f}
+\resizebox{0.9\hsize}{!}{$
+\begin{aligned}
+    & \int\limits_{y = C - R}^{C + R} \ln^2 f(y) \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} dy \\
+=   & \int\limits_{y = C - R}^{C + R} \ln^2 f(y) \frac{R}{R^2 - (C - y)^2 + (y + 1)^2} \frac{1}{\sqrt{R^2 - (C - y)^2}} dy\\
+=   & \int\limits_{y = C - R}^{C + R} \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}  dy\\
+\end{aligned}
+$}
 \end{equation}
-\end{verbatim}
 
-Part numbers for sets of equations may be generated using the \texttt{subequations} environment, e.g.
-\begin{subequations} \label{subeqnexample}
-\begin{equation}
-        \varepsilon \rho w_{tt}(s,t)
-        =
-        N[w_{s}(s,t),w_{st}(s,t)]_{s},
-        \label{subeqnpart}
+On the integration path we cross singularities at $y = C - R$, $y = Z$, $y = C + R$, and the integrand is still too complex for direct estimation. Let's split the integration path in multiple segments and estimate them independently.
+
+\subsubsection{Case 1: $C - R \le y \le Z$}
+A crucial property of $s(k)$ is its convergence to 1 as $\Im k$ goes to 0 (which is because $s$ is the determinant of S-matrix), since then $\ln s(k)$ goes to zero, which is necessary to compensate the singularity of $\frac{1}{R - C + y}$ at $y = C - R$. 
+This means that to prove convergence using lower bound for $s(k)$, we have to require that $s(k)$ also converges to $1$ as $\Im k$ goes to $0$.
+
+% TODO plot?
+Since $l$ is convex when $0 \le y \le Z$, we can estimate it from below using its first derivative at $0$. However, this is not enough, since it will this will violate the property of the estimate being positive (it is under the logarithm sign), so we have to be more careful and approximate the function at $Z$ with its first derivative as well, and then glue them together at some point $Z_0$:
+\begin{align*}
+f(y)
+& = 
+\begin{cases}
+l'(0) y + 1   &, 0 \le y < Z_0  \\
+l'(Z) (y - Z) &, Z_0 \le y < Z \\
+\end{cases}
+\\
+& =
+\begin{cases}
+\frac{-2}{V} y + 1   &, 0 \le y < Z_0  \\
+\frac{1}{2 V}(V^2 - 1) (y - Z) &, Z_0 \le y < Z \\
+\end{cases}
+\end{align*}
+
+Note that lower bound does not have to be a continuous function, so we can pick any number in $[C - R, Z)$ as $Z_0$. For the ease of calculations, let's take $Z_0 = \frac{V}{4}$.
+
+Next we compute upper bounds for the integral \ref{eq:int_f} on $[C - R, \frac{V}{4})$ and $[\frac{V}{4}, Z)$ separately.
+
+\paragraph{$C - R \le y < \frac{V}{4}$}
+
+Note that for $C - R \le y \le \frac{V}{4}$:
+\begin{align*}
+       & \int \ln^2 l(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \ln^2 (1 - \frac{2}{V} y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\end{align*}
+
+Now, we use a well known inequality which holds for $x > -1$: % REFTODO
+\[
+\frac{x}{1 + x} \le \ln (1 + x)
+\]
+, where in our case $x = -\frac{2}{V} y$. Since the expression under logarithm is less than 1, we get $\ln^2 (1 + x) \le \frac{x^2}{(1 + x)^2}$:
+\begin{align*}
+       & \dots 
+\\ \le & \int \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V}y)^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \frac{\frac{4}{V^2}y^2}{(1 - \frac{2}{V} \frac{V}{4})^2}  \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + y}}
+\\ =   & \frac{\frac{4}{V^2}}{(1 - \frac{2}{V} \frac{V}{4})^2} \frac{R}{\sqrt{R + C - Z}}  \int \frac{y^2}{R^2 - C^2 + 2 (C + 1) y + 1}  \frac{1}{\sqrt{R - C + y}}
+\end{align*}
+
+It's clear that the multiplier before the integral has order $\mcO(\sqrt{R})$ (we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$).
+
+The first part of the integrand has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ and $b > 0$. That means $\frac{y^2}{a + b y}$ will be nonnegative when $y > 0$, and non decreasing, since:
+\[
+  \left(\frac{y^2}{a + b y}\right)'
+= \frac{2y}{a + by} + y^2 \frac{-b}{(a + by)^2}
+= \frac{2y (a + by) - b y^2}{(a + by)^2}
+= \frac{y (2a + by)}{(a + by)^2}
+\ge 0
+\]
+
+This implies that we can estimate the function from above by using its value on the rightmost point of the interval at $\frac{V}{4}$.
+\[
+\frac{y^2}{a + b y} \le \frac{\frac{V^2}{16}}{R^2 - C^2 + 1 + 2 (C + 1) \frac{V}{4}} = \mcO\left(\frac{1}{R}\right)
+\]
+
+Interal of the second part of the integrand is:
+\[
+\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - (C - R)} < 2 \sqrt{\frac{V}{4}} = \mcO(1)
+\]
+
+And finally, after combining we get $\mcO(\sqrt{R}) \mcO\left(\frac{1}{R}\right) \mcO(1)  = \mcO\left(\frac{1}{\sqrt{R}}\right)$.
+
+\paragraph{$\frac{V}{4} \le y < Z$}
+
+Note that for $\frac{V}{4} \le y < Z$:
+\begin{align*}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}} 
+\\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}}
+\\ \le &  \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}} \int \ln^2 \left( \frac{1}{2 V}(V^2 - 1) (y - Z) \right)
+\end{align*}
+
+First, take a look at the multiplier before the integral, it's pretty clear it has order of growth $\mcO(\frac{1}{\sqrt{R}})$.
+
+As for the integral, $\ln^2(x)$ is integrable in the neighborhood of $x = 0$, and it is known that: %  REFTODO
+
+\[
+\int\limits_{x=x_0}^b \ln^2(a (x - b)) dx = (b - x_0) (\ln^2(a (x_0 - b)) - 2 \ln(a (x_0 - b)) + 2)
+\]
+
+In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we can see that the integral is bounded by a constant independent of $R$ and $C$, hence the integral on this interval grows as $\mcO(\frac{1}{\sqrt{R}})$.
+
+\subsubsection{Case 2: $y > Z$}
+When $y > Z$, 
+\[
+l(x + \iu y) 
+ = \frac{\tanh y - V}{\tanh y + V}
+ = 1 - 2 \frac{V}{\tanh y + V}
+\]
+
+
+Since $l$ is concave, strictly increasing and for a fixed $r$, we are only interested at $y \le C + R$, we can estimate the function by a linear one: 
+\[
+f(y) = \frac{l(C + R)}{C + R - Z} (y - Z)
+\]
+
+Notice that when $y = C + R$, for a sufficiently big $r$, $l(y)$ is bounded from both sides by constants, independent from $C$ and $R$. This is because $\tanh y$ goes to $1$ as $y$ goes to infinity, therefore, $l(y)$ in the limit will be equal to $1 - \frac{2 V}{V + 1}$. This is an important property of this specific model, since if $l$ went to zero on infinity, this part of proof couldn't have been done.
+
+First, note that on $Z \le y \le R + C$ the function $\frac{1}{\sqrt{R - C + y}}$ has no singularities and we can estimate integral \ref{eq:int_f} as:
+\begin{equation}\label{eq:int_f_up}
+\begin{aligned}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
+\\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}} 
+\end{aligned}
 \end{equation}
-\begin{equation}
-        w_{tt}(1,t)+N[w_{s}(1,t),w_{st}(1,t)] = 0,
-\end{equation}
-\end{subequations}
-which was generated using the commands
-\begin{verbatim}
-\begin{subequations} \label{subeqnexample}
-\begin{equation}
-        \varepsilon \rho w_{tt}(s,t)
-        =
-        N[w_{s}(s,t),w_{st}(s,t)]_{s},
-        \label{subeqnpart}
-\end{equation}
-\begin{equation}
-        w_{tt}(1,t)+N[w_{s}(1,t),w_{st}(1,t)] = 0,
-\end{equation}
-\end{subequations}
-\end{verbatim}
-This is made possible by the \texttt{subeqn} package, which is called
-by the class file. If you put the \verb"\label{}" just after the
-\verb"\begin{subequations}" line, references will be to the
-collection of equations, `(\ref{subeqnexample})' in the example
-above. Or, like the example code above, you can reference each
-equation individually -- e.g. `(\ref{subeqnpart})'.
 
-Displayed mathematics should be given end-of-line punctuation appropriate to the running text sentence of which it forms a part, if required.
+To estimate this expression, let's split the integration path in three intervals: $[Z, Z + \frac{1}{R})$, $[Z + \frac{1}{R}, C)$, $[C, C + R]$.
 
-\subsubsection{Bold math italic symbols}
+\paragraph{$Z \le y < Z + \frac{1}{R}$}
 
-To get bold math italic you can use \verb"\bm", which works for all sizes, e.g.
-\begin{verbatim}
-\sffamily
-\begin{equation}
-  {\rm d}({\bm s_{t_{\bm u}}) = \langle{\bm\alpha({\sf{\textbf L}})}
-  [RM({\bm X}_y + {\bm s}_t) - RM({\bm x}_y)]^2 \rangle
-\end{equation}
-\normalfont
-\end{verbatim}
-produces\sffamily
-\begin{equation}
-  {\rm d}({\bm s_{t_{\bm u}}}) = \langle {\bm\alpha({\sf{\textbf L}})}[RM({\bm X}_y
-  + {\bm s}_t) - RM({\bm x}_y)]^2 \rangle
-\end{equation}\normalfont
-Note that subscript, superscript, subscript to subscript, etc.
-sizes will take care of themselves and are italic, not bold,
-unless coded individually. \verb"\bm" produces the same effect as
-\verb"\boldmath". \verb"\sffamily"...\verb"\normalfont" allows
-upright sans serif fonts to be created in math mode by using the
-control sequence `\verb"\sf"'.
+Let's estimate \ref{eq:int_f_up}, replacing functions under the integral sign by their extreme value at interval's ends:
+\begin{align*}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
+\\ =   & \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}} \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \int \ln^2 f(y) 
+\end{align*}
 
-\subsubsection{Bold Greek}\label{boldgreek}
+It's easy to see that the coefficient before the integral has order of growth $\mcO\left(\frac{1}{\sqrt{R}}\right)$.
 
-Bold lowercase as well as uppercase Greek characters can be
-obtained by \verb"{\bm \gamma}", which gives ${\bm \gamma}$, and
-\verb"{\bm \Gamma}", which gives ${\bm \Gamma}$.
+% REFTODO
+As for the integral $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$, it can be computed explicitly, using:
+\[
+    \int\limits_b^{b + c} \ln^2 (a (x - b)) dx = c (\ln^2(a c) - 2 \ln (a c) + 2)
+\]
 
-\subsubsection{Upright lowercase Greek characters and the upright partial derivative sign}\label{upgreek}
+Hence, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) - 2 \ln (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) + 2)$. As we noted above, $l(C + R)$ is bounded by positive constants less than $1$ and independent of $r$, and we can see that the expression grows as $\mcO(\frac{\ln^2 R}{R})$.
 
-Upright lowercase Greek characters can be obtained with the \textit{gCOV} class file by inserting the letter `u' in the control
-code for the character, e.g. \verb"\umu" and \verb"\upi" produce $\umu$ (used, for example, in the symbol for the
-unit microns -- $\umu{\rm m}$) and $\upi$ (the ratio of the circumference to the diameter of a circle). Similarly,
-the control code for the upright partial derivative $\upartial$ is \verb"\upartial".
+By combining the estimates for the coefficient and the integral, we get $\mcO(\frac{\ln^2 R}{R \sqrt{R}})$.
+
+\paragraph{$Z + \frac{1}{R} \le y < C$}
+Again, by picking extreme values for the parts of integrands, we can estimate \ref{eq:int_f_up} as:
+\begin{align*}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \int \ln^2 f(Z + \frac{1}{R}) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}}
+\\  =  & \ln^2 f(Z + \frac{1}{R})  \frac{R}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{R^2 - C^2 + 2 (C + 1) y + 1}
+\end{align*}
+
+As $R$ goes to infinity, $\ln^2 f(Z + \frac{1}{R})$ goes to infinity as well, so we have to compute the order of singularity. Since $\ln f(Z + \frac{1}{R}) = \ln \left( \frac{l(C + R)}{C + R - Z} \frac{1}{R} \right) = \ln l(C + R) - \ln (C + R - Z) - \ln R$, we can see that $\ln^2 f(Z + \frac{1}{R}) = \mcO (\ln^2 R)$.
 
 
-\subsection{Acknowledgements}
-
-An unnumbered section, e.g.\ \verb"\section*{Acknowledgement(s)}", should be used for thanks, etc.
-and included \emph{in the non-anonymous version} before any Notes or References section.
-
-
-\subsection{Disclosure}
-
-An unnumbered section, e.g.\ \verb"\section*{Disclosure}", should be used to state any potential conflict of interest
-and included \emph{in the non-anonymous version} before the References section, after any Acknowledgements and before any Funding statement.
+As for the integral, antiderivative for such a function is well known:
+\[
+\int \frac{1}{a x + b} = \frac{\ln (a x + b)}{a}
+\]
+, in our case $a = 2 (C + 1)$, $b = R^2 - C^2 + 1$. Substituting the ends of the interval $(Z + \frac{1}{R}, C)$, we get the definite integral:
+\[
+\frac{\ln \frac{2 (C + 1) C + R^2 - C^2 + 1}{2 (C + 1) (Z + \frac{1}{R}) + R^2 - C^2 + 1}}{2 (C + 1)} = \mcO\left( \frac{\ln R}{R} \right)
+\]
 
 
-\subsection{Funding}
+Finally, after combining, we get: $\mcO (\ln^2 R) \frac{R}{\sqrt{R}} \frac{1}{\sqrt{R - C + Z}} \mcO\left( \frac{\ln R}{R} \right)  = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)$.
 
-An unnumbered section, e.g.\ \verb"\section*{Funding}", should be used for grant details, etc.
-and included \emph{in the non-anonymous version} before any Notes or References section.
+\paragraph{$C \le y \le C + R$}
 
+Again, estimating \ref{eq:int_f_up} from above:
+\begin{align*}
+       & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ \le & \int \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
+\\ =   & \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{\sqrt{R + C - y}}
+% \\  = & \ln^2 f(y) \mcO()
+\end{align*}
 
-\subsection{Notes}
+Integral $\frac{1}{\sqrt{R + C - y}}$ from $C$ to $C + R$ is elementary and equals $2 \sqrt{R}$. Function $f$ at $C$ is bounded by constants not dependent on $r$, therefore, the square of its logarithm as well. Finally, we get an expression of order $\mcO \left( \frac{1}{R} \right) \mcO( \sqrt R ) = \mcO \left( \frac{1}{\sqrt{R}} \right)$.
 
-An unnumbered `Notes' section may be placed before the References section (if using the \verb"endnotes" package, use the command \verb"\theendnotes" where the notes are to appear instead of creating a \verb"\section").
+\subsubsection{Final estimate of $\int \abs{f(t)}^2$}
+We split our integration path in five intervals, and the integral has order:
+\[
+\mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) +\mcO\left(\frac{\ln^2 R}{R \sqrt{R}}\right) + \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)
+\]
+, which means that integral converges to $0$ as $r$ goes to $1$ and $R$ goes to $\infty$.
 
-
-\subsection{Supplemental material}
-
-Supplemental material should be referenced within your article where appropriate. An unnumbered section, e.g. \verb"\section*{Supplemental material}", detailing the supplemental material available should be placed immediately before the list of references, and should include a brief description of each supplemental file.
-
-
-\subsection{References}\label{refs}
-
-\subsubsection{References cited in the text}
-
-References should be cited in accordance with US National Library of Medicine (NLM) style (please refer to the style guide in the journal's Instructions for Authors for details). References are cited in the text by a number in square brackets (e.g. [1], [2,4,10], [11--15], not [11]--[15]), in the order in which they first appear.
-
-Each bibliographical entry has a key, which is assigned by the author and used to refer to that entry in the text. In this document, the key \verb"neu83" in the citation form
-\verb"\cite{neu83}" produces `\cite{neu83}', and the keys \verb"ed84" and \verb"aiex00" in the citation form
-\verb"\cite{ed84,aiex00}" produce `\cite{ed84,aiex00}'. The citation for a range of bibliographic entries (e.g.
-`\cite{Eri1984,glov00,hk97,glov86,Agu95,Holl04,Shak78,Mil93}') will automatically be produced by
-\verb"\cite{Eri1984,glov00,hk97,glov86,Agu95,Holl04,Shak78,Mil93}". Optional notes may be included at the end of a citation by the use of square brackets, e.g. \verb"\cite[see][p.73-–77]{cwm73}" produces `\cite[see][p.73--77]{cwm73}'.
-
-\subsubsection{The list of references}
-
-References should be listed at the end of the main text in the order in which they are first cited in the text. The following list shows some references prepared in the style of the journal.
+\section*{Acknowledgements}
+TODO ????
 
 \begin{thebibliography}{99}
 
-\bibitem{neu83}%1
-Neumann M. Parallel GRASP with path-relinking for job shop scheduling. Mol
-  Phys. 1983;50:841--843.
-
-\bibitem{ed84}%2
-Edwards DMF, McDonald IR. Positive bases in numerical optimization. Comput
-  Optim Appl. 1984;21:169--175.
-
-\bibitem{aiex00}%3
-Aiex RM, Pierce IF, Donizetti G, von~Weber CM, Bizet G, Bach CPE, Strauss
-  R, van~Beethoven L, Mozart WA, Dukas P. Computing tools for modelling
-  orchestral performance. Cambridge (UK): University of Cambridge; 2000.
-  Report No.: DAMTP 2000/NA10.
-
-\bibitem{Eri1984}%4
-Ericsson KA, Simon HA. Protocol analysis: verbal reports as data. Cambridge
-  (MA): MIT Press; 1984.
-
-\bibitem{glov00}%5
-Glover F. Multi-start and strategic oscillation methods -- principles to exploit
-  adaptive memory. In: Laguna M, Gonz\'{a}les-Velarde JL, editors. Computing
-  tools for modeling, optimization and simulation: interfaces in computer
-  science and operations research. 2nd ed. Vol.~2. Boston (MA): Kluwer Academic;
-  2000. p. 1--24.
-
-\bibitem{hk97}%6
-Kern H. The resurgent Japanese economy and a Japan--United States free
-  trade agreement. In: Lambert C, Holst G, editors. 4th International
-  Conference on the Restructuring of the Economic and Political System in Japan
-  and Europe; 1996 May 21--25; Milan, Italy. Singapore: World Scientific;
-  1997. p. 147--156.
-
-\bibitem{glov86}%7
-Glover F. Hilbert modular forms and the Galois representations associated to
-  Hilbert--Blumenthal abelian varieties [dissertation]. Cambridge (MA): Harvard
-  University; 1986.
-
-\bibitem{Agu95}%8
-Agutter AJ. The linguistic significance of current British slang [unpublished
-  doctoral dissertation]. Edinburgh (UK): Edinburgh University; 1995.
-
-\bibitem{Holl04}%9
-Holland M. Guide to citing internet sources. 2004~[cited~2012 Nov 4].
-  Available from: http://www.bournemouth.ac.uk/library/using/guide\_to\_citing\_internet\_sourc.html.
-
-\bibitem{Shak78}%10
-Shakelford RT. Surgery of the alimentary tract. Philadelphia (PA): W.B.
-Saunders; 1978. Chapter 2, Esophagoscopy; p. 29--40.
-
-\bibitem{Mil93}%11
-Miller ME. The interactive tester (version 4.0) [computer software].
-  Westminster (CA): Psytek Services; 1993.
-
-\bibitem{cwm73}%12
-Misner CW. Efficient algorithms for layer assignment problems. In: Gottlob I,
-  editor. Gravitation in a collapsing Universe. 2nd ed. San Francisco (CA):
-  Freeman; 1973. p. 63--83. (Einstein's legacy; vol.~5).
+\bibitem{nikol2012treatise}%1
+Nikol'skii N. Treatise on the shift operator: spectral function theory. Springer Science \& Business Media; 2012
 
 \end{thebibliography}
-\bigskip
-\noindent This was produced by typing:
-\begin{verbatim}
-\begin{thebibliography}{99}
-
-\bibitem{neu83}%1
-Neumann M. Parallel GRASP with path-relinking for job shop
- scheduling. Mol Phys. 1983;50:841--843.
-
-\bibitem{ed84}%2
-Edwards DMF, McDonald IR. Positive bases in numerical optimization.
- Comput Optim Appl. 1984;21:169--175.
-
-\bibitem{aiex00}%3
-Aiex RM, Pierce IF, Donizetti G, von~Weber CM, Bizet G, Bach CPE,
- Strauss R, van~Beethoven L, Mozart WA, Dukas P. Computing tools
- for modelling orchestral performance. Cambridge (UK): University
- of Cambridge; 2000. Report No.: DAMTP 2000/NA10.
-
-\bibitem{Eri1984}%4
-Ericsson KA, Simon HA. Protocol analysis: verbal reports as data.
- Cambridge (MA): MIT Press; 1984.
-
-\bibitem{glov00}%5
-Glover F. Multi-start and strategic oscillation methods -- principles
- to exploit adaptive memory. In: Laguna M, Gonz\'{a}les-Velarde JL,
- editors. Computing tools for modeling, optimization and simulation:
- interfaces in computer science and operations research. 2nd ed.
- Vol.~2. Boston (MA): Kluwer Academic; 2000. p. 1--24.
-
-\bibitem{hk97}%6
-Kern H. The resurgent Japanese economy and a Japan--United States
- free trade agreement. In: Lambert C, Holst G, editors. 4th
- International Conference on the Restructuring of the Economic
- and Political System in Japan and Europe; 1996 May 21--25;
- Milan, Italy. Singapore: World Scientific; 1997. p. 147--156.
-
-\bibitem{glov86}%7
-Glover F. Hilbert modular forms and the Galois representations
- associated to Hilbert--Blumenthal abelian varieties [dissertation].
- Cambridge (MA): Harvard University; 1986.
-
-\bibitem{Agu95}%8
-Agutter AJ. The linguistic significance of current British slang
- [unpublished doctoral dissertation]. Edinburgh (UK): Edinburgh
- University; 1995.
-
-\bibitem{Holl04}%9
-Holland M. Guide to citing internet sources. 2004 [cited~2012 Nov 4].
- Available from:
- http://www.bournemouth.ac.uk/library/using/guide\_to\_citing\_internet\_sourc.html.
-
-\bibitem{Shak78}%10
-Shakelford RT. Surgery of the alimentary tract. Philadelphia (PA):
- W.B. Saunders; 1978. Chapter 2, Esophagoscopy; p. 29--40.
-
-\bibitem{Mil93}%11
-Miller ME. The interactive tester (version 4.0) [computer software].
- Westminster (CA): Psytek Services; 1993.
-
-\bibitem{cwm73}%12
-Misner CW. Efficient algorithms for layer assignment problems. In:
- Gottlob I, editor. Gravitation in a collapsing Universe. 2nd ed.
- San Francisco (CA): Freeman; 1973. p. 63--83. (Einstein's legacy;
- vol.~5).
-
-\end{thebibliography}
-\end{verbatim}
-\bigskip
-\noindent Each entry takes the form:
-\begin{verbatim}
-\bibitem{key} Bibliography entry
-\end{verbatim}
-where `\texttt{key}' is the tag that is to be used as an argument for the \verb"\cite{}" commands in the text of the article and \texttt{Bibliography entry} is the material that is to appear in the list of references, suitably formatted.
-
-Instead of typing the bibliography by hand, you may prefer to create the list of references using a \textsc{Bib}\TeX\ database. Include the lines
-\begin{verbatim}
-\bibliographystyle{gCOV}
-\bibliography{gCOVguide}
-\end{verbatim}
-where the list of references should appear, where \texttt{gCOV.bst} is the name of the \textsc{Bib}\TeX\ style file for this journal and \texttt{gCOVguide.bib} is the database of bibliographic details for the references section included with the \textit{gCOV} \LaTeX\ style guide package (to be replaced with the name of your own \textsc{Bib}\TeX\ database). The \LaTeX\ source file of your paper will extract from your .bib file only those references that are cited in that paper and list them in the References section of it.
-
-Please include a copy of your .bib file and/or the final generated .bbl file among your source files if your .tex file does not contain a reference list in a \texttt{thebibliography} environment.
-
-
-\subsection{Appendices}\label{appendices}
-
-Any appendices should be placed after the list of references, beginning with the
-command \verb"\appendices" followed by the command \verb"\section"
-for each appendix title, e.g.
-\begin{verbatim}
-\appendices
-\section{This is the title of the first appendix}
-\section{This is the title of the second appendix}
-\end{verbatim}
-
-\noindent produces:\medskip
-
-\noindent\textbf{Appendix A. This is the title of the first appendix}\medskip
-
-\noindent\textbf{Appendix B. This is the title of the second appendix}\medskip
-
-\noindent Subsections, equations, figures, tables, etc. within
-appendices will then be automatically numbered as appropriate.
-
-
-\section{Example of a section heading including {\fontencoding{T1}\scshape{small caps}},
-   \textit{italic}, and bold Greek such as ${\bm\kappa}$}\label{headings}
-
-The following code shows how to achieve this section heading:
-\begin{verbatim}
-\section{Example of a section heading including
- {\fontencoding{T1}\scshape{small caps}}, \textit{italic},
- and bold Greek such as ${\bm\kappa}$}\label{headings}
-\end{verbatim}
-
-
-\section{\textit{gCOV} journal style}
-
-The notes given here relate to common style errors found in manuscripts, but are \emph{not}
-intended to be exhaustive.
-
-
-\subsection{Hyphens, en rules, em rules and minus signs}\label{dashes}
-
-\begin{enumerate}
-\item[(i)] Hyphens (one dash in \TeX/\LaTeX). \textit{gCOV} uses hyphens for compound adjectives (e.g.\ low-density gas, least-squares fit,
-two-component model) but not for complex units or ranges, which could become cumbersome (e.g.\ 15~km~s$^{-1}$
-feature, 100--200~$\umu$m observations).
-
-\item[(ii)] en rules (two dashes in \TeX/\LaTeX). These are used (a) to denote a range (e.g.\ 1.6--2.2~$\umu$m);
-(b) to denote the joining of two words of equal standing (e.g.\ Kolmogorov--Smirnov test, Herbig--Haro object);
-(c) with spaces, as an alternative to parentheses (e.g.\ `the results -- assuming no temperature gradient -- are indicative of \ldots').
-
-\item[(iii)] The em rule (three dashes in \TeX/\LaTeX) has no specified use in \textit{gCOV}.
-
-\item[(iv)] The minus sign is produced automatically in math mode by the use of a single dash, e.g.
-\begin{equation}
-y_{i} \in \{-1, 1 \} \quad \forall i \in V,
-\end{equation}
-\noindent where $|-V|=A^2+B^2.$\medskip
-
-\noindent is produced by
-\begin{verbatim}
-\begin{equation}
-y_{i} \in \{-1, 1 \} \quad \forall i \in V,
-\end{equation}
-\noindent where $|-V|=A^2+B^2.$
-\end{verbatim}
-
-\end{enumerate}
-
-
-\subsection{References}
-
-It is important to use the correct reference style, details of which can be found in Section~\ref{refs}.
-
-
-\subsection{Maths fonts}
-
-Scalar variables should be mediumface italic (e.g.\ $s$ for speed);
-vectors should be bold italic (e.g.\ $\bm v$ for velocity);
-matrices should be bold roman (upright) (e.g.\ $\bf A$), and
-tensors should be bold upright sans serif (e.g.\ {\sffamily{\textbf L}}).
-Differential d, partial differential $\upartial$, complex i,
-exponential e, superscript T for `transpose', sin, cos, tan, log, etc.,
-should all be roman. Openface, or `blackboard', fonts can be used,
-for example, for the integers $\mathbb Z$ and the reals $\mathbb R$.
-Sub/superscripts that are physical variables should be italic,
-while those that are labels should be roman (e.g.\ $C_p$, $T_{\rm eff}$).
-
-
-\section{Troubleshooting}
-
-Authors may from time to time encounter problems with the preparation
-of a paper using \LaTeX\/. The appropriate action to take will depend
-on the nature of the problem -- the following is intended as a guide.
-
-\begin{enumerate}
-\item[(i)] If the problem is with \LaTeX\ itself, rather than with the
-actual macros, please refer to an appropriate handbook for
-initial advice. If the solution cannot be found, or if you
-suspect that the problem lies with the macros, then please contact
-Taylor \& Francis for assistance (\texttt{latex.helpdesk@tandf.co.uk}).
-
-\item[(ii)] Problems with page make-up (e.g.\ large spaces between paragraphs,
-above headings, or below figures; figures/tables appearing out of order):
-please do not attempt to remedy these using `hard' page make-up
-commands -- the typesetter will deal with such problems. (You may, if you
-wish, draw attention to particular problems when submitting the final version
-of your paper.)
-
-\item[(iii)] If a required font is not available at your site, allow \TeX\
-to substitute the font and specify which font you require in a covering letter
-accompanying your file(s).
-\end{enumerate}
-
-
-\section{Fixes for coding problems}
-
-This guide has been designed to minimize the need for user-defined macros to create special symbols. Authors
-are urged, wherever possible, to use the following coding rather than to create their own. This will minimize
-the danger of author-defined macros being accidentally `overridden' when the paper is typeset (see
-Section~\ref{maths}, `Typesetting mathematics'). In cases where it is essential to create your own macros,
-these should be displayed in the preamble of your \texttt{.tex} file before \verb"\begin{document}".
-
-\begin{enumerate}
-\item[(i)] Fonts in section headings and paper titles. The following are examples
-of styles that sometimes prove difficult to code.
-
-
-\subsection*{Paper titles:}
-
-\hsize380pt\bf{\noindent Generalized Flory theory at ${\bm\delta >
-{\bf 50}^\circ}$}\\
-
-    \noindent\normalfont is produced by
-\begin{verbatim}
-\title{Generalized Flory theory at
-        ${\bm\delta > {\bfseries 50}^\circ}$}
-\end{verbatim}
-\bigskip
-
-{\bf{\noindent Ion--ion correlations in H\,{\sc ii} regions}}\\
-
-\noindent\normalfont is produced by
-\begin{verbatim}
-\title{Ion--ion correlations in H\,{\sc ii} regions}
-\end{verbatim}
-
-
-\stepcounter{enumi}
-
-\item[(ii)] en rules, em rules, hyphens and minus signs (see Section~\ref{dashes} for
-correct usage). To create the correct symbols in the sentence
-\begin{quote}
-The high-resolution observations were made along a line at an
-angle of $-15^\circ$ (East from North) from the axis of the
-jet -- which runs North--South
-\end{quote}
-you would use the following code:
-\begin{verbatim}
-The high-resolution observations were made along a line at an
-angle of $-15^\circ$ (East from North) from the axis of the
-jet -- which runs North--South
-\end{verbatim}
-
-\item[(iii)] Fonts in superscripts and subscripts. Subscripts and superscripts will automatically come out in the correct font
-and size in a math environment (e.g. enclosed by `\verb"$"'
-delimiters in running text or within \verb"\[...\]" or the
-`\texttt{equation}' environment for displayed equations). You can create
-the output ${\bm k_x}$ by typing \verb"${\bm k_x}$". If the
-subscripts or superscripts need to be other than italic, they
-should be coded individually -- see (vi) below.
-
-\item[(iv)] Calligraphic letters ($\mathcal{UPPER\ CASE\ ONLY}$).
-Normal calligraphic can be produced with \verb"\mathcal" as usual (in math mode).
-
-\item[(v)] Automatic scaling of brackets. The codes \verb"\left" and
-\verb"\right" should  be used to scale brackets automatically to
-fit the equation being set. For example, to get
-\[
-   v = x \left( \frac{N+2}{N} \right)
-\]
-use the code
-\begin{verbatim}
-\[
-   v = x \left( \frac{N+2}{N} \right)
-\]
-\end{verbatim}
-
-\item[(vi)] Roman font in equations. It is often necessary to make some
-symbols roman in an equation (e.g.\ units, non-variable subscripts).
-For example, to get
-\[
-   \sigma \simeq (r/13~h^{-1}~{\rm Mpc})^{-0.9},
-   \qquad \omega = \frac{N-N_{\rm s}}{N_{\rm R}}
-\]
-\noindent use the code
-\begin{verbatim}
-\[
-   \sigma \simeq (r/13~h^{-1}
-   ~{\rm Mpc})^{-0.9}, \qquad \omega
-   =\frac{N-N_{{\rm s}}}{N_{{\rm R}}}
-\]
-\end{verbatim}
-The \texttt{SIunits} package of macros for typesetting units is also compatible with the \texttt{gCOV2e} class file.
-\end{enumerate}
-
-
-\section{Obtaining the gCOV2e class file}\label{FTP}
-
-\subsection{Via the Taylor \& Francis website}
-
-This Guide for Authors and the \texttt{gCOV2e} class file may be obtained via the Instructions for Authors
-on the Taylor \& Francis homepage for the journal.
-
-Please note that the class file calls up the following open-source \LaTeX\ packages, which will, for convenience,
-unpack with the downloaded Guide for Authors and class file: amsbsy.sty; amsfonts.sty; amsmath.sty; amssymb.sty; epsfig.sty; graphicx.sty; natbib.sty; rotating.sty.
-The Guide for Authors calls for subfigure.sty, which is also supplied for convenience.
-
-
-\subsection{Via e-mail}
-
-This Guide for Authors, the class file and the associated open-source \LaTeX\ packages are also available by e-mail.
-Requests should be addressed to \texttt{latex.helpdesk@tandf.co.uk} clearly stating for which journal you require the Guide for Authors and/or class file.
-
 \end{document}
