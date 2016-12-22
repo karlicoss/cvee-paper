@@ -193,12 +193,12 @@ The following statements are equivalent:
 \end{itemize}
 \end{theorem}
 
-We will use the criterion (\ref{eq:blaschke}) to analyse the completeness of the system of resonant states. In the space of the unit disk it looks like:
+We will use the criterion (\ref{eq:blaschke}) to analyze the completeness of the system of resonant states. In the space of the unit disk it looks like:
 \begin{equation}\label{eq:crit_cayley}
 \lim\limits_{r = 1} \int\limits_{\abs{\zeta} = r} \log \abs{\det S(\zeta)} d \zeta = 0
 \end{equation}
 
-Since S-matrix is naturally defined on the complex plance, it makes sense to use the upper complex plane for the analysis of completeness. We change the variable in (\ref{eq:crit_cayley}), applying Cayley transform to the integral, which results in:
+Since S-matrix is naturally defined on the complex plane, it makes sense to use the upper complex plane for the analysis of completeness. We change the variable in (\ref{eq:crit_cayley}), applying Cayley transform to the integral, which results in:
 
 \begin{equation}\label{eq:crit}
 \lim\limits_{r \to 1} \int\limits_{C_r} \ln \abs{\det S(k)} \frac{2 \iu}{(k + i)^2} dk = 0
@@ -227,7 +227,7 @@ and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
 \end{figure}
 
 
-Let's analyse the model on Figure~\ref{fig:res_bundle}. Schrodinger's operator is defined on the edges of the graph as  $-\frac{d^2 \psi}{dx^2}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
+Let's analyze the model on Figure~\ref{fig:res_bundle}. Schrodinger's operator is defined on the edges of the graph as  $-\frac{d^2 \psi}{dx^2}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
 
 \begin{equation}\label{eq:bundle_system}
 \begin{aligned}
@@ -328,7 +328,7 @@ We proceed as follows:
 \begin{itemize}
 \item Since $s(k)$ is an absolute value of the determinant of the $S$ matrix, in the upper complex plane $0 \le s(k) \le 1$ holds. From here, we immediately know that the integral is bounded from above since $ln^2 1 = 0$.
 \item We replace $s(k)$ with a lower bound $l(k)$ such that: $0 \le l(k) \le s(k) \le 1$.
-\item By appling logarithm to the expression above, we get $\ln l(k) \le \ln s(k) \le 0$, and therefore, $\ln^2 s(k) \le \ln^2 l(k)$.
+\item By applying logarithm to the expression above, we get $\ln l(k) \le \ln s(k) \le 0$, and therefore, $\ln^2 s(k) \le \ln^2 l(k)$.
 \item Now, if we prove convergence for $l(k)$, this immediately proves the convergence of the original integral.
 \end{itemize}
 
@@ -341,7 +341,7 @@ We build a simple estimate for $s(k)$ over the upper complex plane. This functio
 \item
   It is easy to spot that if we fix the complex part of the argument, $s(k)$ is periodic with respect to the real part of its argument.
 \item 
-  Function $s(k)$ has countably infinite set of zeros, and each of them has $\operatorname{Im} k = \atanh \frac{2 W}{W^2 + 1}$. For brewity, we define:
+  Function $s(k)$ has countably infinite set of zeros, and each of them has $\operatorname{Im} k = \atanh \frac{2 W}{W^2 + 1}$. For brevity, we define:
 
   \begin{equation*}
   \begin{aligned}
@@ -360,7 +360,7 @@ l(x + \iu y)
 \\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(since $\cosh y > 0$)}
 \end{align*}
 
-It's pretty clear that $l(k)$ has a continuum of zeros over the line $\operatorname{Im} k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration cound intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brewity, we will omit it and defince $l(y) = l(\iu y)$.
+It's pretty clear that $l(k)$ has a continuum of zeros over the line $\operatorname{Im} k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration could intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brevity, we will omit it and define $l(y) = l(\iu y)$.
 
 Now, we will simplify the integral using the bound we just constructed:
 \begin{align*}
@@ -450,7 +450,7 @@ Now, we use a well known inequality which holds for $x > -1$: % REFTODO
 
 It's clear that the multiplier before the integral has order $\mcO(\sqrt{R})$ (we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$).
 
-The first part of the integrand has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ and $b > 0$. That means $\frac{y^2}{a + b y}$ will be nonnegative when $y > 0$, and non decreasing, since:
+The first part of the integrand has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ and $b > 0$. That means $\frac{y^2}{a + b y}$ will be non-negative when $y > 0$, and non decreasing, since:
 \[
   \left(\frac{y^2}{a + b y}\right)'
 = \frac{2y}{a + by} + y^2 \frac{-b}{(a + by)^2}
@@ -464,7 +464,7 @@ This implies that we can estimate the function from above by using its value on 
 \frac{y^2}{a + b y} \le \frac{\frac{V^2}{16}}{R^2 - C^2 + 1 + 2 (C + 1) \frac{V}{4}} = \mcO\left(\frac{1}{R}\right)
 \]
 
-Interal of the second part of the integrand is:
+Integral of the second part of the integrand is:
 \[
 \int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - (C - R)} < 2 \sqrt{\frac{V}{4}} = \mcO(1)
 \]
