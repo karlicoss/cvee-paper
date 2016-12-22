@@ -19,14 +19,6 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-
-\newcommand{\mcO}{\mathcal{O}} % Big O
-\newcommand{\iu}{{i\mkern1mu}} % imaginary unit
-\newcommand{\eexp}[1]{e^{#1}}  % convenient exponent
-\newcommand\abs[1]{\left|#1\right|}
-\newcommand\norm[1]{\left\|#1\right\|}
-\DeclareMathOperator\asin{asin}
-\DeclareMathOperator\atanh{atanh}
 \begin{document}
 
 %\jvol{00} \jnum{00} \jyear{2015} \jmonth{February}
@@ -121,10 +113,10 @@ submission instructions; source file coding; environments; references citation; 
 \subsection{Notation}
 
 \begin{itemize}
-\item $\mathbb{C}$: complex plane, $\mathbb{C} = \{ x + \iu y \mid x, y \in \mathbb{R} \}$ 
-\item $\mathbb{H}$: upper complex half-plane, $\mathbb{H} = \{ x + \iu y \mid y > 0, x, y \in \mathbb{R} \}$
-\item $\mathbb{D}$: unit disk, $\mathbb{D} = \{ z \mid \abs{z} < 1 \}$
-\item $\mathbb{T}$: unit circle, $\mathbb{T} = \partial \mathbb{D} =  \{z \mid \abs{z} = 1 \}$
+\item $\mathbb{C}$: complex plane, $\mathbb{C} = \{ x + \mathrm{i} y \mid x, y \in \mathbb{R} \}$ 
+\item $\mathbb{H}$: upper complex half-plane, $\mathbb{H} = \{ x + \mathrm{i} y \mid y > 0, x, y \in \mathbb{R} \}$
+\item $\mathbb{D}$: unit disk, $\mathbb{D} = \{ z \mid \left|z\right| < 1 \}$
+\item $\mathbb{T}$: unit circle, $\mathbb{T} = \partial \mathbb{D} =  \{z \mid \left|z\right| = 1 \}$
 \item $z$ denotes a complex argument on complex plane $\mathbb{C}$
 \item $\zeta$ denotes a complex argument on unit disk $\mathbb{D}$
 \end{itemize}
@@ -133,16 +125,16 @@ submission instructions; source file coding; environments; references citation; 
 
 Cayley transform maps $\mathbb{H}$ to $\mathbb{D}$:
 \[
-W(z) = \frac{z - \iu}{z + \iu}
+W(z) = \frac{z - \mathrm{i}}{z + \mathrm{i}}
 \]
 , whereas inverse Cayley transform maps $\mathbb{D}$ to $\mathbb{H}$:
 \begin{equation}\label{eq:cayley_inverse}
-w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
+w(\zeta) = \mathrm{i} \frac{1 + \zeta}{1 - \zeta}
 \end{equation}
 
 One notable property of the Cayley transform is that it injectively maps $\mathbb{R}$ into unit circle $\mathbb{T}$.
 
-Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $0 < r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\iu C(r)$ and radius $R(r)$, where:
+Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $0 < r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\mathrm{i} C(r)$ and radius $R(r)$, where:
 
 \begin{equation}\label{eq:c_and_r}
 \begin{aligned}
@@ -156,7 +148,7 @@ From these formulas it's easy to see that as $r$ approaches $1$, $R(r)$ goes to 
 Also, we'll note two useful facts: TODO REFERENCE HERE FROM TEXT
 \begin{itemize}
 \item $C(r) - R(r) = \frac{(1 - r)^2}{1 - r^2} > 0$
-\item $C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r}$, which means that $C - R$ is $\mcO(\frac{1}{R})$
+\item $C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r}$, which means that $C - R$ is $\mathcal{O}(\frac{1}{R})$
 \end{itemize}
 
 \subsection{S-matrix}\label{sec:smatrix}
@@ -166,8 +158,8 @@ From the left and right we subject in to beams of quantum particles with the wav
 
 \begin{equation}\label{eq:wlwl}
 \begin{aligned}
-   \psi_L(x) &= A \eexp{\iu k x} + B \eexp{-\iu k x}
-\\ \psi_R(x) &= C \eexp{\iu k x} + D \eexp{-\iu k x}
+   \psi_L(x) &= A e^{\mathrm{i} k x} + B e^{-\mathrm{i} k x}
+\\ \psi_R(x) &= C e^{\mathrm{i} k x} + D e^{-\mathrm{i} k x}
 \end{aligned}
 \end{equation}
 
@@ -188,30 +180,30 @@ The following statements are equivalent:
 \item the dissipating operator $Z$ is complete
 \item
 \begin{equation}\label{eq:blaschke}
-\lim\limits_{r = 1} \int\limits_{\mathbb{T}} \log \abs{\det S(r \zeta)} d m(\zeta) = 0
+\lim\limits_{r = 1} \int\limits_{\mathbb{T}} \log \left|\det S(r \zeta)\right| d m(\zeta) = 0
 \end{equation}
 \end{itemize}
 \end{theorem}
 
 We will use the criterion (\ref{eq:blaschke}) to analyze the completeness of the system of resonant states. In the space of the unit disk it looks like:
 \begin{equation}\label{eq:crit_cayley}
-\lim\limits_{r = 1} \int\limits_{\abs{\zeta} = r} \log \abs{\det S(\zeta)} d \zeta = 0
+\lim\limits_{r = 1} \int\limits_{\left|\zeta\right| = r} \log \left|\det S(\zeta)\right| d \zeta = 0
 \end{equation}
 
 Since S-matrix is naturally defined on the complex plane, it makes sense to use the upper complex plane for the analysis of completeness. We change the variable in (\ref{eq:crit_cayley}), applying Cayley transform to the integral, which results in:
 
 \begin{equation}\label{eq:crit}
-\lim\limits_{r \to 1} \int\limits_{C_r} \ln \abs{\det S(k)} \frac{2 \iu}{(k + i)^2} dk = 0
+\lim\limits_{r \to 1} \int\limits_{C_r} \ln \left|\det S(k)\right| \frac{2 \mathrm{i}}{(k + i)^2} dk = 0
 \end{equation}
-, where $C_r$ is an image of $\abs{\zeta} = r$ under the inverse Cayley transform (\ref{eq:cayley_inverse}). It can be parameterised as $C_r = \{R(r) \eexp{\iu t} + \iu C(r) \mid t \in [0, 2 \pi)\}$ (see \ref{eq:c_and_r}). For brevity, define:
+, where $C_r$ is an image of $\left|\zeta\right| = r$ under the inverse Cayley transform (\ref{eq:cayley_inverse}). It can be parameterised as $C_r = \{R(r) e^{\mathrm{i} t} + \mathrm{i} C(r) \mid t \in [0, 2 \pi)\}$ (see \ref{eq:c_and_r}). For brevity, define:
 
 \[
-s(k) = \abs{\det S(k)}
+s(k) = \left|\det S(k)\right|
 \]
 , and after throwing away constants which are irrelevant for convergence, we get the final form of the criterion, which is convenient for us and will be used afterwards:
 
 \begin{equation}\label{eq:critp}
-\lim\limits_{r \to 1} \int\limits_{0}^{2 \pi} \ln s(R(r) \eexp{\iu t} + \iu C(r)) \frac{R}{(R(r) \eexp{\iu t} + \iu C(r) + i)^2} dt = 0
+\lim\limits_{r \to 1} \int\limits_{0}^{2 \pi} \ln s(R(r) e^{\mathrm{i} t} + \mathrm{i} C(r)) \frac{R}{(R(r) e^{\mathrm{i} t} + \mathrm{i} C(r) + i)^2} dt = 0
 \end{equation}
 
 
@@ -247,7 +239,7 @@ After solving (\ref{eq:bundle_system}) in conjunction with (\ref{eq:wlwl}), we g
 Using the S-matrix obtained above, we get:
 
 \begin{equation}\label{eq:bundle_s}
-s(k) = \abs{\det S(k)} = \abs{\frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}}
+s(k) = \left|\det S(k)\right| = \left|\frac{2 i \, W \cos\left(k\right) - {\left(W^{2} + 1\right)} \sin\left(k\right)}{2 i \, W \cos\left(k\right) + {\left(W^{2} + 1\right)} \sin\left(k\right)}\right|
 \end{equation}
 
 To prove completeness, we have to show that the criterion (\ref{eq:critp}) holds for this function. We will treat the integral as a function of $R$ and give it an upper bound such that it vanishes as $r \to 1$ and $R \to \infty$, which means that the integral vanishes as well, hence the completeness of resonant states.
@@ -260,12 +252,12 @@ To estimate, we need the Cauchy-Schwarz's inequality:
 \]
 , or to be precise, it's $\mathcal{L}^2[a, b]$ version:
 \[
-\abs{
+\left|
 \int\limits_{t=a}^{b} f(t) g^*(t) dt
-}
+\right|
 \le
-\sqrt{\int\limits_{t=a}^b \abs{f(t)}^2 dt }
-\sqrt{\int\limits_{t=a}^b \abs{g(t)}^2 dt }
+\sqrt{\int\limits_{t=a}^b \left|f(t)\right|^2 dt }
+\sqrt{\int\limits_{t=a}^b \left|g(t)\right|^2 dt }
 \]
 % 
 To use inequality, we are going to represent the integrand in (\ref{eq:critp}) as $f(t) g^*(t)$ as follows:
@@ -273,18 +265,18 @@ To use inequality, we are going to represent the integrand in (\ref{eq:critp}) a
 \begin{aligned}
 a      &= 0 \\
 b      &= 2 \pi \\
-f(t)   &= \ln s(R \eexp{\iu t} + \iu C) \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i} \\
-g^*(t) &= \frac{\sqrt{R}}{R \eexp{\iu t} + \iu C + i}
+f(t)   &= \ln s(R e^{\mathrm{i} t} + \mathrm{i} C) \frac{\sqrt{R}}{R e^{\mathrm{i} t} + \mathrm{i} C + i} \\
+g^*(t) &= \frac{\sqrt{R}}{R e^{\mathrm{i} t} + \mathrm{i} C + i}
 \end{aligned}
 \end{equation}
-Next, we will show that $\norm{g}$ (that is, $\sqrt{\int \abs{g(t)}^2}$) is bounded by a constant which does not depend on $r$, and $\norm{f}$ goes to $0$ as $r$ goes to $1$, hence (\ref{eq:critp}) converges.
+Next, we will show that $\|g\|$ (that is, $\sqrt{\int \left|g(t)\right|^2}$) is bounded by a constant which does not depend on $r$, and $\|f\|$ goes to $0$ as $r$ goes to $1$, hence (\ref{eq:critp}) converges.
 
-\subsection{Estimating $\norm{g}$}
+\subsection{Estimating $\|g\|$}
 
 First, we evaluate the integrand:
 \begin{align*}
-\abs{g(t)}^2 = \abs{g^*(t)}^2
-&=   \frac{\sqrt{R}^2}{\abs{R \cos t + \iu R \sin t + \iu C + i}^2} \\
+\left|g(t)\right|^2 = \left|g^*(t)\right|^2
+&=   \frac{\sqrt{R}^2}{\left|R \cos t + \mathrm{i} R \sin t + \mathrm{i} C + i\right|^2} \\
 &=   \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} \\
 &= \frac{R}{R^2 \cos^2 t + R^2 \sin^2 t + (C + 1)^2  + 2 R (C + 1) \sin t} \\
 &=   \frac{1}{R + \frac{(C + 1)^2}{R} + 2 (C + 1) \sin t} \\ 
@@ -317,10 +309,10 @@ a^2 - b^2
 &\ge 4
 \end{align*}
 
-Finally, since $\frac{2 \pi}{\sqrt{a^2 - b^2}} \le \frac{2 \pi}{2} = \pi$, and we just proved that $\norm{g}$ is bounded by a constant. 
+Finally, since $\frac{2 \pi}{\sqrt{a^2 - b^2}} \le \frac{2 \pi}{2} = \pi$, and we just proved that $\|g\|$ is bounded by a constant. 
 
 
-\subsection{Estimating $\norm{f}$}
+\subsection{Estimating $\|f\|$}
 Function $s(k)$ (\ref{eq:bundle_s}) is too complex for direct proof of the convergence.
 
 We proceed as follows:
@@ -341,31 +333,31 @@ We build a simple estimate for $s(k)$ over the upper complex plane. This functio
 \item
   It is easy to spot that if we fix the complex part of the argument, $s(k)$ is periodic with respect to the real part of its argument.
 \item 
-  Function $s(k)$ has countably infinite set of zeros, and each of them has $\operatorname{Im} k = \atanh \frac{2 W}{W^2 + 1}$. For brevity, we define:
+  Function $s(k)$ has countably infinite set of zeros, and each of them has $\operatorname{Im} k = \operatorname{arctanh} \frac{2 W}{W^2 + 1}$. For brevity, we define:
 
   \begin{equation*}
   \begin{aligned}
      V &= \frac{2 W}{W^2 + 1}
-  \\ Z &= \atanh V
+  \\ Z &= \operatorname{arctanh} V
   \end{aligned}
   \end{equation*}
 \item
-  Notice that for each $x$, $s(x + \iu y) \le s(\iu y)$.
+  Notice that for each $x$, $s(x + \mathrm{i} y) \le s(\mathrm{i} y)$.
 \end{enumerate}
 
-Given these facts, we can build a simple lower bound for $s(x + \iu y)$:
+Given these facts, we can build a simple lower bound for $s(x + \mathrm{i} y)$:
 \begin{align*}
-l(x + \iu y)
-   &= \abs{\frac{(W^2 + 1) \sinh y - 2 W \cosh y}{(W^2 + 1) \sinh y + 2 W \cosh y}}
-\\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(since $\cosh y > 0$)}
+l(x + \mathrm{i} y)
+   &= \left|\frac{(W^2 + 1) \sinh y - 2 W \cosh y}{(W^2 + 1) \sinh y + 2 W \cosh y}\right|
+\\ &= \left|\frac{\tanh y - V}{\tanh y + V}\right| && \text{(since $\cosh y > 0$)}
 \end{align*}
 
-It's pretty clear that $l(k)$ has a continuum of zeros over the line $\operatorname{Im} k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration could intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brevity, we will omit it and define $l(y) = l(\iu y)$.
+It's pretty clear that $l(k)$ has a continuum of zeros over the line $\operatorname{Im} k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration could intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brevity, we will omit it and define $l(y) = l(\mathrm{i} y)$.
 
 Now, we will simplify the integral using the bound we just constructed:
 \begin{align*}
-       \int\limits_{t=0}^{2 \pi} \abs{f(t)}^2 dt
-   = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \eexp{\iu t} + \iu C) \frac{R}{\norm{R \eexp{\iu t} + \iu C + i}^2} dt
+       \int\limits_{t=0}^{2 \pi} \left|f(t)\right|^2 dt
+   = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R e^{\mathrm{i} t} + \mathrm{i} C) \frac{R}{\|R e^{\mathrm{i} t} + \mathrm{i} C + i\|^2} dt
 \\ = & \int\limits_{t = 0}^{2 \pi} \ln^2 l(R \sin t + C) \frac{R}{R^2 \cos^2 t + (R \sin t + C + 1)^2} dt
 \end{align*}
 
@@ -383,7 +375,7 @@ Next, we do a variable change:
 \begin{equation*}
 \begin{aligned}
    y         &= R \sin t + C
-\\ t         &= \asin \frac{y - C}{R}
+\\ t         &= \arcsin \frac{y - C}{R}
 \\ dt        &= \frac{1}{\sqrt{R^2 - (C - y)^2}} dy
 \\ \cos t    &= \frac{\sqrt{R^2 - (C - y)^2}}{R}
 \\ y(-\pi/2) &= C - R 
@@ -448,7 +440,7 @@ Now, we use a well known inequality which holds for $x > -1$: % REFTODO
 \\ =   & \frac{\frac{4}{V^2}}{(1 - \frac{2}{V} \frac{V}{4})^2} \frac{R}{\sqrt{R + C - Z}}  \int \frac{y^2}{R^2 - C^2 + 2 (C + 1) y + 1}  \frac{1}{\sqrt{R - C + y}}
 \end{align*}
 
-It's clear that the multiplier before the integral has order $\mcO(\sqrt{R})$ (we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$).
+It's clear that the multiplier before the integral has order $\mathcal{O}(\sqrt{R})$ (we can ignore the terms dependent on $V$ only since $V$ is a constant independent of $r$).
 
 The first part of the integrand has the form $\frac{y^2}{a + b y}$, where $a = R^2 - C^2 + 1, b = 2 (C + 1)$; when $R$ and $C$ are big enough, $a > 0$ and $b > 0$. That means $\frac{y^2}{a + b y}$ will be non-negative when $y > 0$, and non decreasing, since:
 \[
@@ -461,15 +453,15 @@ The first part of the integrand has the form $\frac{y^2}{a + b y}$, where $a = R
 
 This implies that we can estimate the function from above by using its value on the rightmost point of the interval at $\frac{V}{4}$.
 \[
-\frac{y^2}{a + b y} \le \frac{\frac{V^2}{16}}{R^2 - C^2 + 1 + 2 (C + 1) \frac{V}{4}} = \mcO\left(\frac{1}{R}\right)
+\frac{y^2}{a + b y} \le \frac{\frac{V^2}{16}}{R^2 - C^2 + 1 + 2 (C + 1) \frac{V}{4}} = \mathcal{O}\left(\frac{1}{R}\right)
 \]
 
 Integral of the second part of the integrand is:
 \[
-\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - (C - R)} < 2 \sqrt{\frac{V}{4}} = \mcO(1)
+\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - (C - R)} < 2 \sqrt{\frac{V}{4}} = \mathcal{O}(1)
 \]
 
-And finally, after combining we get $\mcO(\sqrt{R}) \mcO\left(\frac{1}{R}\right) \mcO(1)  = \mcO\left(\frac{1}{\sqrt{R}}\right)$.
+And finally, after combining we get $\mathcal{O}(\sqrt{R}) \mathcal{O}\left(\frac{1}{R}\right) \mathcal{O}(1)  = \mathcal{O}\left(\frac{1}{\sqrt{R}}\right)$.
 
 \paragraph{$\frac{V}{4} \le y < Z$}
 
@@ -480,7 +472,7 @@ Note that for $\frac{V}{4} \le y < Z$:
 \\ \le &  \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}} \int \ln^2 \left( \frac{1}{2 V}(V^2 - 1) (y - Z) \right)
 \end{align*}
 
-First, take a look at the multiplier before the integral, it's pretty clear it has order of growth $\mcO(\frac{1}{\sqrt{R}})$.
+First, take a look at the multiplier before the integral, it's pretty clear it has order of growth $\mathcal{O}(\frac{1}{\sqrt{R}})$.
 
 As for the integral, $\ln^2(x)$ is integrable in the neighborhood of $x = 0$, and it is known that: %  REFTODO
 
@@ -488,12 +480,12 @@ As for the integral, $\ln^2(x)$ is integrable in the neighborhood of $x = 0$, an
 \int\limits_{x=x_0}^b \ln^2(a (x - b)) dx = (b - x_0) (\ln^2(a (x_0 - b)) - 2 \ln(a (x_0 - b)) + 2)
 \]
 
-In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we can see that the integral is bounded by a constant independent of $R$ and $C$, hence the integral on this interval grows as $\mcO(\frac{1}{\sqrt{R}})$.
+In our case $x_0 = \frac{V}{4}$, $a = \frac{1}{2 V}(V^2 - 1)$, $b = Z$, and we can see that the integral is bounded by a constant independent of $R$ and $C$, hence the integral on this interval grows as $\mathcal{O}(\frac{1}{\sqrt{R}})$.
 
 \subsubsection{Case 2: $y > Z$}
 When $y > Z$, 
 \[
-l(x + \iu y) 
+l(x + \mathrm{i} y) 
  = \frac{\tanh y - V}{\tanh y + V}
  = 1 - 2 \frac{V}{\tanh y + V}
 \]
@@ -525,7 +517,7 @@ Let's estimate \ref{eq:int_f_up}, replacing functions under the integral sign by
 \\ =   & \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}} \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \int \ln^2 f(y) 
 \end{align*}
 
-It's easy to see that the coefficient before the integral has order of growth $\mcO\left(\frac{1}{\sqrt{R}}\right)$.
+It's easy to see that the coefficient before the integral has order of growth $\mathcal{O}\left(\frac{1}{\sqrt{R}}\right)$.
 
 % REFTODO
 As for the integral $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$, it can be computed explicitly, using:
@@ -533,9 +525,9 @@ As for the integral $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$, it can be
     \int\limits_b^{b + c} \ln^2 (a (x - b)) dx = c (\ln^2(a c) - 2 \ln (a c) + 2)
 \]
 
-Hence, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) - 2 \ln (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) + 2)$. As we noted above, $l(C + R)$ is bounded by positive constants less than $1$ and independent of $r$, and we can see that the expression grows as $\mcO(\frac{\ln^2 R}{R})$.
+Hence, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) - 2 \ln (\frac{l(C + R)}{C + R - Z} \frac{1}{R}) + 2)$. As we noted above, $l(C + R)$ is bounded by positive constants less than $1$ and independent of $r$, and we can see that the expression grows as $\mathcal{O}(\frac{\ln^2 R}{R})$.
 
-By combining the estimates for the coefficient and the integral, we get $\mcO(\frac{\ln^2 R}{R \sqrt{R}})$.
+By combining the estimates for the coefficient and the integral, we get $\mathcal{O}(\frac{\ln^2 R}{R \sqrt{R}})$.
 
 \paragraph{$Z + \frac{1}{R} \le y < C$}
 Again, by picking extreme values for the parts of integrands, we can estimate \ref{eq:int_f_up} as:
@@ -545,7 +537,7 @@ Again, by picking extreme values for the parts of integrands, we can estimate \r
 \\  =  & \ln^2 f(Z + \frac{1}{R})  \frac{R}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{R^2 - C^2 + 2 (C + 1) y + 1}
 \end{align*}
 
-As $R$ goes to infinity, $\ln^2 f(Z + \frac{1}{R})$ goes to infinity as well, so we have to compute the order of singularity. Since $\ln f(Z + \frac{1}{R}) = \ln \left( \frac{l(C + R)}{C + R - Z} \frac{1}{R} \right) = \ln l(C + R) - \ln (C + R - Z) - \ln R$, we can see that $\ln^2 f(Z + \frac{1}{R}) = \mcO (\ln^2 R)$.
+As $R$ goes to infinity, $\ln^2 f(Z + \frac{1}{R})$ goes to infinity as well, so we have to compute the order of singularity. Since $\ln f(Z + \frac{1}{R}) = \ln \left( \frac{l(C + R)}{C + R - Z} \frac{1}{R} \right) = \ln l(C + R) - \ln (C + R - Z) - \ln R$, we can see that $\ln^2 f(Z + \frac{1}{R}) = \mathcal{O} (\ln^2 R)$.
 
 
 As for the integral, antiderivative for such a function is well known:
@@ -554,11 +546,11 @@ As for the integral, antiderivative for such a function is well known:
 \]
 , in our case $a = 2 (C + 1)$, $b = R^2 - C^2 + 1$. Substituting the ends of the interval $(Z + \frac{1}{R}, C)$, we get the definite integral:
 \[
-\frac{\ln \frac{2 (C + 1) C + R^2 - C^2 + 1}{2 (C + 1) (Z + \frac{1}{R}) + R^2 - C^2 + 1}}{2 (C + 1)} = \mcO\left( \frac{\ln R}{R} \right)
+\frac{\ln \frac{2 (C + 1) C + R^2 - C^2 + 1}{2 (C + 1) (Z + \frac{1}{R}) + R^2 - C^2 + 1}}{2 (C + 1)} = \mathcal{O}\left( \frac{\ln R}{R} \right)
 \]
 
 
-Finally, after combining, we get: $\mcO (\ln^2 R) \frac{R}{\sqrt{R}} \frac{1}{\sqrt{R - C + Z}} \mcO\left( \frac{\ln R}{R} \right)  = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)$.
+Finally, after combining, we get: $\mathcal{O} (\ln^2 R) \frac{R}{\sqrt{R}} \frac{1}{\sqrt{R - C + Z}} \mathcal{O}\left( \frac{\ln R}{R} \right)  = \mathcal{O}\left( \frac{\ln^3 R}{\sqrt{R}} \right)$.
 
 \paragraph{$C \le y \le C + R$}
 
@@ -567,15 +559,15 @@ Again, estimating \ref{eq:int_f_up} from above:
        & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ \le & \int \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ =   & \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{\sqrt{R + C - y}}
-% \\  = & \ln^2 f(y) \mcO()
+% \\  = & \ln^2 f(y) \mathcal{O}()
 \end{align*}
 
-Integral $\frac{1}{\sqrt{R + C - y}}$ from $C$ to $C + R$ is elementary and equals $2 \sqrt{R}$. Function $f$ at $C$ is bounded by constants not dependent on $r$, therefore, the square of its logarithm as well. Finally, we get an expression of order $\mcO \left( \frac{1}{R} \right) \mcO( \sqrt R ) = \mcO \left( \frac{1}{\sqrt{R}} \right)$.
+Integral $\frac{1}{\sqrt{R + C - y}}$ from $C$ to $C + R$ is elementary and equals $2 \sqrt{R}$. Function $f$ at $C$ is bounded by constants not dependent on $r$, therefore, the square of its logarithm as well. Finally, we get an expression of order $\mathcal{O} \left( \frac{1}{R} \right) \mathcal{O}( \sqrt R ) = \mathcal{O} \left( \frac{1}{\sqrt{R}} \right)$.
 
-\subsubsection{Final estimate of $\int \abs{f(t)}^2$}
+\subsubsection{Final estimate of $\int \left|f(t)\right|^2$}
 We split our integration path in five intervals, and the integral has order:
 \[
-\mcO \left( \frac{1}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) +\mcO\left(\frac{\ln^2 R}{R \sqrt{R}}\right) + \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mcO \left( \frac{1}{\sqrt{R}} \right) = \mcO\left( \frac{\ln^3 R}{\sqrt{R}} \right)
+\mathcal{O} \left( \frac{1}{\sqrt{R}} \right) + \mathcal{O} \left( \frac{1}{\sqrt{R}} \right) +\mathcal{O}\left(\frac{\ln^2 R}{R \sqrt{R}}\right) + \mathcal{O}\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mathcal{O} \left( \frac{1}{\sqrt{R}} \right) = \mathcal{O}\left( \frac{\ln^3 R}{\sqrt{R}} \right)
 \]
 , which means that integral converges to $0$ as $r$ goes to $1$ and $R$ goes to $\infty$.
 
