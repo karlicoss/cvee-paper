@@ -23,8 +23,6 @@
 \newcommand{\mcO}{\mathcal{O}} % Big O
 \newcommand{\iu}{{i\mkern1mu}} % imaginary unit
 \newcommand{\eexp}[1]{e^{#1}}  % convenient exponent
-\renewcommand{\Re}{\operatorname{Re}} % default Re/Im is weird
-\renewcommand{\Im}{\operatorname{Im}}
 \newcommand\abs[1]{\left|#1\right|}
 \newcommand\norm[1]{\left\|#1\right\|}
 \DeclareMathOperator\asin{asin}
@@ -38,7 +36,7 @@
 \title{\textit{Complex Variables and Elliptic Equations} \LaTeX\ guide for authors (Style 2 + NLM reference style)}
 
 \author{
-\name{A.N. Author\textsuperscript{a}$^{\ast}$\thanks{$^\ast$Corresponding author. Email: latex.helpdesk@tandf.co.uk}
+\name{D.A. Gerasimov\textsuperscript{a}$^{\ast}$\thanks{$^\ast$Corresponding author. Email: the.dmitrii.g@gmail.com}
 and I.T. Consultant\textsuperscript{b}}
 \affil{\textsuperscript{a}Taylor \& Francis, 4 Park Square, Milton Park, Abingdon, UK;
 \textsuperscript{b}Institut f\"{u}r Informatik, Albert-Ludwigs-Universit\"{a}t, Freiburg, Germany}
@@ -134,9 +132,9 @@ submission instructions; source file coding; environments; references citation; 
 \subsection{Cayley transform}
 
 Cayley transform maps $\mathbb{H}$ to $\mathbb{D}$:
-\begin{equation}\label{eq:cayley}
+\[
 W(z) = \frac{z - \iu}{z + \iu}
-\end{equation}
+\]
 , whereas inverse Cayley transform maps $\mathbb{D}$ to $\mathbb{H}$:
 \begin{equation}\label{eq:cayley_inverse}
 w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
@@ -144,20 +142,20 @@ w(\zeta) = \iu \frac{1 + \zeta}{1 - \zeta}
 
 One notable property of the Cayley transform is that it injectively maps $\mathbb{R}$ into unit circle $\mathbb{T}$.
 
-Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\iu C(r)$ and radius $R(r)$, where:
+Another important property we are going to use is that Cayley transform preserves circles. In particular, a circle with radius $0 < r < 1$ centered in zero, under inverse Cayley transform maps into a circle with center $\iu C(r)$ and radius $R(r)$, where:
 
 \begin{equation}\label{eq:c_and_r}
 \begin{aligned}
-   C(r) &= \Im \frac{w(r) + w(-r)}{2} = \frac{1 + r^2}{1 - r^2}
-\\ R(r) &= \Im \frac{w(r) - w(-r)}{2} = \frac{2 r}{1 - r^2}
+   C(r) &= \operatorname{Im} \frac{w(r) + w(-r)}{2} = \frac{1 + r^2}{1 - r^2}
+\\ R(r) &= \operatorname{Im} \frac{w(r) - w(-r)}{2} = \frac{2 r}{1 - r^2}
 \end{aligned}
 \end{equation}
 
-From these formulas it's easy to see that if we limit $r$ to $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$.
+From these formulas it's easy to see that as $r$ approaches $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$.
 
-Also, we'll note two useful facts:
+Also, we'll note two useful facts: TODO REFERENCE HERE FROM TEXT
 \begin{itemize}
-\item $C(r) - R(r) > 0$
+\item $C(r) - R(r) = \frac{(1 - r)^2}{1 - r^2} > 0$
 \item $C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r}$, which means that $C - R$ is $\mcO(\frac{1}{R})$
 \end{itemize}
 
@@ -205,7 +203,7 @@ Since S-matrix is naturally defined on the complex plance, it makes sense to use
 \begin{equation}\label{eq:crit}
 \lim\limits_{r \to 1} \int\limits_{C_r} \ln \abs{\det S(k)} \frac{2 \iu}{(k + i)^2} dk = 0
 \end{equation}
-, where $C_r$ is an image of $\abs{\zeta} = r$ under the inverse Cayley transform. It can be parameterised as $C_r = \{R(r) \eexp{\iu t} + \iu C(r) \mid t \in [0, 2 \pi)\}$ (see \ref{eq:c_and_r}). For brevity, define:
+, where $C_r$ is an image of $\abs{\zeta} = r$ under the inverse Cayley transform (\ref{eq:cayley_inverse}). It can be parameterised as $C_r = \{R(r) \eexp{\iu t} + \iu C(r) \mid t \in [0, 2 \pi)\}$ (see \ref{eq:c_and_r}). For brevity, define:
 
 \[
 s(k) = \abs{\det S(k)}
@@ -229,7 +227,7 @@ and a resonator $\Omega$, consisting of $W$ identical edges of length 1.}
 \end{figure}
 
 
-Let's investigate the model on Figure~\ref{fig:res_bundle}. Schrodinger's operator is defined on the edges of the graph as  $-\frac{d^2 \psi}{dx^2}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
+Let's analyse the model on Figure~\ref{fig:res_bundle}. Schrodinger's operator is defined on the edges of the graph as  $-\frac{d^2 \psi}{dx^2}$. At the vertices $V_a$ and $V_b$ we require the wavefunction and its derivatives to be continuous:
 
 \begin{equation}\label{eq:bundle_system}
 \begin{aligned}
@@ -343,7 +341,7 @@ We build a simple estimate for $s(k)$ over the upper complex plane. This functio
 \item
   It is easy to spot that if we fix the complex part of the argument, $s(k)$ is periodic with respect to the real part of its argument.
 \item 
-  Function $s(k)$ has countably infinite set of zeros, and each of them has $\Im k = \atanh \frac{2 W}{W^2 + 1}$. For brewity, we define:
+  Function $s(k)$ has countably infinite set of zeros, and each of them has $\operatorname{Im} k = \atanh \frac{2 W}{W^2 + 1}$. For brewity, we define:
 
   \begin{equation*}
   \begin{aligned}
@@ -362,7 +360,7 @@ l(x + \iu y)
 \\ &= \abs{\frac{\tanh y - V}{\tanh y + V}} && \text{(since $\cosh y > 0$)}
 \end{align*}
 
-It's pretty clear that $l(k)$ has a continuum of zeros over the line $\Im k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration cound intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brewity, we will omit it and defince $l(y) = l(\iu y)$.
+It's pretty clear that $l(k)$ has a continuum of zeros over the line $\operatorname{Im} k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration cound intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brewity, we will omit it and defince $l(y) = l(\iu y)$.
 
 Now, we will simplify the integral using the bound we just constructed:
 \begin{align*}
@@ -406,8 +404,8 @@ $}
 On the integration path we cross singularities at $y = C - R$, $y = Z$, $y = C + R$, and the integrand is still too complex for direct estimation. Let's split the integration path in multiple segments and estimate them independently.
 
 \subsubsection{Case 1: $C - R \le y \le Z$}
-A crucial property of $s(k)$ is its convergence to 1 as $\Im k$ goes to 0 (which is because $s$ is the determinant of S-matrix), since then $\ln s(k)$ goes to zero, which is necessary to compensate the singularity of $\frac{1}{R - C + y}$ at $y = C - R$. 
-This means that to prove convergence using lower bound for $s(k)$, we have to require that $s(k)$ also converges to $1$ as $\Im k$ goes to $0$.
+A crucial property of $s(k)$ is its convergence to 1 as $\operatorname{Im} k$ goes to 0 (which is because $s$ is the determinant of S-matrix), since then $\ln s(k)$ goes to zero, which is necessary to compensate the singularity of $\frac{1}{R - C + y}$ at $y = C - R$. 
+This means that to prove convergence using lower bound for $s(k)$, we have to require that $s(k)$ also converges to $1$ as $\operatorname{Im} k$ goes to $0$.
 
 % TODO plot?
 Since $l$ is convex when $0 \le y \le Z$, we can estimate it from below using its first derivative at $0$. However, this is not enough, since it will this will violate the property of the estimate being positive (it is under the logarithm sign), so we have to be more careful and approximate the function at $Z$ with its first derivative as well, and then glue them together at some point $Z_0$:
