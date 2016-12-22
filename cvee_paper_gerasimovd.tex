@@ -50,60 +50,6 @@ submission instructions; source file coding; environments; references citation; 
 
 \begin{classcode}F1.1; F4.3 \textbf{(... for example; authors are encouraged to provide two to six 2010 Mathematics Subject Classification codes)}\end{classcode}
 
-
-{\abstractfont\centerline{\bfseries Index to information contained in this guide}\vspace{12pt}
-\hbox to \textwidth{\hsize\textwidth\vbox{\hsize17pc
-\hspace*{-12pt} {1.}    Introduction\\
-\hspace*{7pt} {1.1.}  The \textit{gCOV} document class\\
-\hspace*{7pt} {1.2.}  Submission of \LaTeX\ articles\\
-\hspace*{24pt}        to the journal\\
-{2.}    Using the \textit{gCOV} class file\\
-{3.}    Additional features\\
-\hspace*{10pt}{3.1.}  Title, authors' names, abstract\\
-\hspace*{24pt}        and keywords\\
-\hspace*{10pt}{3.2.}  Additional footnotes to the\\
-\hspace*{24pt}        title or authors' names\\
-\hspace*{10pt}{3.3.}  Lists\\
-{4.}    Some guidelines for using\\
-\hspace*{6pt}        standard features\\
-\hspace*{10pt}{4.1.}  Sections\\
-\hspace*{10pt}{4.2.}  Illustrations (figures)\\
-\hspace*{10pt}{4.3.}  Tables\\
-\hspace*{10pt}{4.4.}  Landscape pages\\
-\hspace*{10pt}{4.5.}   Theorem-like environments\\
-\noindent \hspace*{7pt} {4.6.}   Typesetting mathematics\\
-\hspace*{24pt} {4.6.1.}  Displayed mathematics\\
-\hspace*{24pt} {4.6.2.}  Bold math italic symbols\\
-\hspace*{24pt} {4.6.3.}  Bold Greek\\
-\hspace*{24pt} {4.6.4.}  Upright Greek characters \\
-\hspace*{47pt}            and the upright partial \\
-\hspace*{47pt}            derivative sign }
-\hspace{-24pt}\vbox{\noindent\hsize17pc
-\hspace*{7pt} {4.7.}   Acknowledgements \\
-\hspace*{7pt} {4.8.}   Disclosure \\
-\hspace*{7pt} {4.9.}   Funding \\
-\hspace*{7pt} {4.10.}   Notes \\
-\hspace*{7pt} {4.11.}   Supplemental material \\
-\hspace*{7pt} {4.12.}   References \\
-\hspace*{24pt} {4.12.1.}  References cited in the \\
-\hspace*{52pt}            text\\
-\hspace*{24pt} {4.12.2.}  The list of references\\
-\hspace*{7pt} {4.13.}   Appendices \\
-{5.}    Example of a section heading \\*
-\hspace*{6pt}   including {\fontencoding{T1}\scshape{small caps}}, \textit{italic}, \\
-\hspace*{6pt}   and bold Greek such as ${\bm\kappa}$ \\
-{6.}    \textit{gCOV} journal style \\
-\hspace*{10pt}{6.1.}   Hyphens, en rules, em rules \\ \hspace*{27pt}and minus signs\\
-\hspace*{10pt}{6.2.}   References \\
-\hspace*{10pt}{6.3.}   Maths fonts\\
-{7.}    Troubleshooting\\
-{8.}    Fixes for coding problems\\
-{9.}    Obtaining the \texttt{gCOV2e} class file\\
-\hspace*{10pt}{9.1}  Via the Taylor \& Francis \\
-\hspace*{24pt}       website\\
-\hspace*{10pt}{9.2}  Via e-mail\\}}}
-
-
 \section{Introduction}
 
 ????? 
@@ -300,7 +246,7 @@ First, we check that $a > b$:
    &= \frac{R^2 + C^2 + 2C + 1 - 2 RC - 2 R}{R}
 \\ &= \frac{(C - R)^2 + 2(C - R) + 1}{R}
 \\ &= \frac{(C - R + 1)^2 }{R}
-\\ &> 0 && \text{,strictly greater since $C > R$} 
+\\ &> 0 && \text{,\ strictly greater since $C > R$} 
 \end{align*}
 
 Next, we compute en estimate for $\sqrt{a^2 - b^2}$:
@@ -310,7 +256,7 @@ a^2 - b^2
 & =  R^2 + \frac{(C+1)^4}{R^2} + 2 (C+1)^2 - 4 (C + 1)^2 \\
 & =  \left( \frac{(C + 1)^2}{R} - R \right)^2 \\
 & =  \left( \frac{(C + 1)^2 - R^2}{R}\right)^2 \\
-& =  \left( \frac{(C + 1 - R) (C + 1 + R)}{R}\right)^2 && \text{,since $C > R > 0$} \\
+& =  \left( \frac{(C + 1 - R) (C + 1 + R)}{R}\right)^2 && \text{,\ since $C > R > 0$} \\
 &\ge \left( \frac{(1) (R + R)}{R}\right)^2  \\
 &\ge 4
 \end{align*}
@@ -355,7 +301,7 @@ Given these facts, we can build a simple lower bound for $s(x + \mathrm{i} y)$:
 \begin{align*}
 l(x + \mathrm{i} y)
    &= \left|\frac{(W^2 + 1) \sinh y - 2 W \cosh y}{(W^2 + 1) \sinh y + 2 W \cosh y}\right|
-\\ &= \left|\frac{\tanh y - V}{\tanh y + V}\right| && \text{(since $\cosh y > 0$)}
+\\ &= \left|\frac{\tanh y - V}{\tanh y + V}\right| && \text{,\ since $\cosh y > 0$}
 \end{align*}
 
 It's pretty clear that $l(k)$ has a continuum of zeros over the line $\operatorname{Im} k = Z$, which implies that $\ln l(k)$ has continuum number of singularities over this line. Intuitively, it shouldn't spoil the convergence of integral since the contour of integration could intersect the singularities of the original function anyway. And indeed, we will give a rigorous argument that we still can prove convergence in this case. Since the function is independent from the real part of the argument now, for brevity, we will omit it and define $l(y) = l(\mathrm{i} y)$.
@@ -507,7 +453,7 @@ f(y) = \frac{l(C + R)}{C + R - Z} (y - Z)
 
 Notice that when $y = C + R$, for a sufficiently big $r$, $l(y)$ is bounded from both sides by constants, independent from $C$ and $R$. This is because $\tanh y$ goes to $1$ as $y$ goes to infinity, therefore, $l(y)$ in the limit will be equal to $1 - \frac{2 V}{V + 1}$. This is an important property of this specific model, since if $l$ went to zero on infinity, this part of proof couldn't have been done.
 
-First, note that on $Z \le y \le R + C$ the function $\frac{1}{\sqrt{R - C + y}}$ has no singularities and we can estimate integral \ref{eq:int_f} as:
+First, note that on $Z \le y \le R + C$ the function $\frac{1}{\sqrt{R - C + y}}$ has no singularities and we can estimate the integral (\ref{eq:int_f}) as:
 \begin{equation}\label{eq:int_f_up}
 \begin{aligned}
        & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + y}}
@@ -519,7 +465,7 @@ To estimate this expression, let's split the integration path in three intervals
 
 \paragraph{$Z \le y < Z + \frac{1}{R}$}
 
-Let's estimate \ref{eq:int_f_up}, replacing functions under the integral sign by their extreme value at interval's ends:
+Let's estimate (\ref{eq:int_f_up}), replacing functions under the integral sign by their extreme value at interval's ends:
 \begin{align*}
        & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ \le & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}}
@@ -539,7 +485,7 @@ Hence, $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy = \frac{1}{R} ( \ln^2 (\
 By combining the estimates for the coefficient and the integral, we get $\mathcal{O}(\frac{\ln^2 R}{R \sqrt{R}})$.
 
 \paragraph{$Z + \frac{1}{R} \le y < C$}
-Again, by picking extreme values for the parts of integrands, we can estimate \ref{eq:int_f_up} as:
+Again, by picking extreme values for the parts of integrands, we can estimate (\ref{eq:int_f_up}) as:
 \begin{align*}
        & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ \le & \int \ln^2 f(Z + \frac{1}{R}) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - C}} \frac{1}{\sqrt{R - C + Z}}
@@ -563,7 +509,7 @@ Finally, after combining, we get: $\mathcal{O} (\ln^2 R) \frac{R}{\sqrt{R}} \fra
 
 \paragraph{$C \le y \le C + R$}
 
-Again, estimating \ref{eq:int_f_up} from above:
+Again, estimating (\ref{eq:int_f_up}) from above:
 \begin{align*}
        & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ \le & \int \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
