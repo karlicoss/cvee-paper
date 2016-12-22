@@ -145,11 +145,17 @@ Another important property we are going to use is that Cayley transform preserve
 
 From these formulas it's easy to see that as $r$ approaches $1$, $R(r)$ goes to infinity and $C(r)$ converges to $R(r)$.
 
-Also, we'll note two useful facts: TODO REFERENCE HERE FROM TEXT
-\begin{itemize}
-\item $C(r) - R(r) = \frac{(1 - r)^2}{1 - r^2} > 0$
-\item $C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r}$, which means that $C - R$ is $\mathcal{O}(\frac{1}{R})$
-\end{itemize}
+Also, we'll note two useful facts:
+\begin{subequations}
+\begin{equation}
+C(r) - R(r) = \frac{(1 - r)^2}{1 - r^2} > 0
+\label{eq:cr_positive}
+\end{equation}
+\begin{equation}
+C(r) - R(r) = \frac{1 - r}{1 + r} < \frac{1}{R(r)} = \frac{1 - r^2}{2 r} \implies C - R \text{\ is\ } \mathcal{O}\left(\frac{1}{R}\right)
+\label{eq:cr_small}
+\end{equation}
+\end{subequations}
 
 \subsection{S-matrix}\label{sec:smatrix}
 Consider a localized one dimensional potential barrier or resonator. We assume that the system evolves under the stationary Schrodinger's equation. Since we are only interested in the mathematical scattering problem and scattering state solutions, we set Plank's constant to $1$.
@@ -457,9 +463,12 @@ This implies that we can estimate the function from above by using its value on 
 \]
 
 Integral of the second part of the integrand is:
-\[
-\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} = 2 \sqrt{\frac{V}{4} - (C - R)} < 2 \sqrt{\frac{V}{4}} = \mathcal{O}(1)
-\]
+\begin{align*}
+\int\limits_{C - R}^{\frac{V}{4}} \frac{1}{\sqrt{R - C + y}} 
+   & = 2 \sqrt{\frac{V}{4} - (C - R)} 
+\\ & < 2 \sqrt{\frac{V}{4}} && \text{, since $C - R > 0$, see (\ref{eq:cr_positive})}
+\\ & = \mathcal{O}(1)
+\end{align*}
 
 And finally, after combining we get $\mathcal{O}(\sqrt{R}) \mathcal{O}\left(\frac{1}{R}\right) \mathcal{O}(1)  = \mathcal{O}\left(\frac{1}{\sqrt{R}}\right)$.
 
@@ -472,7 +481,7 @@ Note that for $\frac{V}{4} \le y < Z$:
 \\ \le &  \frac{R}{R^2 - C^2 + 2 (C + 1) \frac{V}{4} + 1} \frac{1}{\sqrt{R + C - Z}} \frac{1}{\sqrt{R - C + \frac{V}{4}}} \int \ln^2 \left( \frac{1}{2 V}(V^2 - 1) (y - Z) \right)
 \end{align*}
 
-First, take a look at the multiplier before the integral, it's pretty clear it has order of growth $\mathcal{O}(\frac{1}{\sqrt{R}})$.
+First, take a look at the multiplier before the integral, using (\ref{eq:cr_small}) it is pretty clear it has order of growth $\mathcal{O}\left(\frac{1}{\sqrt{R}}\right)$.
 
 As for the integral, $\ln^2(x)$ is integrable in the neighborhood of $x = 0$, and it is known that: %  REFTODO
 
@@ -517,7 +526,7 @@ Let's estimate \ref{eq:int_f_up}, replacing functions under the integral sign by
 \\ =   & \frac{1}{\sqrt{R + C - (Z + \frac{1}{R})}} \frac{1}{\sqrt{R - C + Z}} \frac{R}{R^2 - C^2 + 2 (C + 1) Z + 1} \int \ln^2 f(y) 
 \end{align*}
 
-It's easy to see that the coefficient before the integral has order of growth $\mathcal{O}\left(\frac{1}{\sqrt{R}}\right)$.
+Using (\ref{eq:cr_small}), it is easy to see that the coefficient before the integral has order of growth $\mathcal{O}\left(\frac{1}{\sqrt{R}}\right)$.
 
 % REFTODO
 As for the integral $\int\limits_{Z}^{Z + \frac{1}{R}} \ln^2 f(y) dy$, it can be computed explicitly, using:
@@ -559,13 +568,12 @@ Again, estimating \ref{eq:int_f_up} from above:
        & \int \ln^2 f(y) \frac{R}{R^2 - C^2 + 2 (C + 1) y + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ \le & \int \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R + C - y}} \frac{1}{\sqrt{R - C + Z}}
 \\ =   & \ln^2 f(C) \frac{R}{R^2 - C^2 + 2 (C + 1) C + 1} \frac{1}{\sqrt{R - C + Z}} \int \frac{1}{\sqrt{R + C - y}}
-% \\  = & \ln^2 f(y) \mathcal{O}()
 \end{align*}
 
-Integral $\frac{1}{\sqrt{R + C - y}}$ from $C$ to $C + R$ is elementary and equals $2 \sqrt{R}$. Function $f$ at $C$ is bounded by constants not dependent on $r$, therefore, the square of its logarithm as well. Finally, we get an expression of order $\mathcal{O} \left( \frac{1}{R} \right) \mathcal{O}( \sqrt R ) = \mathcal{O} \left( \frac{1}{\sqrt{R}} \right)$.
+Integral $\frac{1}{\sqrt{R + C - y}}$ from $C$ to $C + R$ is elementary and equals $2 \sqrt{R}$. Function $f$ at $C$ is bounded by constants not dependent on $r$, therefore, the square of its logarithm is bounded as well. Finally, we get an expression of order $\mathcal{O} \left( \frac{1}{R} \right) \mathcal{O}( \sqrt R ) = \mathcal{O} \left( \frac{1}{\sqrt{R}} \right)$.
 
 \subsubsection{Final estimate of $\int \left|f(t)\right|^2$}
-We split our integration path in five intervals, and the integral has order:
+We have split our integration path in five intervals, and the integral has order:
 \[
 \mathcal{O} \left( \frac{1}{\sqrt{R}} \right) + \mathcal{O} \left( \frac{1}{\sqrt{R}} \right) +\mathcal{O}\left(\frac{\ln^2 R}{R \sqrt{R}}\right) + \mathcal{O}\left( \frac{\ln^3 R}{\sqrt{R}} \right) + \mathcal{O} \left( \frac{1}{\sqrt{R}} \right) = \mathcal{O}\left( \frac{\ln^3 R}{\sqrt{R}} \right)
 \]
