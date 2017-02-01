@@ -1,5 +1,5 @@
-NAME        := cvee_paper_gerasimovd.tex
-OUTPUT_NAME := cvee_paper_gerasimovd
+NAME        := complet_wires_cvee1.tex
+OUTPUT_NAME := complet_wires_cvee1
 
 BUILD_DIR := build
 BASE_ARGS := -outdir=$(BUILD_DIR) -jobname=$(OUTPUT_NAME)
